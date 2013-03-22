@@ -42,17 +42,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'thin',         '= 1.5.1'
   gem.add_runtime_dependency 'stringex',     '= 1.5.1'
 
-
-  # assets group
-  gem.add_runtime_dependency 'coffee-rails',         '= 3.2.2'
-  gem.add_runtime_dependency 'coffee-script-source', '= 1.4.0'
-  gem.add_runtime_dependency 'compass',              '= 0.13.alpha.0'
-  gem.add_runtime_dependency 'compass-rails',        '= 1.0.3'
-  gem.add_runtime_dependency 'sass',                 '= 3.2.7'
-  gem.add_runtime_dependency 'sass-rails',           '= 3.2.6'
-  gem.add_runtime_dependency 'sprockets-commonjs',   '= 0.0.5'
-  gem.add_runtime_dependency 'uglifier',             '= 1.3.0'
-
   # vendor/deps/active_admin
   # gem.add_runtime_dependency 'activeadmin',  '= 0.5.1'
   gem.add_runtime_dependency "arbre",               ">= 1.0.1"
@@ -67,5 +56,20 @@ Gem::Specification.new do |gem|
   # vendor/deps/closure_tree
   # gem.add_runtime_dependency 'closure_tree', '= 3.10.0'
   gem.add_runtime_dependency 'with_advisory_lock',   '>= 0.0.6'
+
+
+  # assets group
+  gem.add_runtime_dependency 'coffee-rails',         '= 3.2.2'
+  gem.add_runtime_dependency 'coffee-script-source', '= 1.4.0'
+  gem.add_runtime_dependency 'compass',              '= 0.13.alpha.0'
+  gem.add_runtime_dependency 'compass-rails',        '= 1.0.3'
+  gem.add_runtime_dependency 'sass',                 '= 3.2.7'
+  gem.add_runtime_dependency 'sass-rails',           '= 3.2.6'
+  gem.add_runtime_dependency 'sprockets-commonjs',   '= 0.0.5'
+  gem.add_runtime_dependency 'uglifier',             '= 1.3.0'
+
+
+  # development group
+  gem.add_runtime_dependency 'pry-rails', '> 0'
 
 end

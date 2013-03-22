@@ -3,7 +3,7 @@
   border-bottom: 1px solid gray(220);
   font-size: 14px;
   height: $top_nav_height;
-  overflow: hidden;
+  overflow: visible;
   position: fixed;
   right: 0;
   top: 0;
@@ -24,6 +24,15 @@
 
   #titlebar_right {
     float: right;
+
+    .action_items {
+      float: right;
+    }
+
+    .locale_chooser {
+      float: right;
+      padding: 14px 12px 14px 0;
+    }
   }
 
   //

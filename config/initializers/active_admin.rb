@@ -18,4 +18,7 @@ ActiveAdmin.setup do |config|
   # Disable the comments
   config.allow_comments = false
 
+  # Set the custom views
+  config.view_factory.register :title_bar => Lalala::Views::TitleBar
+
 end
