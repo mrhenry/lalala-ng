@@ -13,62 +13,46 @@
 //
 // Table default styles
 //
-table {
+#active_admin_content table {
   background-color: gray(130);
   border-collapse: collapse;
   margin: 0;
   width: 100%;
 
-  thead {
+  thead th {
+    border: none;
 
-    th {
-      border: none;
-
-      a {
-        color: gray(188);
-        font-weight: bold;
-      }
-
-      &[class*="sorted"] {
-
-        a {
-          color: white;
-        }
-
-      }
-
+    a {
+      color: gray(188);
+      font-weight: bold;
     }
 
+    &[class*="sorted"] a {
+      color: white;
+    }
   }
 
   // Rows
-  tbody {
+  tbody tr {
+    @include transition( background-color 300ms );
 
-    tr {
-      @include transition( background-color 300ms );
-
-      &:nth-child(odd) {
-        background-color: white;
-      }
-
-      &:nth-child(even) {
-        background-color: gray(250);
-      }
-
-      &.selected {
-        background-color: $yellow;
-      }
-
-      &:last-child {
-
-        > td {
-          border: none;
-        }
-
-      }
-
+    &:nth-child(odd) {
+      background-color: white;
     }
 
+    &:nth-child(even) {
+      background-color: gray(250);
+    }
+
+    &.selected {
+      background-color: $yellow;
+    }
+
+    &:last-child {
+      > td {
+        border: none;
+      }
+    }
   }
 
   // Columns

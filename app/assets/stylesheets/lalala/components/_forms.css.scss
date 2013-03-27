@@ -6,6 +6,7 @@
   Base styles for various input types, form layouts and states
 
 */
+
 form {
   margin: 0 0 1em 0;
 }
@@ -16,13 +17,13 @@ fieldset {
   border: 0;
 }
 
-legend {
-  color: gray(200);
-  display: block;
-  font-size: 1.5em;
-  font-style: italic;
-  margin: 0 0 1em 0;
-}
+// legend {
+//   color: gray(200);
+//   display: block;
+//   font-size: 1.5em;
+//   font-style: italic;
+//   margin: 0 0 1em 0;
+// }
 
 select {
   @include appearance(none);
@@ -155,6 +156,9 @@ select:focus {
 
   &.boolean {
     padding-left: $label_width;
+
+    label { font-weight: normal; }
+    input[type="checkbox"] { margin-right: 11px; }
   }
 }
 
@@ -176,4 +180,9 @@ select:focus {
       @include box-shadow(transparentize($red,.2) 0 0 5px);
     }
   }
+}
+
+// fragments
+.fragments .fragments-group {
+  clear: both;
 }
