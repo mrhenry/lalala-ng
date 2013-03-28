@@ -2,18 +2,19 @@ class AppBuilder < Rails::AppBuilder
   include Thor::Actions
   include Thor::Shell
 
-  RUBY_VERSION = "1.9.2"
+  RUBY_VERSION = "2.0.0"
 
   def gemfile
     create_file 'Gemfile', <<-DOC
 source 'https://rubygems.org'
 
-ruby "1.9.2"
+ruby "#{RUBY_VERSION}"
 
-gem 'lalala', :github => 'mrhenry/lalala-ng', :submodules => true
-
-group :development do
-  gem 'sqlite3'
+git 'git://github.com/mrhenry/lalala-ng', submodules: true do
+  gem 'lalala'
+  gem 'lalala-development', groups: [:development]
+  gem 'lalala-assets',      groups: [:development, :assets]
+  gem 'lalala-test',        groups: [:test]
 end
 DOC
   end

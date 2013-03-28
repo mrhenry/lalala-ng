@@ -5,7 +5,6 @@ module Lalala::Pages
   autoload :ChildTypeValidator
   autoload :ChildrenLengthValidator
 
-  autoload :PageLoader
   autoload :PageTypeConstraint
   autoload :RouteMapper
 

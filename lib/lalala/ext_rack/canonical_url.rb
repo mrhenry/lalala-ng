@@ -1,4 +1,4 @@
-class Lalala::Rack::CanonicalURL
+class Lalala::ExtRack::CanonicalURL
 
   require 'uri'
 
@@ -15,7 +15,7 @@ class Lalala::Rack::CanonicalURL
 protected
 
   def _call(env)
-    req_url = ::Rack::Request.new(env).url
+    req_url = Rack::Request.new(env).url
 
     status, headers, body = @app.call(env)
 

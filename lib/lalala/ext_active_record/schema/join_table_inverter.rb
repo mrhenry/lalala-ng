@@ -1,4 +1,4 @@
-module Lalala::ActiveRecord::Schema::JoinTableInverter
+module Lalala::ExtActiveRecord::Schema::JoinTableInverter
   extend ActiveSupport::Concern
 
   def invert_create_join_table(*args)

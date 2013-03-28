@@ -1,4 +1,4 @@
-module Lalala::ActiveRecord::Schema
+module Lalala::ExtActiveRecord::Schema
   extend ActiveSupport::Autoload
 
   autoload :JoinTable

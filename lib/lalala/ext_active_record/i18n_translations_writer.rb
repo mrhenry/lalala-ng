@@ -1,4 +1,4 @@
-module Lalala::I18n::TranslationsWriter
+module Lalala::ExtActiveRecord::I18nTranslationsWriter
   extend ActiveSupport::Concern
 
   module ClassMethods
@@ -18,10 +18,10 @@ module Lalala::I18n::TranslationsWriter
 
   module Writer
     def translations_writer=(attributes)
-      _locale = ::I18n.locale
+      _locale = I18n.locale
 
-      ::I18n.available_locales.each do |locale|
-        ::I18n.locale = locale
+      I18n.available_locales.each do |locale|
+        I18n.locale = locale
         attrs = attributes[locale.to_s]
         if attrs
           self.assign_attributes(attrs)
@@ -30,7 +30,7 @@ module Lalala::I18n::TranslationsWriter
 
       attributes
     ensure
-      ::I18n.locale = _locale
+      I18n.locale = _locale
     end
   end
 

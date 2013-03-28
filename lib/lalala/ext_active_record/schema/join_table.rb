@@ -1,4 +1,4 @@
-module Lalala::ActiveRecord::Schema::JoinTable
+module Lalala::ExtActiveRecord::Schema::JoinTable
   extend ActiveSupport::Concern
 
   # Create a join table

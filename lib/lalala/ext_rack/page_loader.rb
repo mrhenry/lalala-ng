@@ -1,4 +1,4 @@
-class Lalala::Pages::PageLoader
+class Lalala::ExtRack::PageLoader
 
   def initialize(app)
     @app = app

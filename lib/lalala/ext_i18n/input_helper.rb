@@ -1,4 +1,4 @@
-module Lalala::I18n::InputHelper
+module Lalala::ExtI18n::InputHelper
 
   def input(method, options = {})
     unless translated?(method)
@@ -6,16 +6,16 @@ module Lalala::I18n::InputHelper
     end
 
     begin
-      _locale, _object_name = ::I18n.locale, @object_name
+      _locale, _object_name = I18n.locale, @object_name
 
       h = "".html_safe
 
-      locales = ::I18n.available_locales.dup
+      locales = I18n.available_locales.dup
       locales.sort!
 
-      if ::I18n.default_locale
-        locales.delete(::I18n.default_locale)
-        locales.unshift(::I18n.default_locale)
+      if I18n.default_locale
+        locales.delete(I18n.default_locale)
+        locales.unshift(I18n.default_locale)
       end
 
       opts = options.dup
@@ -31,7 +31,7 @@ module Lalala::I18n::InputHelper
       ].flatten.compact
 
       locales.each do |locale|
-        ::I18n.locale  = locale
+        I18n.locale  = locale
         @object_name = "#{_object_name}[translations_writer][#{locale}]"
 
 
@@ -43,7 +43,7 @@ module Lalala::I18n::InputHelper
       h
 
     ensure
-      ::I18n.locale, @object_name = _locale, _object_name
+      I18n.locale, @object_name = _locale, _object_name
     end
   end
 

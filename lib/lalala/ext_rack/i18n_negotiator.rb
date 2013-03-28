@@ -1,4 +1,4 @@
-class Lalala::I18n::Negotiation::Router
+class Lalala::ExtRack::I18nNegotiator
 
   include ActionDispatch::Routing::Redirection
 

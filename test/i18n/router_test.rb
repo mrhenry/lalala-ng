@@ -213,9 +213,9 @@ private
 
     a = a.merge("rack.url_scheme" => "http")
 
-    adapter = Lalala::I18n::Negotiation::TestAdapter.new(@default_locale, @available_locales)
+    adapter = Lalala::ExtI18n::TestNegotiationAdapter.new(@default_locale, @available_locales)
     app     = ->(env){ o_env = env ; [-1, {}, []] }
-    router  = Lalala::I18n::Negotiation::Router.new(app, adapter)
+    router  = Lalala::ExtRack::I18nNegotiator.new(app, adapter)
 
     router.call(a)
 

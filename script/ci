@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+blue_='\033[0;34m'
+green='\033[0;32m'
+clear='\033[0m'
+
+set -e
+
+echo -e "\n${blue_}----> create the postgress databases${clear}"
+psql -c 'CREATE DATABASE lalala_test' -U postgres
+
+echo -e "\n${blue_}----> run the tests${clear}"
+rake
+
+echo -e "\n${green}----> done${clear}"
