@@ -45,6 +45,7 @@ module Lalala
 
   autoload :Markdown
   autoload :Pages
+  autoload :Uploaders
 
   module Core
     require 'lalala/core/class_inheritable_setting'
