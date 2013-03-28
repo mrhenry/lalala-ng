@@ -1,12 +1,15 @@
 /*
 
-  IMAGE GRIDS
-  --------------
+  GRIDS
+  --------
 
 */
-.grid.images {
-  list-style: none;
-  overflow: hidden;
+
+.mod-grid {
+  .images,
+  .input-fields {
+    overflow: hidden;
+  }
 
   // [row]
   li {
@@ -21,13 +24,16 @@
 
     &.move,
     &.properties,
-    &.selected { .overlay { display: block; }}
+    &.selected,
+    &.will-destroy { .overlay { display: block; }}
   }
 
   // [row]:types
   li.move label { cursor: move; }
   li.properties { cursor: pointer; }
   li.selected .overlay { background: rgba($yellow, .5); }
+  li.will-destroy .overlay,
+  li.selected.will-destroy .overlay { background: rgba($red, .5); }
 
   // image + overlay
   li .image,
