@@ -9,6 +9,10 @@ module Lalala
     config.lalala.i18n = ActiveSupport::OrderedOptions.new
     config.lalala.i18n.adapter = nil
 
+    initializer "lalala.threadsafe" do |app|
+      app.config.threadsafe!
+    end
+
     initializer "lalala.error_handlers" do |app|
       app.config.exceptions_app = app.routes
     end
@@ -66,5 +70,9 @@ module Lalala
   ActiveSupport.on_load :action_controller do
     ActionDispatch::Routing::Mapper.send :include, Lalala::Pages::RouteMapper
   end
+
+  # load the puma handler
+  require 'rack/handler'
+  Rack::Handler::WEBrick = Rack::Handler.get(:puma)
 
 end
