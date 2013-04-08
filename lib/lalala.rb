@@ -27,7 +27,6 @@ module Lalala
   require 'stringex'
   require 'activeadmin'
 
-  require 'formtastic/inputs/grid_input'
 
   if groups.include?(:assets)
     require 'lalala/assets'
@@ -41,9 +40,12 @@ module Lalala
     require 'lalala/test'
   end
 
+  require 'formtastic/inputs/grid_input'
+
   autoload :ExtActiveRecord
   autoload :ExtRack
   autoload :ExtI18n
+  autoload :ExtWithAdvisoryLock
 
   autoload :Markdown
   autoload :Pages

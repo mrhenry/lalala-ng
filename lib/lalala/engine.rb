@@ -43,6 +43,10 @@ module Lalala
 
   end
 
+  ActiveSupport.on_load :active_record do
+    Lalala::ExtWithAdvisoryLock.patch!
+  end
+
   Formtastic::FormBuilder.send(
     :include, Lalala::ExtI18n::InputHelper)
 
