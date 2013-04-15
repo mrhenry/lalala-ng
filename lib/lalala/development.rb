@@ -5,6 +5,10 @@ module Lalala
   require 'pry-rails'
   require 'better_errors'
 
+  autoload :ExtBetterErrors
+
+  Lalala::ExtBetterErrors.patch!
+
 end
 
 if defined?(Rails::Generators)

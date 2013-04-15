@@ -1,65 +1,26 @@
-def storage_config
-  path = File.join(Rails.root.to_s, 'config/filesystem.yml')
-  unless File.file?(path)
-    return nil
-  end
-
-  config = YAML::load(ERB.new(File.read(path)).result)
-  unless Hash === config
-    return nil
-  end
-
-  config = config[Rails.env.to_s]
-  unless Hash === config
-    return nil
-  end
-
-  config
-end
-
-
-
-#
-#  Configuration types
-#
-def configure_s3(config, s3)
-  config.storage = :fog
-  config.root = Rails.root.join('tmp')
-  config.cache_dir = 'uploads'
-
-  credentials = {
-    provider: 'AWS',
-    aws_access_key_id: s3['access_key_id'],
-    aws_secret_access_key: s3['secret_access_key'],
-    region: 'eu-west-1'
-  }
-
-  if s3['vhost']
-    config.asset_host = "http://#{s3['vhost']}"
-  elsif s3['bucket'] and s3['bucket'].index(".")
-    config.asset_host = "http://#{s3['bucket']}.s3.amazonaws.com"
-  end
-
-  config.fog_credentials = credentials
-  config.fog_directory = s3['vhost'] || s3['bucket']
-end
-
-
-def configure_filesystem(config)
-  config.storage = :file
-end
-
-
-
 #
 #  Carrier Wave configuration block
 #
 CarrierWave.configure do |config|
-  s3 = storage_config
 
-  if s3
-    configure_s3(config, s3)
-  else
-    configure_filesystem(config)
+  if Rails.env.production? or Rails.env.staging?
+
+    config.storage = :fog
+    config.root = Rails.root.join('tmp')
+    config.cache_dir = 'uploads'
+
+    config.fog_credentials = {
+      provider:              'AWS',
+      aws_access_key_id:     ENV["LALALA_S3_ACCESS_KEY"],
+      aws_secret_access_key: ENV["LALALA_S3_SECRET_KEY"]
+    }
+
+    config.fog_directory   = ENV["LALALA_S3_BUCKET"]
+    config.fog_attributes  = {'Cache-Control'=>'max-age=315576000'}
+
+
+  else # dev
+    config.storage = :file
+
   end
 end
