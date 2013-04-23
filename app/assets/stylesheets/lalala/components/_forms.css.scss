@@ -7,6 +7,9 @@
 
 */
 
+$label_width: 20%;
+$input_width: 80%;
+
 form {
   margin: 0 0 1em 0;
 }
@@ -23,6 +26,11 @@ form > fieldset > legend {
   font-size: 1.5em;
   font-style: italic;
   margin: 0 0 1em 0;
+}
+
+form > fieldset.next {
+  & > legend { float: left; width: $label_width; }
+  & > ol { float: right; width: $input_width; }
 }
 
 select {
@@ -114,8 +122,6 @@ select:focus {
 
 // input line
 .input {
-  $label_width: 20%;
-  $input_width: 80%;
   position: relative;
 
   .label {
@@ -192,6 +198,25 @@ select:focus {
 // fragments
 .fragments .fragments-group {
   clear: both;
+}
+
+// single file
+.input.single_file .file-description {
+  font-size: 12px;
+  margin-left: $label_width;
+  margin-top: 7px;
+  width: $input_width;
+
+  img {
+    display: inline-block;
+  }
+
+  span {
+    display: inline-block;
+    font-size: 13px;
+    margin-left: 8px;
+    vertical-align: top;
+  }
 }
 
 

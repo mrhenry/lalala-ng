@@ -41,6 +41,7 @@ module Lalala
   end
 
   require 'formtastic/inputs/grid_input'
+  require 'formtastic/inputs/single_file_input'
 
   autoload :ExtActiveRecord
   autoload :ExtRack

@@ -45,6 +45,10 @@ module Lalala
         'ActionDispatch::Flash',
         Lalala::ExtRack::PageLoader)
 
+      stack.insert_before(
+        'ActionDispatch::Head',
+        Lalala::ExtRack::MultipleFileUploadSupport)
+
     end
 
   end
@@ -69,6 +73,9 @@ module Lalala
 
     ActiveRecord::Base.send(
       :include, Lalala::ExtActiveRecord::I18nTranslationsWriter)
+
+    ActiveRecord::Base.send(
+      :include, Lalala::ExtActiveRecord::Assets)
 
   end
 

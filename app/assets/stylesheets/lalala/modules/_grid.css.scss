@@ -6,9 +6,18 @@
 */
 
 .mod-grid {
+  border: 1px solid #ddd;
+  padding: 18px;
+
+  @include border-radius(5px);
+
   .images,
-  .input-fields {
+  .actions {
     overflow: hidden;
+  }
+
+  .images {
+    padding-top: 10px - 3px;
   }
 
   // [row]
@@ -53,6 +62,14 @@
     z-index: 1;
   }
 
+  // [row].edit-block
+  li.edit-block {
+    clear: both;
+    height: auto;
+    min-height: 100px;
+    width: 100%;
+  }
+
   // label
   li label {
     @include border-radius(2px);
@@ -71,5 +88,83 @@
     white-space: nowrap;
     z-index: 2;
   }
+
+  // attributes
+  li .attributes { display: none; position: relative }
+  li.edit-block .attributes { display: block }
+
+  li .attributes input,
+  li .attributes textarea {
+    margin-bottom: 6px;
+    margin-left: 115px;
+    resize: none;
+    width: 300px;
+  }
+
+  li .attributes textarea {
+    height: 100px !important;
+  }
+
+  li .attributes .close-button {
+    color: #c5c5c5;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    padding: 4px 6px;
+    position: absolute;
+    right: 0;
+    top: -4px;
+
+    &:hover { color: $black }
+  }
+
+  //
+  //  Actions
+  //
+  .actions {
+    & > div {
+      float: left;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .button {
+      background: $button_green;
+      color: white;
+      cursor: pointer;
+      float: left;
+      font-size: 10px;
+      font-weight: 600;
+      margin-bottom: 3px;
+      margin-right: 7px;
+      padding: 7px 9px 6px;
+      text-transform: uppercase;
+
+      @include border-radius(3px);
+    }
+
+    .button.unavailable {
+      background-color: #ddd !important;
+      cursor: default;
+    }
+
+    .button[rel="edit"] { background-color: $button_yellow; }
+    .button[rel="destroy"] { background-color: $button_red; }
+
+    .files-description {
+      color: #999;
+      display: none;
+      font-size: 9px;
+      height: 23px;
+      letter-spacing: 1px;
+      line-height: 25px;
+      margin-right: 12px;
+      overflow: hidden;
+      text-transform: uppercase;
+    }
+  }
+
 
 }

@@ -30,6 +30,12 @@ module Lalala
         template 'errors_controller.rb', 'app/controllers/errors_controller.rb'
       end
 
+      def setup_models
+        empty_directory "app/models"
+        copy_file "models/file_asset.rb", "app/models/file_asset.rb"
+        copy_file "models/image_asset.rb", "app/models/image_asset.rb"
+      end
+
       def setup_pages
         empty_directory "app/pages"
         template 'application_page.rb', 'app/pages/application_page.rb'
@@ -46,6 +52,12 @@ module Lalala
           @user_class = name
           template 'admin_user.rb.erb', "app/admin/#{name.underscore.pluralize}.rb"
         end
+      end
+
+      def setup_uploaders
+        empty_directory "app/uploaders"
+        copy_file "uploaders/file.rb", "app/uploaders/file.rb"
+        copy_file "uploaders/image.rb", "app/uploaders/image.rb"
       end
 
       def create_assets

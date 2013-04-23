@@ -12,7 +12,7 @@
   $padding_btm:   10px;
 
   @include border-radius(4px);
-  @include single-text-shadow(rgba(0,0,0, .25), 1px, 1px, 0);
+  @include single-text-shadow(rgba(black, .25), 1px, 1px, 0);
   @include transition(background-color 300ms);
   @include user-select(none);
 
@@ -31,7 +31,7 @@
   text-transform: uppercase;
 
   &:active {
-    @include single-text-shadow(rgba(0,0,0, 0.1), 0, 0, 0);
+    @include single-text-shadow(rgba(black, 0.1), 0, 0, 0);
     color: white;
     text-decoration: none;
     padding-bottom: $padding_btm - 1;
@@ -39,7 +39,7 @@
   }
 
   &.disabled {
-    @include single-text-shadow(rgba(0,0,0, 0.1), 0, 0, 0);
+    @include single-text-shadow(rgba(black, 0.1), 0, 0, 0);
     color: white;
     text-decoration: none;
     padding-bottom: $padding_btm - 1;
