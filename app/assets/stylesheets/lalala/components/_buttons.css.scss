@@ -13,7 +13,7 @@
 
   @include border-radius(4px);
   @include single-text-shadow(rgba(black, .25), 1px, 1px, 0);
-  @include transition(background-color 300ms);
+  @include transition(background-color 300ms, opacity 300ms);
   @include user-select(none);
 
   background-color: gray(210);
@@ -39,8 +39,10 @@
   }
 
   &.disabled {
+    @include opacity(0.5);
     @include single-text-shadow(rgba(black, 0.1), 0, 0, 0);
     color: white;
+    cursor: default;
     text-decoration: none;
     padding-bottom: $padding_btm - 1;
     padding-top: $padding_top + 1;

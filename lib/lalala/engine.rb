@@ -51,6 +51,10 @@ module Lalala
 
     end
 
+    initializer :assets do |config|
+      Rails.application.config.assets.precompile += %w( editor-preview.css )
+    end
+
   end
 
   ActiveSupport.on_load :active_record do
