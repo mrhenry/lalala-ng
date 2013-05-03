@@ -3,7 +3,7 @@
 #
 CarrierWave.configure do |config|
 
-  if Rails.env.production? or Rails.env.staging?
+  if (Rails.env.production? or Rails.env.staging?) and ENV["LALALA_S3_BUCKET"]
 
     config.storage = :fog
     config.root = Rails.root.join('tmp')

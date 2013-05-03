@@ -51,8 +51,8 @@ module Lalala
 
     end
 
-    initializer :assets do |config|
-      Rails.application.config.assets.precompile += %w( editor-preview.css )
+    initializer :assets do |app|
+      app.config.assets.precompile += %w( lalala/editor-preview.css )
     end
 
   end
