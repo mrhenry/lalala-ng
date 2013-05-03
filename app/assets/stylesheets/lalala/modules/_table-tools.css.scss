@@ -1,3 +1,28 @@
 .table_tools {
   padding-bottom: 20px;
+
+  .scopes {
+    float: right;
+
+    li {
+      float: left;
+      margin: 0 0 0 7px;
+
+      a {
+        text-decoration: none;
+        line-height: 32px;
+      }
+
+      &.selected {
+
+        a {
+          text-decoration: underline;
+        }
+
+      }
+
+    }
+
+  }
+
 }
