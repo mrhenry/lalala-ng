@@ -62,7 +62,7 @@ class Lalala::Page < ActiveRecord::Base
   self.route = self.default_route
 
   def path
-    path_components = self.ancestry_path
+    path_components = self.ancestry_path || []
     unless path_components.first == ''
       path_components.unshift('')
     end
