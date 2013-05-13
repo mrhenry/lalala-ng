@@ -39,9 +39,6 @@ class Lalala::Page < ActiveRecord::Base
     maximum:    ->(r){ r.maximum_children }
 
 
-  default_scope order(:position)
-
-
   # Before filters
   before_validation :set_default_title,             :on => :create
   before_validation :set_default_position,          :on => :create
@@ -63,6 +60,14 @@ class Lalala::Page < ActiveRecord::Base
   end
 
   self.route = self.default_route
+
+  def path
+    path_components = self.ancestry_path
+    unless path_components.first == ''
+      path_components.unshift('')
+    end
+    File.join(path_components)
+  end
 
 
   # The form
