@@ -51,7 +51,8 @@ module Lalala
 
     end
 
-    initializer :assets do |app|
+    initializer "lalala.assets", :group => :assets do |app|
+      ::Sass::Engine::DEFAULT_OPTIONS[:load_paths] << File.expand_path("../../../app/assets/stylesheets", __FILE__)
       app.config.assets.precompile += %w( lalala/editor-preview.css )
     end
 
