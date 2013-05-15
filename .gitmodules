@@ -1,3 +1,0 @@
-[submodule "vendor/deps/active_admin"]
-	path = vendor/deps/active_admin
-	url = git://github.com/mrhenry/active_admin.git

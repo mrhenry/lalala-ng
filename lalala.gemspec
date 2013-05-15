@@ -22,7 +22,6 @@ Gem::Specification.new do |gem|
   gem.homepage      = "http://mrhenry.be"
 
   gem.files = `git ls-files`.split($/).reject{ |f| /^vendor\/deps/ === f }
-  gem.files += `cd vendor/deps/active_admin ; git ls-files`.split($/).map { |f| "vendor/deps/active_admin/#{f}" }
 
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
@@ -45,16 +44,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'i18n-country-translations', '= 0.0.9'
   gem.add_runtime_dependency 'dalli',                     '= 2.6.3'
   gem.add_runtime_dependency 'closure_tree',              '= 3.10.2'
-
-  # vendor/deps/active_admin
-  # gem.add_runtime_dependency 'activeadmin',  '= 0.5.1'
-  gem.add_runtime_dependency "arbre",               ">= 1.0.1"
-  gem.add_runtime_dependency "bourbon",             ">= 1.0.0"
-  gem.add_runtime_dependency "devise",              ">= 1.1.2"
-  gem.add_runtime_dependency "fastercsv",           ">= 0"
-  gem.add_runtime_dependency "formtastic",          ">= 2.0.0"
-  gem.add_runtime_dependency "inherited_resources", ">= 1.3.1"
-  gem.add_runtime_dependency "kaminari",            ">= 0.13.0"
-  gem.add_runtime_dependency "meta_search",         ">= 0.9.2"
+  gem.add_runtime_dependency 'activeadmin',               '= 0.6.0'
 
 end

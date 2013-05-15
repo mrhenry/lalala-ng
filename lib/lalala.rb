@@ -12,8 +12,6 @@ module Lalala
 
   groups = Rails.groups(:assets => %w(development test)).map(&:to_sym)
 
-  Lalala::Vendor.enable('activeadmin', 'active_admin')
-
   require 'rails-i18n'
   require 'i18n-country-translations'
   require 'carrierwave'

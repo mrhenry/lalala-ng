@@ -99,9 +99,9 @@ module ActiveAdmin
 
       def build(page_presenter, collection)
         table_options = {
-          :id => active_admin_config.resource_name.plural,
-          :class => "index_table index",
-          :i18n => active_admin_config.resource_class,
+          :id    => "index_tree_table_#{active_admin_config.resource_name.plural}",
+          :class => "index_tree_table index_table index",
+          :i18n  => active_admin_config.resource_class,
         }
 
         table_options[:sortable] = false
@@ -129,6 +129,10 @@ module ActiveAdmin
           end
           default_actions
         end
+      end
+
+      def self.index_name
+        "tree_table"
       end
 
       #
