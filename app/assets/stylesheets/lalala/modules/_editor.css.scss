@@ -175,8 +175,24 @@
       background-image: icon-url('link');
     }
 
+    .add-image {
+      background-image: icon-url('picture_add');
+    }
+
     .markdown-cheatsheet {
       background-image: icon-url('book_open');
+    }
+
+    .unordered-list {
+      background-image: icon-url('text_list_bullets');
+    }
+
+    .ordered-list {
+      background-image: icon-url('text_list_numbers');
+    }
+
+    .add-table {
+      background-image: icon-url('table_add');
     }
 
   }

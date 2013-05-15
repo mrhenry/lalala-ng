@@ -91,7 +91,15 @@ markdown_settings = {
     { name: 'Bold', key: 'B', openWith: '**', closeWith: '**', className: 'bold' },
     { name: 'Italic', key: 'I', openWith: '_', closeWith: '_', className: 'italic' },
     { separator: '---' },
+    { name: 'Unordered list', openWith: '- ', className: 'unordered-list', multiline: true },
+    { name: 'Ordered list', openWith: '1. ', closeWith: '\n2. \n3. ', className: 'ordered-list', multiline: true },
+    /*
+| column header |\n| ------------- | ------------- |\n|               |               |
+    */
+    { name: 'Add table', openWith: '| ', closeWith: ' | column header |\n| ------------- | ------------- |\n|               |               |', placeHolder: 'Column header', className: 'add-table', multiline: true },
+    { separator: '---' },
     { name: 'Link', key: 'L', openWith: '[[![Link text]!]', closeWith: ']([![Url:!:http://]!])', className: 'add-link' },
+    //{ name: 'Image', openWith: '![[![Alternative text]!]]', closeWith: '([![Url:!:http://]!] "[![Image title]!]")', className: 'add-image' },
     { separator: '---' },
     { name: 'Preview', call: 'preview', className: "preview" },
     { name: 'Fullscreen', className: 'fullscreen' },
