@@ -1,6 +1,3 @@
 [submodule "vendor/deps/active_admin"]
 	path = vendor/deps/active_admin
 	url = git://github.com/mrhenry/active_admin.git
-[submodule "vendor/deps/closure_tree"]
-	path = vendor/deps/closure_tree
-	url = git://github.com/fd/closure_tree.git

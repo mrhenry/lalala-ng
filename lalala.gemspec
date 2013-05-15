@@ -23,7 +23,6 @@ Gem::Specification.new do |gem|
 
   gem.files = `git ls-files`.split($/).reject{ |f| /^vendor\/deps/ === f }
   gem.files += `cd vendor/deps/active_admin ; git ls-files`.split($/).map { |f| "vendor/deps/active_admin/#{f}" }
-  gem.files += `cd vendor/deps/closure_tree ; git ls-files`.split($/).map { |f| "vendor/deps/closure_tree/#{f}" }
 
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
@@ -44,7 +43,8 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'stringex',                  '= 1.5.1'
   gem.add_runtime_dependency 'rails-i18n',                '= 0.7.3'
   gem.add_runtime_dependency 'i18n-country-translations', '= 0.0.9'
-  gem.add_runtime_dependency 'dalli',                     '> 0'
+  gem.add_runtime_dependency 'dalli',                     '= 2.6.3'
+  gem.add_runtime_dependency 'closure_tree',              '= 3.10.2'
 
   # vendor/deps/active_admin
   # gem.add_runtime_dependency 'activeadmin',  '= 0.5.1'
@@ -56,9 +56,5 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "inherited_resources", ">= 1.3.1"
   gem.add_runtime_dependency "kaminari",            ">= 0.13.0"
   gem.add_runtime_dependency "meta_search",         ">= 0.9.2"
-
-  # vendor/deps/closure_tree
-  # gem.add_runtime_dependency 'closure_tree', '= 3.10.0'
-  gem.add_runtime_dependency 'with_advisory_lock',   '>= 0.0.6'
 
 end
