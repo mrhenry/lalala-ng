@@ -107,8 +107,4 @@ module Lalala
     ActionDispatch::Routing::Mapper.send :include, Lalala::Pages::RouteMapper
   end
 
-  # load the puma handler
-  require 'rack/handler'
-  Rack::Handler::WEBrick = Rack::Handler.get(:puma)
-
 end
