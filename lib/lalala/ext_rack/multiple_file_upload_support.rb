@@ -15,7 +15,7 @@ class Lalala::ExtRack::MultipleFileUploadSupport
     @app.call(env)
   end
 
-  def correct_assets_hash_nesting(params, key=nil)
+  def correct_assets_hash_nesting(params, parent=nil, key=nil)
     if key and key.to_s.ends_with?("_attributes")
       return if params.size == 0
 
@@ -31,6 +31,8 @@ class Lalala::ExtRack::MultipleFileUploadSupport
 
       assets.each do |file|
         if file.present?
+          file[:name] = file[:name].sub(/\[\]$/, '')
+          file[:head] = file[:head].sub(file[:name] + "[]", file[:name])
           params[last_id] = { "asset" => file }.with_indifferent_access
           last_id.succ!
         end
@@ -38,8 +40,8 @@ class Lalala::ExtRack::MultipleFileUploadSupport
 
     else
       case params
-      when Hash then params.each { |k, v| correct_assets_hash_nesting(v, k) }
-      when Array then params.each { |v| correct_assets_hash_nesting(v) }
+      when Hash  then params.each { |k, v| correct_assets_hash_nesting(v, params, k) }
+      when Array then params.each { |v|    correct_assets_hash_nesting(v)            }
       end
 
     end
