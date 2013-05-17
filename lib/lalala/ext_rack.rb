@@ -4,6 +4,5 @@ module Lalala::ExtRack
   autoload :CanonicalURL
   autoload :PageLoader
   autoload :I18nNegotiator
-  autoload :MultipleFileUploadSupport
 
 end

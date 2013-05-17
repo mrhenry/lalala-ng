@@ -45,10 +45,6 @@ module Lalala
         'ActionDispatch::Flash',
         Lalala::ExtRack::PageLoader)
 
-      stack.insert_before(
-        'ActionDispatch::Head',
-        Lalala::ExtRack::MultipleFileUploadSupport)
-
     end
 
     initializer "lalala.assets", :group => :assets do |app|
@@ -104,7 +100,13 @@ module Lalala
   end
 
   ActiveSupport.on_load :action_controller do
-    ActionDispatch::Routing::Mapper.send :include, Lalala::Pages::RouteMapper
+
+    ActionDispatch::Routing::Mapper.send(
+      :include, Lalala::Pages::RouteMapper)
+
+    ActionDispatch::Request.send(
+      :include, Lalala::ExtActionDispatch::MultiFileUpload)
+
   end
 
 end
