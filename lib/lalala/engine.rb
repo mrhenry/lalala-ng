@@ -9,6 +9,15 @@ module Lalala
     config.lalala.i18n = ActiveSupport::OrderedOptions.new
     config.lalala.i18n.adapter = nil
 
+    initializer "lalala.migrations" do |app|
+      app.class.configure do
+        if app.class.to_s == "Dummy::Application"
+        else
+          config.paths['db/migrate'] += Lalala::Engine.paths['db/migrate'].existent
+        end
+      end
+    end
+
     initializer "lalala.threadsafe" do |app|
       unless Rails.env.development? or Rails.env.test?
         app.config.threadsafe!

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327213858) do
+ActiveRecord::Schema.define(:version => 20130506155010) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -45,6 +45,25 @@ ActiveRecord::Schema.define(:version => 20130327213858) do
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
+
+  create_table "asset_translations", :force => true do |t|
+    t.string  "locale"
+    t.integer "asset_id"
+    t.string  "title"
+    t.text    "caption"
+  end
+
+  create_table "assets", :force => true do |t|
+    t.string   "asset"
+    t.string   "type"
+    t.integer  "asset_owner_id"
+    t.string   "asset_owner_type"
+    t.string   "asset_owner_section"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "assets", ["asset_owner_id", "asset_owner_type", "asset_owner_section"], :name => "asset_owner_idx"
 
   create_table "page_hierarchies", :id => false, :force => true do |t|
     t.integer "ancestor_id",   :null => false

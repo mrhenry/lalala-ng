@@ -1,5 +1,13 @@
 class CreatePages < ActiveRecord::Migration
-  def up
+  def migrate(direction)
+    super
+    if direction == :up
+      # Reset the column info
+      ApplicationPage.reset_column_information
+    end
+  end
+
+  def change
     create_table :pages do |t|
       t.integer :parent_id
       t.integer :position
@@ -29,14 +37,5 @@ class CreatePages < ActiveRecord::Migration
     add_index :page_translations, [:page_id]
     add_index :page_translations, [:locale]
     add_index :page_translations, [:path_component]
-
-    # Reset the column info
-    ApplicationPage.reset_column_information
-  end
-
-  def down
-    drop_table :pages
-    drop_table :page_hierarchies
-    drop_table :page_translations
   end
 end
