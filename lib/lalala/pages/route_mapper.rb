@@ -22,7 +22,7 @@ module Lalala::Pages::RouteMapper
     match '/', options
 
     if block_given?
-      scope(options) { yield }
+      scope(options.except(:to,:action,:controller)) { yield }
     end
 
     self

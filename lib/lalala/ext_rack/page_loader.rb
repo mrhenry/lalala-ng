@@ -45,10 +45,6 @@ protected
     env['lalala.page_chain'] = pages
     env['lalala.page']       = pages.last
     env['PATH_INFO']         = path_info
-
-    unless script_name == "/" or script_name.blank?
-      env['SCRIPT_NAME'] = script_name
-    end
   end
 
 end
