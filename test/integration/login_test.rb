@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class LoginIntegrationTest < ActionDispatch::IntegrationTest
 
   def setup
-    AdminUser.create! email: 'admin@example.com', password: 'password', password_confirmation: 'password'
+    AdminUser.create! name: 'Admin', email: 'admin@example.com', password: 'password', password_confirmation: 'password'
   end
 
   test 'when not loged in whe should be redirected to the login page' do

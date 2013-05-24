@@ -9,8 +9,6 @@ module Lalala
       desc "Installs Active Admin and generates the necessary migrations"
       argument :name, :type => :string, :default => "AdminUser"
 
-      hook_for :users, :default => "devise", :desc => "Admin user generator to run. Skip with --skip-users"
-
       def self.source_root
         @_active_admin_source_root ||= File.expand_path("../templates", __FILE__)
       end
@@ -36,9 +34,16 @@ module Lalala
         copy_file "models/image_asset.rb", "app/models/image_asset.rb"
       end
 
+      def setup_admin_users
+        empty_directory "app/models"
+        template 'models/admin_user.rb', 'app/models/admin_user.rb'
+        empty_directory "app/admin"
+        template 'admin_users.rb', 'app/admin/admin_users.rb'
+      end
+
       def setup_pages
         empty_directory "app/pages"
-        template 'application_page.rb', 'app/pages/application_page.rb'
+        template 'models/application_page.rb', 'app/pages/application_page.rb'
         empty_directory "app/controllers"
         template 'pages_controller.rb', 'app/controllers/pages_controller.rb'
         empty_directory "app/admin"
@@ -48,16 +53,12 @@ module Lalala
       def setup_directory
         empty_directory "app/admin"
         template 'dashboard.rb', 'app/admin/dashboard.rb'
-        if options[:users].present?
-          @user_class = name
-          template 'admin_user.rb.erb', "app/admin/#{name.underscore.pluralize}.rb"
-        end
       end
 
       def setup_uploaders
         empty_directory "app/uploaders"
-        copy_file "uploaders/file.rb", "app/uploaders/file.rb"
-        copy_file "uploaders/image.rb", "app/uploaders/image.rb"
+        copy_file "uploaders/file_uploader.rb", "app/uploaders/file_uploader.rb"
+        copy_file "uploaders/image_uploader.rb", "app/uploaders/image_uploader.rb"
       end
 
       def create_assets

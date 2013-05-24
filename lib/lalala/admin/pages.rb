@@ -1,7 +1,10 @@
 if defined?(ActiveAdmin) and defined?(ApplicationPage)
   ActiveAdmin.register ApplicationPage, :as => 'Page' do
 
-    config.filters = false
+    menu priority: 20, html_options: { class: 'icon-page' }
+
+    config.filters  = false
+    config.paginate = false
 
     index as: :tree_table, paginator: false, download_links: false do
       selectable_column

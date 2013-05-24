@@ -24,7 +24,6 @@ module Lalala
   require 'stringex'
   require 'activeadmin'
 
-
   if groups.include?(:assets)
     require 'lalala/assets'
   end

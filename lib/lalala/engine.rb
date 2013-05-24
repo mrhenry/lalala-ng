@@ -1,4 +1,6 @@
 module Lalala
+  require 'lalala'
+
   class Engine < Rails::Engine
 
     config.i18n.fallbacks = true
@@ -86,11 +88,13 @@ module Lalala
     Lalala::ExtWithAdvisoryLock.patch!
   end
 
-  Formtastic::FormBuilder.send(
-    :include, Lalala::Markdown::InputHelper)
+  if defined?(Formtastic)
+    Formtastic::FormBuilder.send(
+      :include, Lalala::Markdown::InputHelper)
 
-  Formtastic::FormBuilder.send(
-    :include, Lalala::ExtI18n::InputHelper)
+    Formtastic::FormBuilder.send(
+      :include, Lalala::ExtI18n::InputHelper)
+  end
 
   ActiveSupport.on_load :active_record do
 
