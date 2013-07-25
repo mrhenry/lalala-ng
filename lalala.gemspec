@@ -6,6 +6,7 @@ require 'lalala/version'
 Gem::Specification.new do |gem|
   gem.name          = "lalala"
   gem.version       = Lalala::BUILD_VERSION
+  gem.license       = 'MIT'
 
   gem.authors       = [
     "Simon Menke",
