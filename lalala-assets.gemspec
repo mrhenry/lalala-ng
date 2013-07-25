@@ -29,13 +29,13 @@ Gem::Specification.new do |gem|
 
   # generic
   gem.add_runtime_dependency 'lalala',               Lalala::BUILD_VERSION
-  gem.add_runtime_dependency 'coffee-rails',         '= 3.2.2'
-  gem.add_runtime_dependency 'coffee-script-source', '= 1.4.0'
-  gem.add_runtime_dependency 'compass',              '= 0.13.alpha.0'
+  gem.add_runtime_dependency 'coffee-rails',         '= 4.0.0'
+  gem.add_runtime_dependency 'coffee-script-source', '= 1.6.3'
+  gem.add_runtime_dependency 'compass',              '= 0.13.alpha.4'
   gem.add_runtime_dependency 'compass-rails',        '= 1.0.3'
   gem.add_runtime_dependency 'sass',                 '= 3.2.9'
-  gem.add_runtime_dependency 'sass-rails',           '= 3.2.6'
-  gem.add_runtime_dependency 'sprockets-commonjs',   '= 0.0.5'
-  gem.add_runtime_dependency 'uglifier',             '= 1.3.0'
+  gem.add_runtime_dependency 'sass-rails',           '= 4.0.0'
+  gem.add_runtime_dependency 'sprockets-commonjs',   '= 0.0.6'
+  gem.add_runtime_dependency 'uglifier',             '= 2.1.2'
 
 end
