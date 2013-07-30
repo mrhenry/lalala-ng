@@ -55,7 +55,7 @@ module ActiveAdmin
         tbody do
           # Build enough rows for our collection (and the sub trees)
           collection.each do |node|
-            tr(:class => cycle('odd', 'even'), :id => dom_id(node))
+            tr(:class => cycle('odd', 'even'), :id => dom_id(node), :'data-id' => node.id.to_s)
             build_subtree(node.children)
           end
         end

@@ -1,4 +1,4 @@
-.index_as_tree_table {
+#active_admin_content .index_as_tree_table {
   @extend %table-wrapper;
 
   table {
@@ -9,6 +9,26 @@
 
     td {
       background-color: white;
+
+      &.selectable {
+        padding-right: 0;
+        width: 16px;
+      }
+
+      &.position {
+        padding-left: 0;
+        width: 16px;
+
+        .drag-handle {
+          display: inline-block;
+          height: 16px;
+          margin: 0 3px;
+          text-indent: -9999px;
+          width: 16px;
+
+          @include icon("text_align_justify");
+        }
+      }
     }
 
   }

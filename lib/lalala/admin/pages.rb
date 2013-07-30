@@ -8,6 +8,11 @@ if defined?(ActiveAdmin) and defined?(ApplicationPage)
 
     index as: :tree_table, paginator: false, download_links: false do
       selectable_column
+
+      column :position, label: "" do
+        %[<i class="drag-handle"></i>].html_safe
+      end
+
       column :title
 
       actions defaults: false do |page|
@@ -47,6 +52,20 @@ if defined?(ActiveAdmin) and defined?(ApplicationPage)
       end
       h << self.instance_exec(f, &f.object.form)
       h
+    end
+
+    collection_action :order, :method => :put do
+      unless Array === params[:ordered_ids]
+        render status: 422
+        return
+      end
+
+      # update the pages
+      params[:ordered_ids].each_with_index do |id, idx|
+        ApplicationPage.update_all({position: idx}, {id: id.to_i})
+      end
+
+      render json: { status: "OK" }, status: 200
     end
 
     controller do

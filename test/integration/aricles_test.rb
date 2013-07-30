@@ -19,7 +19,7 @@ class ArticlesTest < ActionDispatch::IntegrationTest
     click_on('New Article')
     assert_equal('/lalala/articles/new', current_path)
 
-    fill_in('Title',                             with: 'My Article')
+    fill_in('Title', with: 'My Article')
     attach_file('Image', File.expand_path('../../fixtures/files/image.png', __FILE__))
     click_on('Create Article')
     page.save_page
