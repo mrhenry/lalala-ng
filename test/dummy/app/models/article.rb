@@ -3,10 +3,13 @@ class Article < ActiveRecord::Base
 
   has_one_asset :image
 
+  # Translations
+  translates :title, :body
+
   # Markdown
   markdown :body
 
-  validates :title,
-    presence: true
+  # Validations
+  validates :title, presence: true
 
 end

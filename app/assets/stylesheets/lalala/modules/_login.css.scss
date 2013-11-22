@@ -1,61 +1,183 @@
 .active_admin.logged_out.new {
 
-  #wrapper {
-    height: 400px;
-    left: 50%;
-    margin: -200px 0 0 -200px;
-    overflow: visible;
-    position: absolute;
-    top: 50%;
-    width: 400px;
+  //
+  //  Containers
+  //
+  #wrapper, #content_wrapper, #active_admin_content {
+    @include spiderman;
   }
 
   #active_admin_content {
     background-color: transparent;
     padding: 0;
+    text-align: center;
     width: auto;
   }
 
-  h2 {
-    @include text-shadow( 1px 1px 0 rgba(0,0,0, 0.2) );
+  #active_admin_content:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em; /* Adjusts for spacing */
+  }
+
+  .mod-login {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    width: 650px;
+  }
+
+
+  //
+  //  Text
+  //
+  .text {
     color: white;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: bold;
+    line-height: 52px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px rgba(black, .325);
   }
 
-  label {
-    width: 120px;
+  span.text {
+    display: inline-block;
   }
 
-  input[type=email],
-  input[type=password] {
-    @include transition( background-color 300ms );
-    background-color: rgba(0,0,0, 0.1);
-    font-size: 35px;
-    font-weight: bold;
-    padding: 10px 20px;
-
-    &:focus {
-      background-color: transparentize($yellow, 0.9);
-      color: darken($yellow, 50%);
-    }
-
+  .text.tryout {
+    left: 0;
+    position: fixed;
+    top: 99%;
+    top: -moz-calc(100% - 1px);
+    top: -webkit-calc(100% - 1px);
+    top: calc(100% - 1px);
+    visibility: hidden;
+    width: auto;
   }
 
-  #admin_user_remember_me_input {
+  label,
+  .flash {
     display: none;
   }
 
-  input[name="commit"] {
-    background-image: none;
-    font-size: 20px;
-    margin-top: 10px;
-    padding-left: 12px;
+  //
+  //  Input fields
+  //
+  .input {
+    margin: -4px 0 0;
   }
 
-  .flash {
+  .inputs {
+    margin: 14px 0 0;
+    white-space: nowrap;
+  }
+
+  .inputs > ol > li {
+    display: inline-block;
+    margin-right: 13px;
+  }
+
+  .inputs .text {
+    position: relative;
+    top: -2px;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    @include box-sizing(border-box);
+    @include transition(background-color 600ms, border-color 600ms);
+
+    background: none;
+    border: 0;
+    border-bottom: 2px solid rgba($blue, .5);
+    border-radius: 0;
+    box-shadow: none;
+    color: lighten($blue, 10);
+    display: inline-block;
+    font-size: 50px;
+    font-weight: bold;
+    height: 66px;
+    line-height: 56px;
+    padding: 0;
+    position: relative;
+    top: -2px;
+    width: 120px;
+
+    @include placeholder-styles {
+      @include transition(color 600ms, text-shadow 600ms);
+      color: white;
+      text-shadow: 1px 1px rgba(black, .325);
+      text-transform: lowercase;
+    }
+  }
+
+  input[type="password"] {
+    width: 233px;
+  }
+
+  input[type="email"],
+  input[type="password"] { &:focus {
+    @include placeholder-styles {
+      color: rgba(white, .75);
+      text-shadow: 1px 1px rgba(black, .05);
+    }
+  }}
+
+  //
+  //  Actions
+  //
+  .actions {
+    margin: 90px 0 0 -50px;
+    position: relative;
+
+    button, .version {
+      @include transition(background-color 600ms);
+    }
+  }
+
+  .actions button {
+    background: #bbb image-url("lalala/overlay-logo.png") 0 0;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    height: 90px;
+    outline: none;
+    text-indent: -9999px;
+    width: 280px;
+  }
+
+  .actions button.error {
+    &, & + .version { background-color: $button_red; }
+  }
+
+  .actions button.glow,
+  .actions button:focus,
+  .actions button:hover { &, & + .version {
+    background-color: rgba($blue, .5);
+  }}
+
+  .actions .version {
+    @include background-image(
+      linear-gradient(rgba(black, 0), rgba(black, .125))
+    );
+
+    background-color: #bbb;
+    border-bottom: 1px solid rgba(black, .25);
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: bold;
+    height: 16px;
+    left: 235px;
+    line-height: 16px;
+    padding: 1px 9px 0;
     position: absolute;
-    top: -70px;
+    text-shadow: 1px 1px rgba(black, .3);
+    top: -19px;
   }
 
 }

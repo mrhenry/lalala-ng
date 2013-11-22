@@ -7,11 +7,11 @@ class ArticlesTest < ActionDispatch::IntegrationTest
   end
 
   test 'list articles' do
-    Article.create!(title: "Hello World")
+    article = Article.create!(title: "Hello World")
 
     click_on('Articles')
     assert_equal 200, page.status_code
-    assert page.has_text?('Hello World')
+    assert page.assert_selector('a.resource_id_link', text: article.id.to_s)
   end
 
   test 'create article' do
@@ -19,7 +19,7 @@ class ArticlesTest < ActionDispatch::IntegrationTest
     click_on('New Article')
     assert_equal('/lalala/articles/new', current_path)
 
-    fill_in('Title', with: 'My Article')
+    first('input[name="article[translations_writer][en][title]"]').set('My Article')
     attach_file('Image', File.expand_path('../../fixtures/files/image.png', __FILE__))
     click_on('Create Article')
     page.save_page

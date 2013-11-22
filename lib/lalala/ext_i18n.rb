@@ -5,4 +5,5 @@ module Lalala::ExtI18n
   autoload :NegotiationAdapter
   autoload :TestNegotiationAdapter
   autoload :LocaleSource
+  autoload :NameForLocale
 end

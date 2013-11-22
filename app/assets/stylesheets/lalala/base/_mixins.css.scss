@@ -55,3 +55,22 @@
   right: $offset;
   top: $offset;
 }
+
+
+//
+// PLACEHOLDER STYLES (mixin)
+// ----------------------
+//
+// Apply styles to the placeholder
+//
+// Usage:
+// input, textarea {
+//   @include placeholder-styles { color: #aaa; }
+// }
+//
+@mixin placeholder-styles {
+  &::-webkit-input-placeholder { @content }
+  &:-moz-placeholder { @content }
+  &::-moz-placeholder { @content }
+  &:-ms-input-placeholder { @content }
+}

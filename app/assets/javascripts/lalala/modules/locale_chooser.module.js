@@ -1,6 +1,7 @@
 var storage = require("lalala/modules/storage"),
     $chooser;
 
+
 exports.init = function(){
   $chooser = $('.locale_chooser select').first();
 
@@ -8,6 +9,7 @@ exports.init = function(){
     setup();
   }
 };
+
 
 function setup() {
   var locale = storage.locale,
@@ -35,9 +37,11 @@ function setup() {
   $chooser.on('change', on_switch_locale);
 }
 
+
 function on_switch_locale(e) {
   switch_locale($(this).val());
 }
+
 
 function switch_locale(locale) {
   var translated = $(".translated[data-locale]"),

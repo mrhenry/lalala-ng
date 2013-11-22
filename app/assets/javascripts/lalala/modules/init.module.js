@@ -3,9 +3,11 @@ var console = require('browser/console'),
     editor = require('lalala/modules/editor'),
     grid = require('lalala/modules/grid'),
     locale_chooser = require("lalala/modules/locale_chooser"),
-    sorted_pages_tree = require("lalala/modules/sorted_pages_tree");
+    sorted_pages_tree = require("lalala/modules/sorted_pages_tree"),
+    login = require("lalala/modules/login");
 
-$(function(){
+$(function() {
+  login.init();
   locale_chooser.init();
   editor.init();
   calendar.init();

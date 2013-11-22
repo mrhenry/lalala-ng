@@ -1,0 +1,43 @@
+<div class="mod-login">
+  <% scope = Devise::Mapping.find_scope!(resource_name) %>
+  <%= active_admin_form_for(resource, :as => resource_name, :url => send(:"#{scope}_session_path"), :html => { :id => "session_new" }) do |f|
+    alert = flash.now[:alert]
+    button_css_class = (alert && alert.to_s.downcase.include?("invalid")) ? "error" : ""
+
+    f.form_buffers.last << raw(<<-EOS
+      <div class="text">
+        #{ t("login.a") }
+      </div>
+    EOS
+    )
+
+    f.inputs do
+      resource.class.authentication_keys.each { |key|
+        f.input key, input_html: {
+          placeholder: t('active_admin.devise.login.title'),
+          autofocus: true
+        }
+      }
+
+      f.form_buffers.last << raw("<span class=\"text\">#{ t("login.b") }</span>")
+      f.form_buffers.last << raw("<br>")
+
+      f.input :password, input_html: {
+        placeholder: "Password"
+      }
+
+      f.form_buffers.last << raw("<span class=\"text\">#{ t("login.c") }</span>")
+    end
+
+    f.form_buffers.last << raw(<<-EOS
+      <fieldset class="actions">
+        <button type="submit" class="#{ button_css_class }">#{ t('active_admin.devise.login.submit') }</button>
+        <span class="version">VERSION #{ Lalala::BUILD_VERSION }</span>
+      </fieldset>
+    EOS
+    )
+  end
+  %>
+
+  <div class="text tryout"></div>
+</div>

@@ -14,14 +14,14 @@ class Lalala::Views::TitleBar < ActiveAdmin::Views::TitleBar
     locales.sort!
 
     div :class => "locale_chooser" do
-      select do
+      select(class: "bypass-chosen") do
 
         locales.each do |locale|
           opts = { :value => locale.to_s }
           opts[:'data-default'] = "true" if I18n.default_locale == locale
           opts[:'data-current'] = "true" if I18n.locale == locale
           option opts do
-            text_node locale.to_s
+            text_node Lalala::ExtI18n::NameForLocale.name_for_locale(locale)
           end
         end
 
