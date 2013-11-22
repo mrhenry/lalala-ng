@@ -3,6 +3,9 @@ class Article < ActiveRecord::Base
 
   has_one_asset :image
 
+  # Markdown
+  markdown :body
+
   validates :title,
     presence: true
 
