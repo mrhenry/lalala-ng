@@ -5,8 +5,15 @@ ActiveAdmin.register Article do
       f.input :title
       f.input :body
       f.input :category, as: :select, collection: %w(A B C)
-      f.input :image, as: :single_file
+      f.input :images, as: :haraway do |h|
+        h.inputs do
+          h.input :title, as: :string
+          h.input :choice, as: :select, collection: %w(A B C)
+          h.input :check_it, as: :boolean
+        end
+      end
     end
+
     f.actions
   end
 

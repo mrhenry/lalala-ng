@@ -27,7 +27,9 @@
 @import "lalala/modules/index-as-tree-table";
 @import "lalala/modules/editor";
 @import "lalala/modules/editor-cheatsheet";
-@import "lalala/modules/grid";
+
+@import "lalala/modules/file-uploader";
+@import "lalala/modules/file-uploader-metadata";
 @import "lalala/modules/media-selector";
 
 @import "lalala/lib/jquery-ui";

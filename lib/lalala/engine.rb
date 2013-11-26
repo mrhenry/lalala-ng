@@ -112,9 +112,6 @@ module Lalala
     ActiveRecord::Base.send(
       :include, Lalala::ExtActiveRecord::I18nTranslationsWriter)
 
-    ActiveRecord::Base.send(
-      :include, Lalala::ExtActiveRecord::Assets)
-
   end
 
   ActiveSupport.on_load :action_controller do

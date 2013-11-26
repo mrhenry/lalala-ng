@@ -55,12 +55,6 @@ module Lalala
         template 'dashboard.rb', 'app/admin/dashboard.rb'
       end
 
-      def setup_uploaders
-        empty_directory "app/uploaders"
-        copy_file "uploaders/file_uploader.rb", "app/uploaders/file_uploader.rb"
-        copy_file "uploaders/image_uploader.rb", "app/uploaders/image_uploader.rb"
-      end
-
       def create_assets
         generate "lalala:assets"
       end

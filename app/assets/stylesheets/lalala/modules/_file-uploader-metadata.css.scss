@@ -1,0 +1,118 @@
+/*
+
+  Modules / File uploader metadata
+
+*/
+
+.mod-file-uploader-metadata {
+  background: white;
+  height: 100%;
+  position: relative;
+
+  //
+  //  Main
+  //
+  .main {
+    margin-right: 220px + 2 * 29px;
+    padding: 30px 29px;
+  }
+
+  .main .fields {
+    ul, ol {
+      list-style: none;
+    }
+
+    .label {
+      color: #6C6C6E;
+      font-size: 13px;
+      text-transform: lowercase;
+    }
+
+    .input {
+      margin-bottom: 6px;
+    }
+
+    .input:after {
+      clear: both;
+      content: ".";
+      display: block;
+      height: 0;
+      visibility: hidden;
+    }
+
+    .input input[type="checkbox"] {
+      display: inline-block;
+      margin: 0 9px 0 0;
+      position: relative;
+      top: -1px;
+      width: auto;
+    }
+
+    .chosen-container {
+      margin-top: 6px;
+    }
+  }
+
+  //
+  //  Sidebar
+  //
+  .sidebar {
+    border-left: 1px solid #E0E0E0;
+    bottom: 0;
+    padding: 30px 29px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 220px;
+  }
+
+  .sidebar .image.cover {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 150px;
+    width: 220px;
+  }
+
+  .sidebar .image img {
+    display: block;
+    width: 100%;
+  }
+
+  .sidebar .meta {
+    color: #A2A2A2;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-align: right;
+
+    -webkit-font-smoothing: antialiased;
+
+    .row {
+      border-bottom: 1px solid #E0E0E0;
+      height: 39px;
+      line-height: 38px;
+      overflow: hidden;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .label {
+      color: #DFDFDF;
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+  }
+
+  .sidebar .actions a {
+    display: block;
+    height: 40px;
+    line-height: 42px;
+    margin-bottom: 10px;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+
+
+}

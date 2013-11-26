@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131121092946) do
+ActiveRecord::Schema.define(:version => 20131122144302) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -60,9 +60,10 @@ ActiveRecord::Schema.define(:version => 20131121092946) do
   add_index "article_translations", ["locale"], :name => "index_article_translations_on_locale"
 
   create_table "articles", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.string   "category"
+    t.text     "haraway_metadata"
   end
 
   create_table "asset_translations", :force => true do |t|
@@ -110,8 +111,9 @@ ActiveRecord::Schema.define(:version => 20131121092946) do
     t.integer  "position"
     t.string   "type"
     t.string   "static_uuid"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.text     "haraway_metadata"
   end
 
 end

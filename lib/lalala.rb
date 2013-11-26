@@ -15,12 +15,10 @@ module Lalala
   require 'sentry-raven'
   require 'rails-i18n'
   require 'i18n-country-translations'
-  require 'carrierwave'
   require 'closure_tree'
   require 'globalize3'
   require 'jquery-rails'
   require 'meta_search'
-  require 'mini_magick'
   require 'redcarpet'
   require 'stringex'
   require 'country-select'
@@ -38,8 +36,8 @@ module Lalala
     require 'lalala/test'
   end
 
-  require 'formtastic/inputs/grid_input'
-  require 'formtastic/inputs/single_file_input'
+  require 'formtastic/inputs/haraway_input'
+  require 'formtastic/form_builder_ext'
 
   autoload :ExtActionDispatch
   autoload :ExtActiveRecord
@@ -49,7 +47,6 @@ module Lalala
 
   autoload :Markdown
   autoload :Pages
-  autoload :Uploaders
   autoload :Cache
 
   module Core
