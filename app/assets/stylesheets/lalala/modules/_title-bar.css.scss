@@ -20,6 +20,7 @@
 
   #titlebar_left {
     float: left;
+    padding: 0 0 0 19px;
   }
 
   #titlebar_right {
@@ -64,7 +65,7 @@
   .breadcrumb {
     color: gray(211);
     line-height: $top_nav_height;
-    padding: 0 0 0 19px;
+    padding: 0;
     white-space: nowrap;
 
     li {

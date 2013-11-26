@@ -6,10 +6,16 @@
 @import "lalala/base/base";
 @import "lalala/base/layout";
 
+@import "lalala/lib/jquery-ui";
+@import "lalala/lib/chosen";
+@import "lalala/lib/pikaday";
+@import "lalala/lib/overlay";
+
 @import "lalala/components/icons";
 @import "lalala/components/forms";
 @import "lalala/components/buttons";
 @import "lalala/components/tables";
+@import "lalala/components/chosen-lalala";
 
 @import "lalala/modules/flashes";
 @import "lalala/modules/login";
@@ -27,12 +33,8 @@
 @import "lalala/modules/index-as-tree-table";
 @import "lalala/modules/editor";
 @import "lalala/modules/editor-cheatsheet";
+@import "lalala/modules/scopes";
 
 @import "lalala/modules/file-uploader";
 @import "lalala/modules/file-uploader-metadata";
 @import "lalala/modules/media-selector";
-
-@import "lalala/lib/jquery-ui";
-@import "lalala/lib/chosen";
-@import "lalala/lib/pikaday";
-@import "lalala/lib/overlay";

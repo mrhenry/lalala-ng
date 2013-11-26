@@ -14,7 +14,7 @@
 // Table default styles
 //
 #active_admin_content table {
-  background-color: gray(130);
+  background-color: $blue;
   border-collapse: collapse;
   margin: 0;
   width: 100%;
@@ -23,7 +23,7 @@
     border: none;
 
     a {
-      color: gray(188);
+      color: rgba(255,255,255,.5);
       font-weight: bold;
     }
 

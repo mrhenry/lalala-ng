@@ -1,0 +1,51 @@
+/*
+ * Scopes are fixed categories on a model
+ * You can find the scopes in an index-view, on top of the table
+*/
+.table_tools {
+
+  .scopes {
+    @include border-radius(5px);
+    border: 1px solid gray(224);
+    margin: 0;
+    padding: 0;
+
+    .scope {
+      border-left: 1px solid gray(224);
+      margin: 0;
+      padding: 0;
+
+      a {
+        @include transition(color 150ms);
+        color: gray(200);
+        padding: 4px 6px !important;
+        text-decoration: none !important;
+
+        &:hover {
+          color: gray(150);
+        }
+      }
+
+      &.selected {
+        background-color: gray(224);
+
+        a {
+          color: gray(150);
+          font-weight: bold;
+          text-decoration: none;
+
+          span {
+            font-weight: normal;
+          }
+        }
+      }
+
+      // the first scope-element gets no border
+      &:first-child {
+        border-left: none;
+      }
+
+    }
+  }
+
+}
