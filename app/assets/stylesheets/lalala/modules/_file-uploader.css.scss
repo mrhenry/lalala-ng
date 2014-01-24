@@ -248,6 +248,17 @@ x-files {
     display: none;
   }
 
+  x-file.error {
+    .status-bar {
+      background-color: $red;
+    }
+
+    .upload-bar,
+    .process-bar {
+      display: none;
+    }
+  }
+
 
   //
   //  FC -> Empty message
