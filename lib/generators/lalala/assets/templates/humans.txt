@@ -1,0 +1,24 @@
+/* AGENCY */
+  Mr. Henry
+  http://www.mrhenry.be
+
+/* TEAM */
+  Chef and Designer: Hans Spooren
+  Contact: hans@mrhenry.be
+  From: Antwerp, Belgium
+
+  Project Manager: Inge Reulens
+  Contact: inge@mrhenry.be
+  From: Antwerp, Belgium
+
+  Ruby on Rails Developer: Simon Menke
+  Contact: simon@mrhenry.be
+  From: Antwerp, Belgium
+
+  Ruby on Rails / Front end Developer: Yves van Broekhoven
+  Contact: yves@mrhenry.be
+  From: Antwerp, Belgium
+
+  Ruby on Rails / Front end Developer: Steven Vandevelde
+  Contact: yves@mrhenry.be
+  From: Antwerp, Belgium

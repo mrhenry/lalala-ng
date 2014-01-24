@@ -7,11 +7,131 @@
   h3 {
     background-color: gray(220);
     color: $white;
+    font-size: 14px !important;
     font-weight: bold;
     padding: 10px;
+    margin: 0 !important;
   }
 
   .panel_contents {
     padding: 10px;
+
+    // LALALA specific styling
+    //
+    .lalala {
+      font-size: 13px;
+      line-height: 18px;
+
+      &.sidebar {
+
+        // intro message
+        &.message {
+          color: gray(180);
+          padding: 0 20px 10px 0;
+
+          strong {
+            font-weight: bold;
+          }
+        }
+
+        // person id-card
+        &.person {
+          text-align: center;
+
+          // optional img
+          .avatar {
+            @include border-radius(100px);
+          }
+
+          // name
+          h4 {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0 0 0;
+          }
+
+          // detailed information
+          .details {
+            color: gray(180);
+            font-family: "Monaco";
+            font-size: 12px;
+            margin: 10px;
+          }
+
+        }
+
+        // listing, lists various elements (uls, divs, table, ...)
+        &.listing {
+          margin: 10px 0 0 0;
+
+          // plain div's
+          &.div {
+
+            .item {
+              border-bottom: 1px solid gray(220);
+              padding: 0 0 5px 0;
+              margin: 0 0 10px 0;
+            }
+
+            // last item has no border or margin
+            > :last-child {
+              border-bottom: none;
+              margin: 0;
+            }
+
+          }
+
+          // ul
+          &.ul {
+
+            .item {
+              border-bottom: 1px solid gray(220);
+              padding: 0 0 5px 0;
+              margin: 0 0 10px 0;
+            }
+
+            // last item has no border or margin
+            > :last-child {
+              border-bottom: none;
+              margin: 0;
+            }
+
+          }
+
+          // table
+          &.table {
+
+            table {
+              thead {
+                display: none;
+              }
+              tbody tr td {
+                padding: 7px 5px 6px 5px !important;
+              }
+            }
+
+          }
+
+        }
+
+        // element has a closing line
+        &.with-closing-line {
+          border-bottom: 1px solid gray(220);
+        }
+
+        .timeago {
+          color: $gray_lighter;
+        }
+
+      }
+
+    // default link style inside .panel_contents .lalala
+    a {
+      color: $blue;
+      text-decoration: none;
+    }
+
+    }
+
   }
 }

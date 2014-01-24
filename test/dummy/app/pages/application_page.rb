@@ -6,4 +6,5 @@ class ApplicationPage < Lalala::Page
   # All page associations should be placed here:
   # has_many :comments
 
+  markdown :body
 end

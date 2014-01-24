@@ -1,0 +1,33 @@
+body.show {
+
+  .panel {
+    margin-bottom: 2em;
+
+    h3 {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 0 20px 18px;
+    }
+
+    // set table tbody tr th lighter
+    table {
+      @include border-radius(10px);
+      background-color: #e0e0e0 !important;
+      border: 1px solid #e0e0e0;
+
+      tbody tr th {
+        color: $gray_lighter;
+        width: 15% !important;
+      }
+
+      ul {
+        list-style-style: circle;
+      }
+
+    }
+
+  }
+
+
+
+}

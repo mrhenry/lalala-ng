@@ -30,7 +30,7 @@ Gem::Specification.new do |gem|
 
 
   # generic
-  gem.add_runtime_dependency 'activeadmin',               '= 0.6.0'
+  gem.add_runtime_dependency 'activeadmin',               '= 0.6.2'
   gem.add_runtime_dependency 'closure_tree',              '= 3.10.2'
   gem.add_runtime_dependency 'country-select',            '= 1.1.1'
   gem.add_runtime_dependency 'dalli',                     '= 2.6.3'
@@ -39,7 +39,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'i18n-country-translations', '= 0.0.9'
   gem.add_runtime_dependency 'jquery-rails',              '= 2.2.1'
   gem.add_runtime_dependency 'meta_search',               '= 1.1.3'
-  gem.add_runtime_dependency 'pg',                        '= 0.15.1'
+  gem.add_runtime_dependency 'pg',                        '= 0.17.1'
   gem.add_runtime_dependency 'puma',                      '= 2.0.1'
   gem.add_runtime_dependency 'rails',                     '= 3.2.14'
   gem.add_runtime_dependency 'rails-i18n',                '= 0.7.3'

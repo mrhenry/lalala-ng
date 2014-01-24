@@ -1,13 +1,13 @@
 .flashes {
-  @include animation-name(flash-slide-up);
+  @include animation-name(flash-slide-down);
   @include animation-duration(500ms);
-  @include animation-delay(0.75s);
+  @include animation-delay(1500ms);
   @include animation-fill-mode(forwards);
+  bottom: 0;
   left: 0;
   height: $top_nav_height;
-  position: absolute;
+  position: fixed;
   right: 0;
-  top: 0;
   z-index: 20;
 }
 
@@ -26,11 +26,11 @@
 }
 
 
-@include keyframes(flash-slide-up) {
+@include keyframes(flash-slide-down) {
   0% {
-    top: 0;
+    bottom: 0;
   }
   100% {
-    top: 0 - $top_nav_height - 1;
+    bottom: 0 - $top_nav_height - 1;
   }
 }

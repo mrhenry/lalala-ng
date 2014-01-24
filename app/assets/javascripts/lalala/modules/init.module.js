@@ -3,7 +3,8 @@ var console = require('browser/console'),
     editor = require('lalala/modules/editor'),
     locale_chooser = require("lalala/modules/locale_chooser"),
     sorted_pages_tree = require("lalala/modules/sorted_pages_tree"),
-    login = require("lalala/modules/login");
+    login = require("lalala/modules/login"),
+    dashboard = require("lalala/modules/dashboard");
 
 $(function() {
   login.init();
@@ -11,4 +12,7 @@ $(function() {
   editor.init();
   calendar.init();
   sorted_pages_tree.init();
+  dashboard.init();
+
+  $('select').not(".bypass-chosen").chosen();
 });

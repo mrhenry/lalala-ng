@@ -21,4 +21,8 @@ class Article < ActiveRecord::Base
   # Bindings
   has_and_belongs_to_many :tags
 
+  def get_tags
+    self.tags
+  end
+
 end

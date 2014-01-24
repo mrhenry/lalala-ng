@@ -1,0 +1,93 @@
+//
+// Trying to make lemonade with the dashboard lemons given by FormTastic
+//
+body.lalala_dashboard {
+
+  // reset main container
+  #main_content_wrapper {
+    width: 100% !important;
+  }
+
+  #dashboard_default_message {
+    @include border-radius(3px);
+    border: 1px solid $gray_lighter;
+    margin: 0 0 40px 0;
+  }
+
+  .columns {
+    @include pie-clearfix;
+
+    .column {
+      float: left;
+      margin-bottom: 20px;
+
+      .panel {
+        @include border-radius(10px);
+        border: 1px solid $gray_lighter;
+        overflow: hidden;
+
+        // title
+        h3 {
+          color: white;
+          background-color: $gray_lighter;
+          font-size: 14px;
+          font-weight: bold;
+          padding: 10px;
+        }
+
+        .panel_contents {
+
+          // paragraph styles
+          p {
+            padding: 10px;
+          }
+          // list styles
+          ul {
+            li {
+              border-top: 1px solid $gray_lighter;
+              a {
+                color: $black;
+                display: block;
+                padding: 10px 5px 10px 10px;
+                text-decoration: none;
+
+                &:hover {
+                  color: $blue;
+                }
+              }
+            }
+          }
+          // table styles
+          table {
+            thead {
+              display: none;
+            }
+            tbody {
+              // cell padding
+              td {
+                padding: 13px 10px 12px 10px !important;
+              }
+              // date format
+              .timeago {
+                display: block;
+                color: $gray_lighter;
+                text-align: right;
+              }
+              // default link
+              a {
+                color: $black;
+
+                &:hover {
+                  color: $blue !important;
+                }
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+  }
+
+}

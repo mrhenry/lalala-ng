@@ -6,7 +6,11 @@ TODO: Write a gem description
 
 Make sure you have rails 3.X installed. Then run the generator:
 
-    rails new [APP_NAME] -m https://raw.github.com/mrhenry/lalala-ng/master/lib/lalala/utils/install_template.rb
+    rails new [APP_NAME] -b https://raw.github.com/mrhenry/lalala-ng/master/lib/lalala/utils/install_template.rb
+
+Or you can install a specific version:
+
+    rails _3.2.15_ new [APP_NAME] -b https://raw.github.com/mrhenry/lalala-ng/master/lib/lalala/utils/install_template.rb
 
 
 ## Configuration

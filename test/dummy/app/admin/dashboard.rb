@@ -12,22 +12,52 @@ ActiveAdmin.register_page "Dashboard" do
 
     # Here is an example of a simple dashboard with columns and panels.
     #
-    # columns do
-    #   column do
-    #     panel "Recent Posts" do
-    #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
-    #         end
-    #       end
-    #     end
-    #   end
+    columns do
+      column :span => 2 do
+        panel "Recent Posts List" do
+          ul do
+            Article.all.map do |article|
+              li link_to(article.title, edit_lalala_article_path(article))
+            end
+          end
+        end
+      end
 
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
-    # end
+      column :span => 2 do
+        panel "Latest Posts Updated" do
+          table_for Article.where('id > 0').order('updated_at DESC').limit(5) do
+            column :title do |article|
+                link_to(article.title, edit_lalala_article_path(article))
+            end
+            column :updated_at do |article|
+                span article.updated_at, { :class => "timeago", :title => article.updated_at }
+            end
+          end
+        end
+      end
+
+      column do
+        panel "Info" do
+          para "Welcome to LALALA."
+        end
+      end
+
+    end
+
+
+    columns do
+      column :span => 2 do
+        panel "Recent Posts List" do
+          ul do
+            Article.all.map do |article|
+              li link_to(article.title, edit_lalala_article_path(article))
+            end
+          end
+        end
+      end
+
+    end
+
+
   end # content
 end

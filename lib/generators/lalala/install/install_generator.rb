@@ -1,4 +1,5 @@
 require 'rails/generators/active_record'
+require 'securerandom'
 
 module Lalala
   module Generators
@@ -13,12 +14,16 @@ module Lalala
         @_active_admin_source_root ||= File.expand_path("../templates", __FILE__)
       end
 
+      def copy_initializer_devise
+        template 'devise.rb.erb', 'config/initializers/devise.rb'
+      end
+
       def setup_routes
         remove_file("config/routes.rb")
         template 'routes.rb.erb', 'config/routes.rb'
       end
 
-      def copy_initializer
+      def copy_initializer_active_admin
         @underscored_user_name = name.underscore
         template 'active_admin.rb.erb', 'config/initializers/active_admin.rb'
       end
@@ -53,6 +58,14 @@ module Lalala
       def setup_directory
         empty_directory "app/admin"
         template 'dashboard.rb', 'app/admin/dashboard.rb'
+      end
+
+      def setup_environment_configs
+        template "staging.rb.erb", "config/environments/staging.rb"
+      end
+
+      def setup_forklift
+        empty_directory ".forklift"
       end
 
       def create_assets

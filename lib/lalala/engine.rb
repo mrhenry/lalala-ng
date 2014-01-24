@@ -6,6 +6,8 @@ module Lalala
     config.i18n.fallbacks = true
     config.i18n.default_locale = :en
     config.i18n.available_locales = [:en]
+    config.i18n.enforce_available_locales = true
+    I18n.enforce_available_locales = true
 
     config.lalala = ActiveSupport::OrderedOptions.new
     config.lalala.i18n = ActiveSupport::OrderedOptions.new

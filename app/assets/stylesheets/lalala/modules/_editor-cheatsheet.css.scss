@@ -1,5 +1,5 @@
 #markdown-cheatsheet {
-  @include box-shadow();
+  @include box-shadow(0 0 10px gray(100));
   background-color: rgba(255,255,255, 0.95);
   bottom: 0;
   overflow: auto;
@@ -9,9 +9,37 @@
   top: 0;
   z-index: 230;
 
+  h2 {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.5em;
+    margin: 1em 0;
+  }
+
+  h3 {
+    border-bottom: 1px solid rgb(200,200,200);
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 2em;
+    margin: 1em 0;
+  }
+
+  p {
+    margin: 0 0 1em 0;
+  }
+
   pre {
     background-color: rgb(240,240,240);
-    padding: 7px;
+    font-family: Monaco, monospace;
+    font-size: 12px;
+    line-height: 1.5em;
+    margin: 0 0 1em 0;
+    padding: 10px;
+
+    & + h3 {
+      margin-top: 2em;
+    }
+
   }
 
 }
