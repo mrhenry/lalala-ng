@@ -209,13 +209,13 @@ FileUploader.prototype.file_done_handler = function(e) {
 //  Events - General
 //
 FileUploader.prototype.bind_events = function() {
-  var choose  = $.proxy(this.choose_click_handler, this);
-  var delete  = $.proxy(this.xfile_btn_delete_click_handler, this);
-  var meta    = $.proxy(this.xfile_btn_meta_click_handler, this);
+  var choose_handler  = $.proxy(this.choose_click_handler, this);
+  var delete_handler  = $.proxy(this.xfile_btn_delete_click_handler, this);
+  var meta_handler    = $.proxy(this.xfile_btn_meta_click_handler, this);
 
-  this.$el.on("click", ".choose", choose);
-  this.$el.on("click", "x-file [data-action=\"delete\"]", delete);
-  this.$el.on("click", "x-file [data-action=\"meta\"]", meta);
+  this.$el.on("click", ".choose", choose_handler);
+  this.$el.on("click", "x-file [data-action=\"delete\"]", delete_handler);
+  this.$el.on("click", "x-file [data-action=\"meta\"]", meta_handler);
 
   // when processing/uploading files -> disable form
   Haraway.on("busy", $.proxy(function() {
