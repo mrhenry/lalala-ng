@@ -87,6 +87,16 @@ class Lalala::Markdown::HtmlRenderer < Redcarpet::Render::HTML
     end
   end
 
+  def preprocess(doc)
+    # custom markdown
+    # haraway
+    doc.gsub(/\{\{haraway\/([^\}]+)\}\}/) do
+      # TODO: retrieve haraway asset by uuid
+      uuid = $1
+      "<img />"
+    end
+  end
+
 private
 
   def safe_link(link)
