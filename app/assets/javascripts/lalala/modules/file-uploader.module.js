@@ -118,7 +118,7 @@ FileUploader.prototype.handle_file = function(file) {
   });
 
   // if there are no files yet in the file container, empty it.
-  // this is done to remove message, etc.
+  // this is done to remove messages, etc.
   if (this.$file_container.find("x-file").length === 0) {
     this.clear_file_container();
   }
@@ -209,9 +209,13 @@ FileUploader.prototype.file_done_handler = function(e) {
 //  Events - General
 //
 FileUploader.prototype.bind_events = function() {
-  this.$el.on("click", ".choose", $.proxy(this.choose_click_handler, this));
-  this.$el.on("click", "x-file [data-action=\"delete\"]", $.proxy(this.xfile_btn_delete_click_handler, this));
-  this.$el.on("click", "x-file [data-action=\"meta\"]", $.proxy(this.xfile_btn_meta_click_handler, this));
+  var choose  = $.proxy(this.choose_click_handler, this);
+  var delete  = $.proxy(this.xfile_btn_delete_click_handler, this);
+  var meta    = $.proxy(this.xfile_btn_meta_click_handler, this);
+
+  this.$el.on("click", ".choose", choose);
+  this.$el.on("click", "x-file [data-action=\"delete\"]", delete);
+  this.$el.on("click", "x-file [data-action=\"meta\"]", meta);
 
   // when processing/uploading files -> disable form
   Haraway.on("busy", $.proxy(function() {
@@ -268,7 +272,7 @@ FileUploader.prototype.xfile_btn_meta_click_handler = function(e) {
   // check status, must be uploaded file
   if (!$xfile.hasClass("uploaded")) return;
 
-  // new meta
+  // new metadata overlay-content block
   fum = new FileUploaderMetadata($xfile, this);
   main_overlay.append_content(fum.$el);
   main_overlay.$el.find("select").chosen({ width: "80%" });
