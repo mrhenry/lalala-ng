@@ -1,0 +1,6 @@
+{
+  "globals": {
+    "$": true
+  },
+  "node": true
+}

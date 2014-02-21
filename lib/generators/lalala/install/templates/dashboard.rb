@@ -1,6 +1,8 @@
 ActiveAdmin.register_page "Dashboard" do
 
-  menu :priority => 1, :label => proc{ I18n.t("active_admin.dashboard") }
+  menu :priority => 1,
+    :label => proc{ I18n.t("active_admin.dashboard") },
+    :html_options => { class: 'icon-application_view_tile' }
 
   content :title => proc{ I18n.t("active_admin.dashboard") } do
     div :class => "blank_slate_container", :id => "dashboard_default_message" do

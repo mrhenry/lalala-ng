@@ -23,6 +23,24 @@ ActiveAdmin.register Article do
     f.actions
   end
 
+  sidebar "Actions", :only => [:edit] do
+
+    div :class =>"lalala sidebar actions", :id => "lalala_sidebar_actions" do
+
+
+
+    end
+
+  end
+
+  sidebar "Actions", :only => [:edit] do
+
+    div :class => "lalala sidebar message", :id => "lalala_sidebar_message" do
+      "This item has been updated last at <strong>Feb 14th, 2014</strong>".html_safe
+    end
+
+  end
+
 
   sidebar "Related tags", :only => [:show] do
 

@@ -62,6 +62,7 @@ module Lalala
 
       def setup_environment_configs
         template "staging.rb.erb", "config/environments/staging.rb"
+        gsub_file "config/environments/production.rb", "  # config.assets.precompile += %w( search.js )", "  config.assets.precompile += %w( modernizr.js )"
       end
 
       def setup_forklift

@@ -1,12 +1,52 @@
 .filter_form {
 
-  label {
-    display: block;
-    float: none;
+  .filter_form_field {
+
+    label {
+      color: #6d6e71;
+      display: block;
+      float: none;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 15px 0;
+    }
+
+    //
+    // Specific cases for filter styles
+    // overwrites some chosen-features (_chosen-lalala.css.scss)
+
+    // normal dropdown select
+    &.filter_select {
+      .chosen-container {
+        width: 100% !important;
+      }
+    }
+
+    // date rage
+    &.filter_date_range {
+
+      .datepicker {
+        width: 45%;
+      }
+      .seperator {
+        color: gray(200);
+        font-weight: normal;
+        padding: 0 4px;
+      }
+    }
+
+    &.filter_string.select_and_search {
+      input {
+        margin: 0 0 0 10px;
+        width: 60%;
+      }
+    }
+
+
   }
 
   .buttons {
-    padding: 20px 0;
+    padding: 20px 0 0 0;
 
     a,
     input {
@@ -20,7 +60,5 @@
     }
 
   }
-
-
 
 }

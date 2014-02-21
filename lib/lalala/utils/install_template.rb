@@ -7,6 +7,7 @@ class AppBuilder < Rails::AppBuilder
 
   def gemfile
     create_file 'Gemfile', <<-DOC
+
 source 'https://rubygems.org'
 
 ruby "#{RUBY_VERSION}"

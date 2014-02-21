@@ -1,20 +1,21 @@
 .sidebar_section {
-  @include border-radius(10px);
+  @include border-radius(3px);
   border: 1px solid gray(220);
-  margin: 0 10px 20px 0;
+  margin: 0 30px 20px 0;
   overflow: hidden;
 
   h3 {
-    background-color: gray(220);
-    color: $white;
+    background-color: gray(247);
+    border-bottom: 1px solid gray(220);
+    color: gray(70);
     font-size: 14px !important;
     font-weight: bold;
-    padding: 10px;
+    padding: 15px 20px;
     margin: 0 !important;
   }
 
   .panel_contents {
-    padding: 10px;
+    padding: 15px 20px 15px 20px;
 
     // LALALA specific styling
     //
