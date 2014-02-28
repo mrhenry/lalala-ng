@@ -15,7 +15,7 @@ class Lalala::Markdown::Handlers::Haraway < Lalala::Markdown::Handlers::Base
 
     url = "//" + File.join(
       "c." + Haraway.configuration.endpoint,
-      $1,
+      id,
       version.to_s)
 
     "<img src=\"#{url}\" alt=\"#{alt}\" title=\"#{title}\" />"
