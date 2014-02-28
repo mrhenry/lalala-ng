@@ -1,6 +1,6 @@
 class Lalala::Markdown::HtmlRenderer < Redcarpet::Render::HTML
 
-  URI_PATTERN = %r{\A(lalala|youtube|vimeo)[:][/]{2}.+\Z}
+  URI_PATTERN = %r{\A(lalala|youtube|vimeo|haraway)[:][/]{2}.+\Z}
 
   def initialize(options)
     @options      = options.dup
@@ -84,16 +84,6 @@ class Lalala::Markdown::HtmlRenderer < Redcarpet::Render::HTML
       handler.link(link, content, title)
     else
       ""
-    end
-  end
-
-  def preprocess(doc)
-    # custom markdown
-    # haraway
-    doc.gsub(/\{\{haraway\/([^\}]+)\}\}/) do
-      # TODO: retrieve haraway asset by uuid
-      uuid = $1
-      "<img />"
     end
   end
 

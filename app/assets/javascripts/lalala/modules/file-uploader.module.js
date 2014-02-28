@@ -294,7 +294,7 @@ FileUploader.prototype.toggle_destroy = function($xfile) {
 
 
 FileUploader.prototype.set_to_destroy = function($xfile) {
-  var $destroy, $uuid;
+  var $destroy, $id;
 
   // add class
   $xfile.addClass("about-to-destroy");
@@ -303,11 +303,11 @@ FileUploader.prototype.set_to_destroy = function($xfile) {
   $destroy = $xfile.find("[name$=\"_destroy]\"]");
 
   if ($destroy.length === 0) {
-    $uuid = $xfile.find("[name$=\"[uuid]\"]");
+    $id = $xfile.find("[name$=\"[id]\"]");
     $destroy = $("<input />");
     $destroy.attr("type", "hidden");
-    $destroy.attr("name", $uuid.attr("name").replace("uuid", "_destroy"));
-    $uuid.after($destroy);
+    $destroy.attr("name", $id.attr("name").replace("id", "_destroy"));
+    $id.after($destroy);
   }
 
   // set

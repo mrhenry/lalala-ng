@@ -7,4 +7,4 @@ gemspec name: 'lalala-development', groups: [:development]
 gemspec name: 'lalala-assets',      groups: [:development, :assets]
 gemspec name: 'lalala-test',        groups: [:test]
 
-gem 'haraway', path: ENV['GO']+'/haraway/haraway-rb'
+gem 'haraway', path: ENV['HOME'] + '/Projects/mrhenry/haraway-rb'

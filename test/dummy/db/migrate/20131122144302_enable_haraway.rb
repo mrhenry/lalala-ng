@@ -1,7 +1,12 @@
 class EnableHaraway < ActiveRecord::Migration
   def up
-    add_column :articles, :haraway_metadata, :text
-    add_column :pages, :haraway_metadata, :text
+    unless column_exists?(:articles, :haraway_metadata)
+      add_column(:articles, :haraway_metadata, :text)
+    end
+
+    unless column_exists?(:pages, :haraway_metadata)
+      add_column(:pages, :haraway_metadata, :text)
+    end
   end
 
   def down

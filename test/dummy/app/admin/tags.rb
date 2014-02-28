@@ -1,7 +1,5 @@
 ActiveAdmin.register Tag do
-
-  #menu priority: 50, html_options: { class: 'icon-tag-purple' }
-
+  # menu priority: 50, html_options: { class: 'icon-tag-purple' }
 
   form do |f|
     f.inputs do

@@ -122,9 +122,6 @@ module Lalala
       :include, Lalala::Pages::RouteMapper)
 
     ActionDispatch::Request.send(
-      :include, Lalala::ExtActionDispatch::MultiFileUpload)
-
-    ActionDispatch::Request.send(
       :include, Lalala::ExtActionDispatch::PageName)
 
     ActionController::Base.send(

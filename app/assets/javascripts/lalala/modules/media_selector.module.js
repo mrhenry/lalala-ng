@@ -11,11 +11,10 @@ function MediaSelector() {
   };
 
   // data
-  this.data_store = {};
-  this.selected_uuids = [];
+  this.selected_ids = [];
 
   // exec
-  this.fetch_and_render();
+  this.collect_data_and_render();
   this.bind_events();
 }
 
@@ -24,58 +23,38 @@ function MediaSelector() {
 //
 //  Data & Render
 //
-MediaSelector.prototype.fetch_data_if_needed = function(klass, id, association) {
-  var url = "/lalala/assets/list";
-  var dfd = $.Deferred();
-  var request_data, data_key, data_store;
-
-  // prepare request data to send along
-  if (klass && id && association) {
-    request_data = "klass=" + klass + "&id=" + id + "&association=" + association;
-  } else {
-    request_data = "";
-  }
-
-  // data store
-  data_key = klass ? klass : "all";
-  data_store = this.data_store;
-
-  // request & resolve
-  if (!data_store[data_key]) {
-    return $.getJSON(url, request_data, function(response) {
-      data_store[data_key] = response;
-      dfd.resolve(data_store[data_key]);
-    });
-
-  } else {
-    dfd.resolve(data_store[data_key]);
-
-  }
-
-  // promise
-  return dfd.promise();
-};
-
-
-MediaSelector.prototype.fetch_and_render = function() {
-  var fetch_args;
+MediaSelector.prototype.collect_data_and_render = function() {
+  var data;
 
   // fetch arguments
   switch (this.settings.selected_data) {
     case "SELF":
-      // TODO
-      fetch_args = ["Article", "1", "images"];
+      data = this.collect_data_from_self();
       break;
 
     case "ALL":
-      fetch_args = [];
+      data = [];
       break;
   }
 
-  // fetch -> render
-  this.fetch_data_if_needed.apply(this, fetch_args).then(
-    $.proxy(this.render, this)
-  );
+  // render
+  this.render(data);
+};
+
+
+MediaSelector.prototype.collect_data_from_self = function() {
+  var data = [];
+
+  $("x-file").each(function() {
+    var $xfile = $(this);
+
+    data.push({
+      id: $xfile.find("[name$=\"[id]\"]").attr("value"),
+      thumb_url: $xfile.attr("data-src-original").replace(/original$/, "thumb")
+    })
+  });
+
+  return data;
 };
 
 
@@ -87,8 +66,8 @@ MediaSelector.prototype.render = function(data) {
 
   for (var i=0, j=data.length; i<j; ++i) {
     var asset = data[i];
-    assets = assets + '<div class="asset" rel="' + asset.uuid + '">' +
-      '<div class="image" style="background-image: url(\'' + asset.url + '\');"></div>' +
+    assets = assets + '<div class="asset" rel="' + asset.id + '">' +
+      '<div class="image" style="background-image: url(\'' + asset.thumb_url + '\');"></div>' +
     '</div>';
   }
 
@@ -161,10 +140,10 @@ MediaSelector.prototype.commit_click_handler = function(e) {
 //  Selecting assets
 //
 MediaSelector.prototype.select_asset = function($asset) {
-  var uuid = $asset.attr("rel");
+  var id = $asset.attr("rel");
 
   // add to 'selected' array
-  this.selected_uuids.push(uuid);
+  this.selected_ids.push(id);
 
   // visual
   $asset.addClass(this.settings.selected_class);
@@ -172,12 +151,12 @@ MediaSelector.prototype.select_asset = function($asset) {
 
 
 MediaSelector.prototype.unselect_asset = function($asset) {
-  var uuid = $asset.attr("rel");
-  var index = this.selected_uuids.indexOf(uuid);
+  var id = $asset.attr("rel");
+  var index = this.selected_ids.indexOf(id);
 
   // remove from 'selected' array
   if (index !== -1) {
-    this.selected_uuids.splice(index, 1);
+    this.selected_ids.splice(index, 1);
   }
 
   // visual
@@ -186,13 +165,13 @@ MediaSelector.prototype.unselect_asset = function($asset) {
 
 
 MediaSelector.prototype.add_selected_to_editor_textarea = function() {
-  var selected = this.selected_uuids;
+  var selected = this.selected_ids;
   var markdown = "";
   var $textarea;
 
   // build markdown text
   for (var i=0, j=selected.length; i<j; ++i) {
-    markdown = markdown + "{{haraway/" + selected[i] + "}}  \n";
+    markdown = markdown + "![](haraway://" + selected[i] + ")  \n";
   }
 
   // add to textarea

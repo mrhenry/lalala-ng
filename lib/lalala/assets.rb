@@ -13,10 +13,3 @@ module Lalala
   require 'uglifier'
 
 end
-
-
-module Lalala::Assets
-  extend ActiveSupport::Autoload
-
-  autoload :List
-end

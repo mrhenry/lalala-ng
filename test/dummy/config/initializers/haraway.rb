@@ -2,9 +2,8 @@ Haraway.configure do |c|
 
   c.use_ssl    = false
   c.endpoint   = "assets.sh"
-  c.access_key = "ab1cf520-f9fd-11e2-b778-0800200c9a66"
-  c.secret_key = "ab1cf520-f9fd-11e2-b778-0800200c9a66"
-  c.pusher_key = "2832a7b628da2ac2899c"
+  c.access_key = "533019cfa622e91c"
+  c.secret_key = "74bc88e1a0ab978b88d0c2a4b919f13ebe4a681a8f3a89e812182d09282d26a4"
 
   #
   #  Profiles

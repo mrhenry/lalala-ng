@@ -8,6 +8,7 @@ class Lalala::Markdown
 
   module Handlers
     require 'lalala/markdown/handlers/base'
+    require 'lalala/markdown/handlers/haraway'
     require 'lalala/markdown/handlers/youtube'
   end
 

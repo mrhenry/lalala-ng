@@ -12,8 +12,6 @@ class Formtastic::Inputs::HarawayInput
       klass.xfile_html(self, template, param_key, asset)
     end
 
-    # TODO: accept
-
     <<-EOT
 
     <x-files profile="#{method}" accept="image/*" name="#{param_key}">
@@ -47,6 +45,10 @@ class Formtastic::Inputs::HarawayInput
           #{ sorted_assets.join("") }
         </div>
       </div>
+
+      <div class="meta-versions">
+        #{ versions(method) }
+      </div>
     </x-files>
 
     EOT
@@ -68,17 +70,40 @@ class Formtastic::Inputs::HarawayInput
   end
 
 
+  def versions(profile)
+    profile = Haraway.configuration.profiles[profile.to_s]
+
+    # collect data
+    if profile
+      versions = profile.versions.keys.map do |key|
+        version = profile.versions[key.to_s]
+
+        OpenStruct.new(
+          name: version.name,
+          params: version.steps.first.try(:[], "params")
+        )
+      end.compact
+
+    else
+      versions = []
+
+    end
+
+    # make html
+    versions.map do |version|
+      <<-EOS
+        <script class="version" data-name="#{version.name}" type="application/json">
+          #{version.params.to_json}
+        </script>
+      EOS
+    end.join("")
+  end
+
+
   #
   #  Utilities
   #
   def self.sorted_assets(array)
-    # fallback = 9999
-    # array.sort do |a, b|
-    #   a = a.instance_values["attributes"]["position"] || fallback
-    #   b = b.instance_values["attributes"]["position"] || fallback
-
-    #   a <=> b
-    # end
     array
   end
 
@@ -93,7 +118,7 @@ class Formtastic::Inputs::HarawayInput
       <div class="thumb" style="background-image: url(#{ asset_url_thumb });"></div>
 
       #{ Formtastic::Inputs::HarawayInput.menu_html }
-      #{ template.hidden_field_tag(param_key + "[][uuid]", asset.uuid) }
+      #{ template.hidden_field_tag(param_key + "[][id]", asset.id) }
       #{ template.hidden_field_tag(param_key + "[][_destroy]", "") }
 
       <div class="attributes">
@@ -101,10 +126,7 @@ class Formtastic::Inputs::HarawayInput
       </div>
 
       <div class="meta">
-        <div class="row">
-          <span class="label">filetype</span>
-          <span class="value">#{ asset.version(:original).extension }</span>
-        </div>
+        <div class="row"></div>
       </div>
     </x-file>
 

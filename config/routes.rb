@@ -12,12 +12,6 @@ Rails.application.routes.draw do
 
 
   #
-  #  Assets
-  #
-  get '/lalala/assets/list'
-
-
-  #
   #  Other
   #
   get '/lalala/markdown/cheatsheet', to: 'lalala/markdown#cheatsheet'

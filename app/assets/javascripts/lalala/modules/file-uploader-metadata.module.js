@@ -181,7 +181,7 @@ FileUploaderMetadata.prototype.copy_attributes_to_xfile = function() {
     new_attributes_container.className = "attributes";
     new_attributes_container.innerHTML = this.get_form_template();
 
-    this.$xfile.find("[name$=\"uuid]\"]").after(new_attributes_container);
+    this.$xfile.find("[name$=\"id]\"]").after(new_attributes_container);
     $xattr = $(new_attributes_container);
 
     this.fileuploader.remove_hidden_fields_from_checkboxes($xattr);

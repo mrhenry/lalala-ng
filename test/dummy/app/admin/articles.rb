@@ -1,10 +1,12 @@
 ActiveAdmin.register Article do
-
   scope :all, :default => true
   scope :catA
   scope :catB
   scope :catC
 
+  #
+  #  Form
+  #
   form do |f|
     f.inputs do
       f.input :title
@@ -23,27 +25,26 @@ ActiveAdmin.register Article do
     f.actions
   end
 
+
+  #
+  #  Sidebar
+  #
   sidebar "Actions", :only => [:edit] do
 
     div :class =>"lalala sidebar actions", :id => "lalala_sidebar_actions" do
-
-
-
     end
 
   end
 
-  sidebar "Information", :only => [:edit] do
 
+  sidebar "Information", :only => [:edit] do
     div :class => "lalala sidebar message", :id => "lalala_sidebar_message" do
       "This item has been updated last at <strong>Feb 14th, 2014</strong> by <a href='#link-to-hans-profile'>Hans</a>.".html_safe
     end
-
   end
 
 
   sidebar "Related tags", :only => [:show] do
-
     div :class => "lalala sidebar message", :id => "lalala_sidebar_message" do
       "This is an intro block.... It is yours. It is the best <strong>intro block</strong> in the world. Click the link for a tag detail.".html_safe
     end
@@ -70,8 +71,8 @@ ActiveAdmin.register Article do
       end
 
     end
-
   end
+
 
   sidebar "Help", :only => [:show] do
     div :class => "lalala sidebar message", :id => "lalala_sidebar_message" do
@@ -91,8 +92,8 @@ ActiveAdmin.register Article do
       end
 
     end
-
   end
+
 
   sidebar "User Information", :only => [:show] do
     div :class => "lalala sidebar person" do

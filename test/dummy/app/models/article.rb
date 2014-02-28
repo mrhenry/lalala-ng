@@ -15,7 +15,8 @@ class Article < ActiveRecord::Base
 
   # Markdown columns
   markdown :body, tables: true, link_schemes: {
-    "youtube" => Lalala::Markdown::Handlers::YouTube.new(width: 520, height: 292)
+    "youtube" => Lalala::Markdown::Handlers::YouTube.new(width: 520, height: 292),
+    "haraway" => Lalala::Markdown::Handlers::Haraway.new
   }
 
   # Scopes
