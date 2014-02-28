@@ -17,6 +17,7 @@ class Lalala::Views::TitleBar < ActiveAdmin::Views::TitleBar
       select(class: "bypass-chosen") do
 
         locales.each do |locale|
+          next if Rails.application.config.lalala.i18n.excluded_locales.try(:include?, locale)
           opts = { :value => locale.to_s }
           opts[:'data-default'] = "true" if I18n.default_locale == locale
           opts[:'data-current'] = "true" if I18n.locale == locale

@@ -1,15 +1,15 @@
 #utility_nav {
   position: absolute;
-  top: 125px;
+  top: 75px;
   left: 25px;
 
   a {
-    @include text-shadow(1px 1px 2px #AAAAAA);
+    @include text-shadow(1px 1px 1px rgba(0,0,0,.2));
     color: $white;
     display: inline-block;
     font-size: 15px;
     font-weight: bold;
-    padding: 20px 0 0 10px;
+    padding: 20px 0 0 38px;
     text-decoration: none;
   }
 
@@ -17,7 +17,7 @@
     @include border-radius(50%);
     background-image: image-url('lalala/users/default.jpg');
     background-size: cover;
-    border: 1px solid $yellow;
+    border: 3px solid $yellow;
     display: block;
     float: left;
     height: 60px;

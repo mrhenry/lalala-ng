@@ -1,6 +1,6 @@
 class HomePage < ApplicationPage
 
-  # self.route            = nil # slug
+  self.route            = ''
   self.allow_create     = false
   self.allow_destroy    = false
   # self.minimum_children = nil
@@ -15,5 +15,6 @@ class HomePage < ApplicationPage
   # def static_children
   #   {}
   # end
+  #
 
 end

@@ -1,4 +1,88 @@
 //
+// own partials and containers
+//
+.mod-dashboard {
+
+  .stats {
+    @include border-radius(3px);
+    border: 1px solid gray(220);
+
+    // list items are stats
+    // divide percentage with number of stats
+    // count_x <- x is set by rails
+    ul {
+      @include pie-clearfix;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        border-left: 1px solid gray(220);
+        float: left;
+        margin: 0;
+        padding: 20px 0;
+        text-align: center;
+
+        .val {
+          font-size: 30px;
+          font-weight: bold;
+          margin: 0 0 5px 0;
+        }
+        .title {
+          @include mono-font;
+          color: gray(200);
+        }
+      }
+
+    }
+
+    li:first-child {
+      border-left: none;
+    }
+
+    // count settings
+    &.count_2 {
+      ul {
+        li {
+          width: 49.999999%;
+        }
+      }
+    }
+    &.count_3 {
+      ul {
+        li {
+          width: 32.333333%;
+        }
+      }
+    }
+    &.count_4 {
+      ul {
+        li {
+          width: 24.8%;
+        }
+      }
+    }
+    &.count_5 {
+      ul {
+        li {
+          width: 19.999999%;
+        }
+      }
+    }
+    &.count_6 {
+      ul {
+        li {
+          width: 15.66666666%;
+        }
+      }
+    }
+
+  }
+
+}
+
+
+//
 // Trying to make lemonade with the dashboard lemons given by FormTastic
 //
 body.lalala_dashboard {
@@ -9,9 +93,17 @@ body.lalala_dashboard {
   }
 
   #dashboard_default_message {
-    @include border-radius(3px);
-    border: 1px solid $gray_lighter;
-    margin: 0 0 40px 0;
+    @include mono-font;
+    background-color: #fffbcb;
+    background-image: url('/assets/lalala/img-notes-pattern.jpg');
+    background-position-y: 2px;
+    line-height: 27px;
+    margin: 0 0 20px 0;
+    width: auto;
+
+    .blank_slate {
+      font-style: normal;
+    }
   }
 
   .columns {
@@ -22,68 +114,7 @@ body.lalala_dashboard {
       margin-bottom: 20px;
 
       .panel {
-        @include border-radius(10px);
-        border: 1px solid $gray_lighter;
-        overflow: hidden;
-
-        // title
-        h3 {
-          color: white;
-          background-color: $gray_lighter;
-          font-size: 14px;
-          font-weight: bold;
-          padding: 10px;
-        }
-
-        .panel_contents {
-
-          // paragraph styles
-          p {
-            padding: 10px;
-          }
-          // list styles
-          ul {
-            li {
-              border-top: 1px solid $gray_lighter;
-              a {
-                color: $black;
-                display: block;
-                padding: 10px 5px 10px 10px;
-                text-decoration: none;
-
-                &:hover {
-                  color: $blue;
-                }
-              }
-            }
-          }
-          // table styles
-          table {
-            thead {
-              display: none;
-            }
-            tbody {
-              // cell padding
-              td {
-                padding: 13px 10px 12px 10px !important;
-              }
-              // date format
-              .timeago {
-                display: block;
-                color: $gray_lighter;
-                text-align: right;
-              }
-              // default link
-              a {
-                color: $black;
-
-                &:hover {
-                  color: $blue !important;
-                }
-              }
-            }
-          }
-        }
+        @extend %pnl;
 
       }
 

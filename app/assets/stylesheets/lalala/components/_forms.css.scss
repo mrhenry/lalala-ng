@@ -122,6 +122,32 @@ select:focus {
   }
 }
 
+// actions
+.actions {
+
+  ol {
+    @include pie-clearfix;
+    border-top: 1px solid gray(220);
+    padding: 15px 0 15px $label_width;
+    margin: 15px 0 30px 0;
+
+    // float li items next to eachother
+    li {
+      float: left;
+      margin: 0 7px 0 0;
+
+      &.cancel {
+        // cancel (not an input, but a plain <a href>)
+        a {
+          @extend %btn;
+          @extend %btn.gray;
+          @include icon('bullet_orange', 'button');
+        }
+      }
+    }
+  }
+}
+
 // input line
 .input {
   position: relative;
@@ -131,6 +157,7 @@ select:focus {
     width: $label_width;
   }
 
+  a,
   input,
   textarea,
   select {

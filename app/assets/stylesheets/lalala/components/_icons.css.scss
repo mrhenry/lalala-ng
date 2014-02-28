@@ -15,7 +15,7 @@ $icons: "accept", "add", "anchor", "application", "application_add", "applicatio
   background-repeat: no-repeat;
 
   @if $type == 'button' {
-    padding-left: 29px;
+    padding-left: 29px !important;
   }
 }
 

@@ -1,0 +1,8 @@
+{
+  "globals": {
+    "$": true,
+    "localStorage": true,
+    "window": true
+  },
+  "node": true
+}

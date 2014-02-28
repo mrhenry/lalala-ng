@@ -1,0 +1,28 @@
+<%
+  @values         = []
+  @page_total     = Lalala::Page::all.count
+  @post_total     = Article::all.count rescue Post::all.count
+  @assets_total   = "n/a"
+  @user_total     = Lalala::AdminUser::all.count
+
+  # fill array
+  @values << ["pages",@page_total]
+  @values << ["posts",@post_total]
+  @values << ["files",@assets_total]
+  @values << ["user(s)",@user_total]
+
+%>
+<div class="mod-dashboard">
+
+  <div class="stats count_<%= @values.length %>">
+    <ul>
+      <% @values.each do |title,val| %>
+      <li>
+        <p class="val"><%= val %></p>
+        <p class="title"><%= title %></p>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+
+</div>

@@ -69,6 +69,10 @@ module Lalala
         empty_directory ".forklift"
       end
 
+      def copy_default_mailer_layout
+        copy_file 'application_mailer.html.erb', 'app/views/layouts/application_mailer.html.erb'
+      end
+
       def create_assets
         generate "lalala:assets"
       end
