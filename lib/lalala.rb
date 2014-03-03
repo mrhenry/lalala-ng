@@ -23,6 +23,7 @@ module Lalala
   require 'stringex'
   require 'country-select'
   require 'activeadmin'
+  require 'haraway'
 
   if groups.include?(:assets)
     require 'lalala/assets'

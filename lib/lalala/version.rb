@@ -1,5 +1,5 @@
 module Lalala
-  VERSION = "4.0.0"
+  VERSION = "4.1.0"
   BUILD   = "{{BUILD_NUMBER}}"
 
   if BUILD != ("{{BUILD_NUMBER" + "}}") # prevent sed replacement (see script/ci)
