@@ -12,6 +12,7 @@ function MediaSelector() {
 
   // data
   this.selected_ids = [];
+  this.last_rendered_data = [];
 
   // exec
   this.collect_data_and_render();
@@ -39,19 +40,32 @@ MediaSelector.prototype.collect_data_and_render = function() {
 
   // render
   this.render(data);
+
+  // versions
+  this.setup_version_option();
 };
 
 
 MediaSelector.prototype.collect_data_from_self = function() {
   var data = [];
 
-  $("x-file").each(function() {
-    var $xfile = $(this);
+  $("x-files[accept*=\"image\"]").each(function() {
+    var $xfiles = $(this);
+    var versions;
 
-    data.push({
-      id: $xfile.find("[name$=\"[id]\"]").attr("value"),
-      thumb_url: $xfile.attr("data-src-original").replace(/original$/, "thumb")
-    })
+    versions = $xfiles.find(".meta-versions .version").map(function() {
+      return $(this).attr("data-name");
+    }).toArray();
+
+    $xfiles.find("x-file").each(function() {
+      var $xfile = $(this);
+
+      data.push({
+        id: $xfile.find("[name$=\"[id]\"]").attr("value"),
+        thumb_url: $xfile.attr("data-src-original").replace(/original$/, "thumb"),
+        versions: versions
+      });
+    });
   });
 
   return data;
@@ -60,6 +74,9 @@ MediaSelector.prototype.collect_data_from_self = function() {
 
 MediaSelector.prototype.render = function(data) {
   var html, assets;
+
+  // store data
+  this.last_rendered_data = data;
 
   // assets
   assets = "";
@@ -89,7 +106,7 @@ MediaSelector.prototype.templates = {
   main: (function() {
     return [
       '<header>',
-        '<div class="data-selection"></div>',
+        '<div class="data-selection">Insert image</div>',
         '<a class="close">✕</a>',
       '</header>',
 
@@ -101,6 +118,11 @@ MediaSelector.prototype.templates = {
         '<div class="actions">',
           '<a class="button large commit">Add media to post</a>',
           '<a class="button large cancel close">Cancel</a>',
+        '</div>',
+
+        '<div class="options">',
+          '<div class="options-title">Options</div>',
+          '<div class="version"></div>',
         '</div>',
       '</aside>'
     ].join('');
@@ -166,12 +188,13 @@ MediaSelector.prototype.unselect_asset = function($asset) {
 
 MediaSelector.prototype.add_selected_to_editor_textarea = function() {
   var selected = this.selected_ids;
+  var version = this.$el.find(".options .version select option:selected").val() || "original";
   var markdown = "";
   var $textarea;
 
   // build markdown text
   for (var i=0, j=selected.length; i<j; ++i) {
-    markdown = markdown + "![](asset://" + selected[i] + ")  \n";
+    markdown = markdown + "![](asset://" + selected[i] + "/" + version + ")  \n";
   }
 
   // add to textarea
@@ -182,6 +205,41 @@ MediaSelector.prototype.add_selected_to_editor_textarea = function() {
 
   // hide overlay
   Overlay.get_instance().hide();
+};
+
+
+
+//
+//  Options
+//
+MediaSelector.prototype.setup_version_option = function() {
+  var versions = [];
+  var select_element;
+
+  // collect all versions
+  for (var i=0, j=this.last_rendered_data.length; i<j; ++i) {
+    var data_piece = this.last_rendered_data[i];
+
+    for (var k=0, l=data_piece.versions.length; k<l; ++k) {
+      var version = data_piece.versions[k];
+      if (versions.indexOf(version) === -1) {
+        versions.push(version)
+      }
+    }
+  }
+
+  // make option element
+  select_element = document.createElement("select");
+  select_element.innerHTML = $.map(["original"].concat(versions), function(v) {
+    return "<option value=\"" + v + "\">" + v + "</option>";
+  }).join("");
+
+  // add to dom & apply chosen
+  this.$el.find(".options .version")
+    .empty()
+    .append(select_element)
+    .children("select")
+    .chosen({ width: "100%" });
 };
 
 

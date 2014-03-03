@@ -12,6 +12,13 @@
     position: relative;
   }
 
+  header .data-selection {
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 72px;
+    padding: 0 22px;
+  }
+
   header .close {
     color: black;
     cursor: pointer;
@@ -36,9 +43,28 @@
     top: 70px;
     width: 279px - 2 * 28px;
 
+    // actions
     .actions a {
       display: block;
       margin-bottom: 11px;
+    }
+
+    // options
+    .options {
+      margin-top: 29px;
+    }
+
+    .options .options-title {
+      color: #aaa;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 9px;
+      text-transform: uppercase;
+    }
+
+    .options select {
+      @include box-sizing(border-box);
+      width: 100%;
     }
   }
 
