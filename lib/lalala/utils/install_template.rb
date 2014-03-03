@@ -3,7 +3,7 @@ class AppBuilder < Rails::AppBuilder
   include Thor::Shell
 
   RUBY_VERSION   = "2.0.0"
-  LALALA_VERSION = "4.0.0.dev"
+  LALALA_VERSION = "4.1.0.dev"
 
   def gemfile
     create_file 'Gemfile', <<-DOC

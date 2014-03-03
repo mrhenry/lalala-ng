@@ -20,7 +20,6 @@ class ArticlesTest < ActionDispatch::IntegrationTest
     assert_equal('/lalala/articles/new', current_path)
 
     first('input[name="article[translations_writer][en][title]"]').set('My Article')
-    attach_file('Image', File.expand_path('../../fixtures/files/image.png', __FILE__))
     click_on('Create Article')
     page.save_page
     assert_equal 200, page.status_code

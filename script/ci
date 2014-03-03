@@ -41,54 +41,57 @@ if [[ "$TRAVIS_SECURE_ENV_VARS" == "true" && "$TRAVIS_PULL_REQUEST" == "false" ]
 then
 
   # Are we in the canonical environment?
-  if [[ "$TRAVIS_BRANCH" == "master" && "$DB" == "postgresql" ]]
+  if [[ "$DB" == "postgresql" ]]
   then
+    if [[ "$TRAVIS_BRANCH" == "master" || "$TRAVIS_BRANCH" == "haraway" ]]
+    then
 
-    announce "${yellow}" "Build development gems"
+      announce "${yellow}" "Build development gems"
 
-    export LALALA_BUILD_VERSION="$TRAVIS_BUILD_NUMBER"
+      export LALALA_BUILD_VERSION="$TRAVIS_BUILD_NUMBER"
 
-    { # set the build version
-      cd lib/lalala
-      mv version.rb version.rb_
-      cat version.rb_ | sed "s|{{BUILD_NUMBER}}|$LALALA_BUILD_VERSION|" > version.rb
-      rm version.rb_
-      cd -
-    } > /dev/null
-
-
-    step "${yellow}" "Building lalala"
-    rake lalala:build | indent
-
-    step "${yellow}" "Building lalala-assets"
-    rake lalala-assets:build | indent
-
-    step "${yellow}" "Building lalala-development"
-    rake lalala-development:build | indent
-
-    step "${yellow}" "Building lalala-test"
-    rake lalala-test:build | indent
+      { # set the build version
+        cd lib/lalala
+        mv version.rb version.rb_
+        cat version.rb_ | sed "s|{{BUILD_NUMBER}}|$LALALA_BUILD_VERSION|" > version.rb
+        rm version.rb_
+        cd -
+      } > /dev/null
 
 
-    announce "${yellow}" "Release development gems"
+      step "${yellow}" "Building lalala"
+      rake lalala:build | indent
 
-    mkdir -p "$HOME/.gem/"
-    echo -e "---\n:rubygems_api_key: ${RUBYGEMS_API_KEY}" > "$HOME/.gem/credentials"
-    chmod 0600 "$HOME/.gem/credentials"
+      step "${yellow}" "Building lalala-assets"
+      rake lalala-assets:build | indent
 
-    step "${yellow}" "Releasing lalala"
-    gem push pkg/lalala-[0-9]*.gem | indent
+      step "${yellow}" "Building lalala-development"
+      rake lalala-development:build | indent
 
-    step "${yellow}" "Releasing lalala-assets"
-    gem push pkg/lalala-assets-[0-9]*.gem | indent
-
-    step "${yellow}" "Releasing lalala-development"
-    gem push pkg/lalala-development-[0-9]*.gem | indent
-
-    step "${yellow}" "Releasing lalala-test"
-    gem push pkg/lalala-test-[0-9]*.gem | indent
+      step "${yellow}" "Building lalala-test"
+      rake lalala-test:build | indent
 
 
+      announce "${yellow}" "Release development gems"
+
+      mkdir -p "$HOME/.gem/"
+      echo -e "---\n:rubygems_api_key: ${RUBYGEMS_API_KEY}" > "$HOME/.gem/credentials"
+      chmod 0600 "$HOME/.gem/credentials"
+
+      step "${yellow}" "Releasing lalala"
+      gem push pkg/lalala-[0-9]*.gem | indent
+
+      step "${yellow}" "Releasing lalala-assets"
+      gem push pkg/lalala-assets-[0-9]*.gem | indent
+
+      step "${yellow}" "Releasing lalala-development"
+      gem push pkg/lalala-development-[0-9]*.gem | indent
+
+      step "${yellow}" "Releasing lalala-test"
+      gem push pkg/lalala-test-[0-9]*.gem | indent
+
+
+    fi
   fi
 
 fi
