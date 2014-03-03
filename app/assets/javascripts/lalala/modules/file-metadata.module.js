@@ -30,7 +30,7 @@ FileMetadata.prototype.render = function() {
 
   if (this.$xfile.hasClass("saved-to-db")) {
     img_tmpl = '<div class="image cover" style="background-image: url(' +
-               this.$xfile.attr("data-src-original").replace("original", "cover") + ');"></div>';
+               this.$xfile.attr("data-src-original").replace("original", "thumb") + ');"></div>';
 
     meta_tmpl = this.$xfile.find(".meta").html();
 

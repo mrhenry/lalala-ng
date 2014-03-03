@@ -12,10 +12,6 @@ Haraway.configure do |c|
     p.accept "image/*"
 
     p.version("thumb") do |v|
-      v.resize_to_fill(158, 110)
-    end
-
-    p.version("cover") do |v|
       v.resize_to_fill(220, 153)
     end
 

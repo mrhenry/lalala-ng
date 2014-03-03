@@ -57,7 +57,7 @@ MediaSelector.prototype.collect_data_from_self = function() {
       return $(this).attr("data-name");
     }).toArray();
 
-    $xfiles.find("x-file").each(function() {
+    $xfiles.find("x-file[data-src-original]").each(function() {
       var $xfile = $(this);
 
       data.push({
