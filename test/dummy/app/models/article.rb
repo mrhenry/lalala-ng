@@ -1,5 +1,5 @@
 class Article < ActiveRecord::Base
-  attr_accessible :body, :title, :category, :images, :tag_ids
+  attr_accessible :body, :title, :category, :tag_ids, :images, :downloads
 
   # Translations
   translates :title, :body
@@ -9,6 +9,7 @@ class Article < ActiveRecord::Base
 
   # Assets
   has_many_assets :images, :images
+  has_many_assets :downloads, :downloads
 
   # Validations
   validates :title, presence: true

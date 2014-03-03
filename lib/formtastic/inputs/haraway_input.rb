@@ -7,6 +7,8 @@ class Formtastic::Inputs::HarawayInput
     param_key = "#{object.class.table_name.singularize}[#{method}]"
     title = method.to_s.pluralize.titleize
     assets = object.send(method)
+    accepts = Haraway.configuration.profiles[method.to_s].try(:accepted_file_types)
+    accepts = accepts.join(", ") if accepts
 
     sorted_assets = klass.sorted_assets(assets.clone).map do |asset|
       klass.xfile_html(self, template, param_key, asset)
@@ -14,7 +16,7 @@ class Formtastic::Inputs::HarawayInput
 
     <<-EOT
 
-    <x-files profile="#{method}" accept="image/*" name="#{param_key}">
+    <x-files profile="#{method}" accept="#{accepts}" name="#{param_key}">
       <header>
         <div class="col-a">
           <span class="name">#{title}</span>

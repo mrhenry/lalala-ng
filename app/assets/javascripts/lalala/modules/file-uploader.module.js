@@ -113,9 +113,17 @@ FileUploader.prototype.handle_file = function(file) {
   file.$el.addClass("waiting");
 
   // make thumbnail
-  file.readThumbnailData(158, 110, function(canvas) {
-    file.el.insertBefore(canvas, file.el.firstChild);
-  });
+  if (file.type.indexOf("image") == -1) {
+    var fake_thumb = document.createElement("div");
+    fake_thumb.className = "thumb no-image";
+    file.el.insertBefore(fake_thumb, file.el.firstChild);
+
+  } else {
+    file.readThumbnailData(158, 110, function(canvas) {
+      file.el.insertBefore(canvas, file.el.firstChild);
+    });
+
+  }
 
   // if there are no files yet in the file container, empty it.
   // this is done to remove messages, etc.

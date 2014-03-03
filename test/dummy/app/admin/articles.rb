@@ -13,11 +13,19 @@ ActiveAdmin.register Article do
       f.input :body
       f.input :tags
       f.input :category, as: :select, collection: %w(A B C)
+
       f.input :images, as: :haraway do |h|
         h.inputs do
           h.input :title, as: :string
-          h.input :choice, as: :select, collection: %w(A B C)
-          h.input :check_it, as: :boolean
+          h.input :caption, as: :text
+        end
+      end
+
+      f.input :downloads, as: :haraway do |h|
+        h.inputs do
+          h.input :title, as: :string
+          h.input :category, as: :select, collection: %w(X Y Z)
+          h.input :featured, as: :boolean
         end
       end
     end

@@ -24,4 +24,6 @@ Haraway.configure do |c|
     end
   end
 
+  c.profile("downloads")
+
 end

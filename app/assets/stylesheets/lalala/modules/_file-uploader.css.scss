@@ -111,6 +111,7 @@ x-files {
     height: 110px;
     padding: 18px 8px 62px;
     position: relative;
+    width: 158px;
   }
 
   x-file.about-to-destroy {
@@ -121,11 +122,17 @@ x-files {
   //  X-file -- General
   //
   x-file .thumb {
+    background-color: #F3F3F3;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     height: 110px;
-    width: 158px;
+    width: 100%;
+  }
+
+  x-file .thumb.no-image {
+    background-image: icon-url("page_white");
+    background-size: auto;
   }
 
   x-file .title {

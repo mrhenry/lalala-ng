@@ -1,5 +1,7 @@
 .mod-overlay-background,
 .mod-overlay {
+  @include single-transition(opacity, 750ms);
+
   bottom: 0;
   display: none;
   left: 0;
@@ -7,12 +9,6 @@
   position: fixed;
   right: 0;
   top: 0;
-
-  -webkit-transition: opacity 750ms;
-  -moz-transition: opacity 750ms;
-  -ms-transition: opacity 750ms;
-  -o-transition: opacity 750ms;
-  transition: opacity 750ms;
 }
 
 .mod-overlay-background.visible,
