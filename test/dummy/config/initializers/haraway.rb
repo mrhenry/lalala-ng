@@ -12,11 +12,15 @@ Haraway.configure do |c|
     p.accept "image/*"
 
     p.version("thumb") do |v|
-      v.resize_to_fill(100, 100)
+      v.resize_to_fill(158, 110)
     end
 
-    p.version("banner") do |v|
-      v.resize_to_fill(960, 300)
+    p.version("cover") do |v|
+      v.resize_to_fill(220, 153)
+    end
+
+    p.version("aspect_16-9") do |v|
+      v.resize_to_fill(700, 393)
     end
   end
 

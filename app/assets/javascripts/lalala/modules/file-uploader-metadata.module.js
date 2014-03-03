@@ -30,7 +30,7 @@ FileUploaderMetadata.prototype.render = function() {
 
   if (this.$xfile.hasClass("saved-to-db")) {
     img_tmpl = '<div class="image cover" style="background-image: url(' +
-               this.$xfile.attr("data-src-original") + ');"></div>';
+               this.$xfile.attr("data-src-original").replace("original", "cover") + ');"></div>';
 
     meta_tmpl = this.$xfile.find(".meta").html();
 
@@ -79,7 +79,7 @@ FileUploaderMetadata.prototype.render = function() {
       file = that.fileuploader.state.files[file_id];
 
       if (file) {
-        file.readThumbnailData(220, Math.floor(110 * (220 / 158)), function(canvas) {
+        file.readThumbnailData(220, 153, function(canvas) {
           $canvas.replaceWith(canvas);
         });
       }
