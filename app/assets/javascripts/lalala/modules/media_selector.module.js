@@ -171,7 +171,7 @@ MediaSelector.prototype.add_selected_to_editor_textarea = function() {
 
   // build markdown text
   for (var i=0, j=selected.length; i<j; ++i) {
-    markdown = markdown + "![](haraway://" + selected[i] + ")  \n";
+    markdown = markdown + "![](asset://" + selected[i] + ")  \n";
   }
 
   // add to textarea

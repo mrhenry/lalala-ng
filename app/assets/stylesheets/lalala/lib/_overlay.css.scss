@@ -1,19 +1,11 @@
 .mod-overlay-background,
 .mod-overlay {
-  @include single-transition(opacity, 750ms);
-
   bottom: 0;
   display: none;
   left: 0;
-  opacity: 0;
   position: fixed;
   right: 0;
   top: 0;
-}
-
-.mod-overlay-background.visible,
-.mod-overlay.visible {
-  opacity: 1;
 }
 
 
@@ -23,8 +15,13 @@
 
 */
 .mod-overlay-background {
-  background-color: rgba($yellow, .9);
+  @include single-transition(background-color, 750ms);
+  background-color: rgba($yellow, 0);
   z-index: 1000;
+
+  &.visible {
+    background-color: rgba($yellow, 0.9);
+  }
 }
 
 
@@ -34,11 +31,17 @@
 
 */
 .mod-overlay {
+  @include single-transition(opacity, 750ms);
+  opacity: 0;
   overflow-x: hidden;
   overflow-y: scroll;
   z-index: 1010;
 
   -webkit-overflow-scrolling: touch;
+
+  &.visible {
+    opacity: 1;
+  }
 }
 
 .mod-overlay .overlay-outer-wrapper {

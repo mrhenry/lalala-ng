@@ -1,11 +1,11 @@
-class Lalala::Markdown::Handlers::Haraway < Lalala::Markdown::Handlers::Base
+class Lalala::Markdown::Handlers::Asset < Lalala::Markdown::Handlers::Base
 
   def initialize(options={})
     @options = options
   end
 
   def image(url, alt=nil, title=nil)
-    unless %r|^haraway[:]//(.+)$| === url
+    unless %r|^asset[:]//(.+)$| === url
       return ""
     end
 

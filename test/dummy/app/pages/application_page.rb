@@ -9,7 +9,7 @@ class ApplicationPage < Lalala::Page
 
   markdown :body, tables: true, link_schemes: {
     "youtube" => Lalala::Markdown::Handlers::YouTube.new(width: 520, height: 292),
-    "haraway" => Lalala::Markdown::Handlers::Haraway.new
+    "asset" => Lalala::Markdown::Handlers::Asset.new
   }
 
 end
