@@ -1,9 +1,9 @@
-var FileUploaderMetadata = require("lalala/modules/file-uploader-metadata"),
+var FileMetadata = require("lalala/modules/file-metadata"),
     Overlay = require("lalala/modules/overlay");
 
 
 
-function FileUploader(xfiles_element) {
+function MultipleFilesUploader(xfiles_element) {
   this.$el = $(xfiles_element);
   this.$file_container = this.$el.find(".file-container");
   this.$form = this.$el.closest("form");
@@ -26,7 +26,7 @@ function FileUploader(xfiles_element) {
 //
 //  Templates, views, etc.
 //
-FileUploader.prototype.make_xfile_template = function() {
+MultipleFilesUploader.prototype.make_xfile_template = function() {
   var $template = this.$el.find("template.x-file-template");
   var template = $template.get(0);
   var $wrapper = $("<x-file />");
@@ -51,7 +51,7 @@ FileUploader.prototype.make_xfile_template = function() {
 };
 
 
-FileUploader.prototype.render_isempty_message_if_needed = function() {
+MultipleFilesUploader.prototype.render_isempty_message_if_needed = function() {
   if (this.$file_container.find("x-file").length === 0) {
     this.$file_container[0].innerHTML = [
       "<div class=\"is-empty\">",
@@ -66,18 +66,18 @@ FileUploader.prototype.render_isempty_message_if_needed = function() {
 };
 
 
-FileUploader.prototype.set_data_inspection_html = function(html) {
+MultipleFilesUploader.prototype.set_data_inspection_html = function(html) {
   this.$el.find("header .data-inspection").html(html);
 };
 
 
-FileUploader.prototype.clear_file_container = function() {
+MultipleFilesUploader.prototype.clear_file_container = function() {
   this.$file_container.empty();
   this.$file_container.append("<div class=\"inner-wrapper\" />");
 };
 
 
-FileUploader.prototype.show_amount_of_files = function() {
+MultipleFilesUploader.prototype.show_amount_of_files = function() {
   var amount_of_files = this.$file_container.find("x-file").length;
   var word = (amount_of_files === 1 ? "file" : "files");
 
@@ -87,7 +87,7 @@ FileUploader.prototype.show_amount_of_files = function() {
 };
 
 
-FileUploader.prototype.remove_hidden_fields_from_checkboxes = function($element) {
+MultipleFilesUploader.prototype.remove_hidden_fields_from_checkboxes = function($element) {
   $element.find("input[type=\"checkbox\"]").each(function() {
     var name = $(this).attr("name");
     $element.find('[name="' + name + '"][type="hidden"]').remove();
@@ -99,7 +99,7 @@ FileUploader.prototype.remove_hidden_fields_from_checkboxes = function($element)
 //
 //  Handle file
 //
-FileUploader.prototype.handle_file = function(file) {
+MultipleFilesUploader.prototype.handle_file = function(file) {
   this.state.files_counter++;
   this.state.files[this.state.files_counter.toString()] = file;
 
@@ -153,13 +153,13 @@ FileUploader.prototype.handle_file = function(file) {
 //
 //  -> this = file
 //
-FileUploader.prototype.file_start_handler = function(e) {
+MultipleFilesUploader.prototype.file_start_handler = function(e) {
   this.$el.removeClass("waiting");
   this.$el.addClass("uploading");
 };
 
 
-FileUploader.prototype.file_progess_handler = function(e) {
+MultipleFilesUploader.prototype.file_progess_handler = function(e) {
   if (this.$el.hasClass("error")) return;
 
   // if there are no transform -> upload percentage
@@ -174,7 +174,7 @@ FileUploader.prototype.file_progess_handler = function(e) {
 };
 
 
-FileUploader.prototype.file_err_handler = function(e) {
+MultipleFilesUploader.prototype.file_err_handler = function(e) {
   console.error("Error", this);
 
   this.$el.addClass("error");
@@ -183,19 +183,19 @@ FileUploader.prototype.file_err_handler = function(e) {
 };
 
 
-FileUploader.prototype.file_done_uploading_handler = function(e) {
+MultipleFilesUploader.prototype.file_done_uploading_handler = function(e) {
   this.$el.find(".upload-bar").addClass("done");
   this.$el.removeClass("uploading");
   this.$el.addClass("processing");
 };
 
 
-FileUploader.prototype.file_done_processing_handler = function(e) {
+MultipleFilesUploader.prototype.file_done_processing_handler = function(e) {
   this.$el.find(".process-bar").addClass("done");
 };
 
 
-FileUploader.prototype.file_done_handler = function(e) {
+MultipleFilesUploader.prototype.file_done_handler = function(e) {
   var name = this.$el.closest("x-files").attr("name");
   var pairs = format_asset_metadata(this.metadata, name + "[]");
 
@@ -216,7 +216,7 @@ FileUploader.prototype.file_done_handler = function(e) {
 //
 //  Events - General
 //
-FileUploader.prototype.bind_events = function() {
+MultipleFilesUploader.prototype.bind_events = function() {
   var choose_handler  = $.proxy(this.choose_click_handler, this);
   var delete_handler  = $.proxy(this.xfile_btn_delete_click_handler, this);
   var meta_handler    = $.proxy(this.xfile_btn_meta_click_handler, this);
@@ -237,7 +237,7 @@ FileUploader.prototype.bind_events = function() {
 };
 
 
-FileUploader.prototype.choose_click_handler = function(e) {
+MultipleFilesUploader.prototype.choose_click_handler = function(e) {
   var accept = this.$el.attr("accept").split(",");
   var profile = this.$el.attr("profile");
 
@@ -249,7 +249,7 @@ FileUploader.prototype.choose_click_handler = function(e) {
 };
 
 
-FileUploader.prototype.defer_submit = function(e) {
+MultipleFilesUploader.prototype.defer_submit = function(e) {
   var $form = $(e.currentTarget);
 
   // prevent default behaviour
@@ -267,13 +267,13 @@ FileUploader.prototype.defer_submit = function(e) {
 };
 
 
-FileUploader.prototype.xfile_btn_delete_click_handler = function(e) {
+MultipleFilesUploader.prototype.xfile_btn_delete_click_handler = function(e) {
   var $xfile = $(e.currentTarget).closest("x-file");
   if ($xfile.length) this.toggle_destroy($xfile);
 };
 
 
-FileUploader.prototype.xfile_btn_meta_click_handler = function(e) {
+MultipleFilesUploader.prototype.xfile_btn_meta_click_handler = function(e) {
   var $xfile = $(e.currentTarget).closest("x-file"), fum;
   var main_overlay = Overlay.get_instance();
 
@@ -281,10 +281,10 @@ FileUploader.prototype.xfile_btn_meta_click_handler = function(e) {
   if (!$xfile.hasClass("uploaded")) return;
 
   // new metadata overlay-content block
-  fum = new FileUploaderMetadata($xfile, this);
+  fum = new FileMetadata($xfile, this);
   main_overlay.append_content(fum.$el);
   main_overlay.$el.find("select").chosen({ width: "80%" });
-  main_overlay.show("file-uploader-metadata");
+  main_overlay.show("file-metadata");
 };
 
 
@@ -292,7 +292,7 @@ FileUploader.prototype.xfile_btn_meta_click_handler = function(e) {
 //
 //  Destroy
 //
-FileUploader.prototype.toggle_destroy = function($xfile) {
+MultipleFilesUploader.prototype.toggle_destroy = function($xfile) {
   if ($xfile.hasClass("about-to-destroy")) {
     this.set_to_not_destroy($xfile);
   } else {
@@ -301,7 +301,7 @@ FileUploader.prototype.toggle_destroy = function($xfile) {
 };
 
 
-FileUploader.prototype.set_to_destroy = function($xfile) {
+MultipleFilesUploader.prototype.set_to_destroy = function($xfile) {
   var $destroy, $id;
 
   // add class
@@ -323,7 +323,7 @@ FileUploader.prototype.set_to_destroy = function($xfile) {
 };
 
 
-FileUploader.prototype.set_to_not_destroy = function($xfile) {
+MultipleFilesUploader.prototype.set_to_not_destroy = function($xfile) {
   $xfile.removeClass("about-to-destroy");
   $xfile.find("[name$=\"_destroy]\"]").attr("value", "0");
 };
@@ -333,7 +333,7 @@ FileUploader.prototype.set_to_not_destroy = function($xfile) {
 //
 //  Sortable
 //
-FileUploader.prototype.make_items_sortable = function() {
+MultipleFilesUploader.prototype.make_items_sortable = function() {
   this.$el.sortable({
     containment: "parent",
     items: "x-file",
@@ -373,4 +373,4 @@ function format_asset_metadata(value, prefix) {
 //
 //  -> EXPORT
 //
-module.exports = FileUploader;
+module.exports = MultipleFilesUploader;

@@ -1,3 +1,3 @@
 exports.init = function() {
-  $('select').not(".bypass-chosen").chosen();
+  $("select").not(".bypass-chosen").chosen();
 };

@@ -1,10 +1,10 @@
 /*
 
-  Modules / File uploader
+  Modules / Multiple file uploader
 
 */
 
-x-files {
+x-files[multiple-files] {
   color: #6F6F71;
   display: block;
   font-size: 12px;
@@ -122,7 +122,6 @@ x-files {
   //  X-file -- General
   //
   x-file .thumb {
-    background-color: #F3F3F3;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -131,6 +130,7 @@ x-files {
   }
 
   x-file .thumb.no-image {
+    background-color: #F3F3F3;
     background-image: icon-url("page_white");
     background-size: auto;
   }

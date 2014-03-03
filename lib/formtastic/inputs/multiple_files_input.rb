@@ -1,22 +1,27 @@
-class Formtastic::Inputs::HarawayInput
+class Formtastic::Inputs::MultipleFilesInput
   include Formtastic::Inputs::Base
 
   def to_html
     object = builder.object
-    klass = Formtastic::Inputs::HarawayInput
+
+    klass = Formtastic::Inputs::MultipleFilesInput
     param_key = "#{object.class.table_name.singularize}[#{method}]"
     title = method.to_s.pluralize.titleize
     assets = object.send(method)
-    accepts = Haraway.configuration.profiles[method.to_s].try(:accepted_file_types)
+
+    profile_name = object.class.haraway_assets[method.to_s]
+    profile = Haraway.configuration.profiles[profile_name]
+    accepts = profile.try(:accepted_file_types)
     accepts = accepts.join(", ") if accepts
+    versions = compile_versions_array(profile)
 
     sorted_assets = klass.sorted_assets(assets.clone).map do |asset|
-      klass.xfile_html(self, template, param_key, asset)
+      klass.xfile_html(self, template, param_key, asset, versions)
     end
 
-    <<-EOT
+    <<-HTML
 
-    <x-files profile="#{method}" accept="#{accepts}" name="#{param_key}">
+    <x-files multiple-files profile="#{profile_name}" accept="#{accepts}" name="#{param_key}">
       <header>
         <div class="col-a">
           <span class="name">#{title}</span>
@@ -49,11 +54,11 @@ class Formtastic::Inputs::HarawayInput
       </div>
 
       <div class="meta-versions">
-        #{ versions(method) }
+        #{ versions_html(profile) }
       </div>
     </x-files>
 
-    EOT
+    HTML
   end
 
 
@@ -72,10 +77,7 @@ class Formtastic::Inputs::HarawayInput
   end
 
 
-  def versions(profile)
-    profile = Haraway.configuration.profiles[profile.to_s]
-
-    # collect data
+  def compile_versions_array(profile)
     if profile
       versions = profile.versions.keys.map do |key|
         version = profile.versions[key.to_s]
@@ -91,13 +93,18 @@ class Formtastic::Inputs::HarawayInput
 
     end
 
-    # make html
-    versions.map do |version|
-      <<-EOS
+    # return
+    versions
+  end
+
+
+  def versions_html(profile)
+    compile_versions_array(profile).map do |version|
+      <<-HTML
         <script class="version" data-name="#{version.name}" type="application/json">
           #{version.params.to_json}
         </script>
-      EOS
+      HTML
     end.join("")
   end
 
@@ -110,16 +117,28 @@ class Formtastic::Inputs::HarawayInput
   end
 
 
-  def self.xfile_html(input, template, param_key, asset)
-    asset_url_original = (asset.url(:original) rescue "")
-    asset_url_thumb = (asset.url(:thumb) rescue "")
+  def self.xfile_html(input, template, param_key, asset, versions)
+    asset_url_original = asset.url(:original)
 
-    <<-EOT
+    # thumb
+    if versions.select { |v| v.name == "thumb" }.length >= 1
+      asset_url_thumb = asset.url(:thumb)
+    end
+
+    if asset_url_thumb
+      thumb_html = "<div class=\"thumb\" style=\"background-image: " +
+                   "url(#{ asset_url_thumb });\"></div>"
+    else
+      thumb_html = "<div class=\"thumb no-image\"></div>"
+    end
+
+    # return
+    <<-HTML
 
     <x-file class="uploaded saved-to-db" data-src-original="#{ asset_url_original }">
-      <div class="thumb" style="background-image: url(#{ asset_url_thumb });"></div>
+      #{ thumb_html }
 
-      #{ Formtastic::Inputs::HarawayInput.menu_html }
+      #{ Formtastic::Inputs::MultipleFilesInput.menu_html }
       #{ template.hidden_field_tag(param_key + "[][id]", asset.id) }
       #{ template.hidden_field_tag(param_key + "[][_destroy]", "") }
 
@@ -132,12 +151,12 @@ class Formtastic::Inputs::HarawayInput
       </div>
     </x-file>
 
-    EOT
+    HTML
   end
 
 
   def self.menu_html
-    <<-EOT
+    <<-HTML
 
     <div class="menu">
       <a data-action="delete"></a>
@@ -145,7 +164,7 @@ class Formtastic::Inputs::HarawayInput
       <a data-action="move"></a>
     </div>
 
-    EOT
+    HTML
   end
 
 end

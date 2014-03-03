@@ -2,8 +2,8 @@ var Overlay = require("lalala/modules/overlay");
 
 
 
-function FileUploaderMetadata($xfile, fileuploader) {
-  this.$el = $('<div class="mod-file-uploader-metadata" />');
+function FileMetadata($xfile, fileuploader) {
+  this.$el = $('<div class="mod-file-metadata" />');
   this.$xfile = $xfile;
   this.fileuploader = fileuploader;
 
@@ -13,7 +13,7 @@ function FileUploaderMetadata($xfile, fileuploader) {
 
 
 
-FileUploaderMetadata.prototype.render = function() {
+FileMetadata.prototype.render = function() {
   var tmpl, main_tmpl, sidebar_tmpl, img_tmpl, meta_tmpl;
   var that = this;
 
@@ -92,9 +92,9 @@ FileUploaderMetadata.prototype.render = function() {
 //
 //  Templates
 //
-FileUploaderMetadata.prototype.template = (function() {
+FileMetadata.prototype.template = (function() {
   return [
-    '<div class="mod-file-uploader-metadata">',
+    '<div class="mod-file-metadata">',
       '<div class="main">{{MAIN}}</div>',
       '<div class="sidebar">{{SIDEBAR}}</div>',
     '</div>'
@@ -102,7 +102,7 @@ FileUploaderMetadata.prototype.template = (function() {
 })();
 
 
-FileUploaderMetadata.prototype.main_template = (function() {
+FileMetadata.prototype.main_template = (function() {
   return [
     '<div class="fields">',
       '{{FIELDS}}',
@@ -111,7 +111,7 @@ FileUploaderMetadata.prototype.main_template = (function() {
 })();
 
 
-FileUploaderMetadata.prototype.sidebar_template = (function() {
+FileMetadata.prototype.sidebar_template = (function() {
   return [
     '{{IMAGE}}',
     '<div class="meta">{{META}}</div>',
@@ -123,7 +123,7 @@ FileUploaderMetadata.prototype.sidebar_template = (function() {
 })();
 
 
-FileUploaderMetadata.prototype.get_form_template = function() {
+FileMetadata.prototype.get_form_template = function() {
   var $x = this.fileuploader.$el.find("template.form-template");
   var x = $x.get(0);
   var wrapper = document.createElement("div");
@@ -142,13 +142,13 @@ FileUploaderMetadata.prototype.get_form_template = function() {
 //
 //  Events (General)
 //
-FileUploaderMetadata.prototype.bind_events = function() {
+FileMetadata.prototype.bind_events = function() {
   this.$el.on("click", "a.button.commit", $.proxy(this.commit_click_handler, this));
   this.$el.on("click", "a.button.cancel", $.proxy(this.cancel_click_handler, this));
 };
 
 
-FileUploaderMetadata.prototype.unbind_events = function() {
+FileMetadata.prototype.unbind_events = function() {
   this.$el.off("click");
 };
 
@@ -157,13 +157,13 @@ FileUploaderMetadata.prototype.unbind_events = function() {
 //
 //  Actions
 //
-FileUploaderMetadata.prototype.commit_click_handler = function() {
+FileMetadata.prototype.commit_click_handler = function() {
   this.copy_attributes_to_xfile();
   this.hide();
 };
 
 
-FileUploaderMetadata.prototype.cancel_click_handler = function() {
+FileMetadata.prototype.cancel_click_handler = function() {
   this.hide();
 };
 
@@ -172,7 +172,7 @@ FileUploaderMetadata.prototype.cancel_click_handler = function() {
 //
 //  Attributes
 //
-FileUploaderMetadata.prototype.copy_attributes_to_xfile = function() {
+FileMetadata.prototype.copy_attributes_to_xfile = function() {
   var $xattr = this.$xfile.find(".attributes");
   var new_attributes_container;
 
@@ -235,7 +235,7 @@ FileUploaderMetadata.prototype.copy_attributes_to_xfile = function() {
 //
 //  Other
 //
-FileUploaderMetadata.prototype.hide = function() {
+FileMetadata.prototype.hide = function() {
   this.unbind_events();
   Overlay.get_instance().hide();
 };
@@ -245,4 +245,4 @@ FileUploaderMetadata.prototype.hide = function() {
 //
 //  -> EXPORT
 //
-module.exports = FileUploaderMetadata;
+module.exports = FileMetadata;

@@ -24,6 +24,8 @@ Haraway.configure do |c|
     end
   end
 
-  c.profile("downloads")
+  c.profile("downloads") do |p|
+    p.accept "*"
+  end
 
 end

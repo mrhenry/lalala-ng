@@ -1,5 +1,6 @@
 class Article < ActiveRecord::Base
-  attr_accessible :body, :title, :category, :tag_ids, :images, :downloads
+  attr_accessible :body, :title, :category, :tag_ids,
+                  :images, :downloads, :poster_image
 
   # Translations
   translates :title, :body
@@ -8,6 +9,7 @@ class Article < ActiveRecord::Base
   markdown :body
 
   # Assets
+  has_one_asset :poster_image, :images
   has_many_assets :images, :images
   has_many_assets :downloads, :downloads
 

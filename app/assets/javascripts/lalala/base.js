@@ -1,16 +1,26 @@
 //= require active_admin/base
 //= require_tree ./lib
-
 //= require_tree ../browser
 //= require_tree ./modules
 //= require_tree ./initializers
 //= require_self
 
-var haraway = require("lalala/initializers/haraway");
-
 $(function() {
-  haraway.init();
-});
+  var initializers = [
+    "assets", "chosen"
+  ];
 
-// TODO - refactor
-require('lalala/modules/init');
+  var modules = [
+    "calendar", "editor", "locale_chooser",
+    "sorted_pages_tree", "login", "dashboard",
+    "collapsible_pages_tree"
+  ];
+
+  for (var i=0, j=initializers.length; i<j; ++i) {
+    require("lalala/initializers/" + initializers[i]).init();
+  }
+
+  for (var m=0, n=modules.length; m<n; ++m) {
+    require("lalala/modules/" + modules[m]).init();
+  }
+});

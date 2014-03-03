@@ -13,15 +13,16 @@ ActiveAdmin.register Article do
       f.input :body
       f.input :tags
       f.input :category, as: :select, collection: %w(A B C)
+      f.input :poster_image, as: :single_file
 
-      f.input :images, as: :haraway do |h|
+      f.input :images, as: :multiple_files do |h|
         h.inputs do
           h.input :title, as: :string
           h.input :caption, as: :text
         end
       end
 
-      f.input :downloads, as: :haraway do |h|
+      f.input :downloads, as: :multiple_files do |h|
         h.inputs do
           h.input :title, as: :string
           h.input :category, as: :select, collection: %w(X Y Z)

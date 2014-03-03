@@ -36,7 +36,8 @@ module Lalala
     require 'lalala/test'
   end
 
-  require 'formtastic/inputs/haraway_input'
+  require 'formtastic/inputs/single_file_input'
+  require 'formtastic/inputs/multiple_files_input'
   require 'formtastic/form_builder_ext'
 
   autoload :ExtActionDispatch

@@ -8,7 +8,7 @@ class MediaPage < BasicPage
     f.inputs do
       f.input :title
       f.input :body
-      f.input :images, as: :haraway do |h|
+      f.input :images, as: :multiple_files do |h|
         h.inputs do
           h.input :title, as: :string
           h.input :choice, as: :select, collection: %w(A B C)
