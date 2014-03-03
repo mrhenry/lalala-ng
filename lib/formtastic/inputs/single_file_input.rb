@@ -23,7 +23,7 @@ class Formtastic::Inputs::SingleFileInput
       </div>
 
       <div class="content">
-        <div class="image">#{ image_html(asset, versions) }</div>
+        <div class="image">#{ asset ? image_html(asset, versions) : "" }</div>
         <div class="status">
           <div class="status-title"></div>
           <div class="status-bar">
