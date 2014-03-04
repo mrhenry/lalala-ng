@@ -53,7 +53,7 @@ class Formtastic::Inputs::MultipleFilesInput
       </div>
 
       <div class="meta-versions">
-        #{ versions_html(profile) }
+        #{ versions_html(defn.profile) }
       </div>
     </x-files>
 
