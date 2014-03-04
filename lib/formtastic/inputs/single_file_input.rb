@@ -7,15 +7,14 @@ class Formtastic::Inputs::SingleFileInput
     title = method.to_s.titleize
     asset = object.send(method)
 
-    profile_name = object.class.haraway_assets[method.to_s]
-    profile = Haraway.configuration.profiles[profile_name]
-    accepts = profile.try(:accepted_file_types)
+    defn = object.class.haraway_assets[method.to_s]
+    accepts = defn.profile.try(:accepted_file_types)
     accepts = accepts.join(", ") if accepts
-    versions = compile_versions_array(profile)
+    versions = compile_versions_array(defn.profile)
 
     <<-HTML
 
-    <x-files single-file profile="#{profile_name}" accept="#{accepts}" name="#{param_key}">
+    <x-files single-file profile="#{defn.profile.name}" accept="#{accepts}" name="#{param_key}">
       <div class="association">#{ title }</div>
 
       <div class="buttons">

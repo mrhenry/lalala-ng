@@ -9,11 +9,10 @@ class Formtastic::Inputs::MultipleFilesInput
     title = method.to_s.pluralize.titleize
     assets = object.send(method)
 
-    profile_name = object.class.haraway_assets[method.to_s]
-    profile = Haraway.configuration.profiles[profile_name]
-    accepts = profile.try(:accepted_file_types)
+    defn = object.class.haraway_assets[method.to_s]
+    accepts = defn.profile.try(:accepted_file_types)
     accepts = accepts.join(", ") if accepts
-    versions = compile_versions_array(profile)
+    versions = compile_versions_array(defn.profile)
 
     sorted_assets = klass.sorted_assets(assets.clone).map do |asset|
       klass.xfile_html(self, template, param_key, asset, versions)
@@ -21,7 +20,7 @@ class Formtastic::Inputs::MultipleFilesInput
 
     <<-HTML
 
-    <x-files multiple-files profile="#{profile_name}" accept="#{accepts}" name="#{param_key}">
+    <x-files multiple-files profile="#{defn.profile.name}" accept="#{accepts}" name="#{param_key}">
       <header>
         <div class="col-a">
           <span class="name">#{title}</span>
