@@ -35,8 +35,6 @@ module Lalala
 
       def setup_models
         empty_directory "app/models"
-        copy_file "models/file_asset.rb", "app/models/file_asset.rb"
-        copy_file "models/image_asset.rb", "app/models/image_asset.rb"
       end
 
       def setup_admin_users
