@@ -1,0 +1,6 @@
+<% Article.all.each do |a| %>
+  <article>
+    <h1><%= a.title %></h1>
+    <%= a.body_html %>
+  </article>
+<% end %>
