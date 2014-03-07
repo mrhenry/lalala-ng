@@ -5,6 +5,12 @@ class Lalala::Markdown::HtmlRenderer < Redcarpet::Render::HTML
   def initialize(options)
     @options      = options.dup
     @link_schemes = (options[:link_schemes] || {}).dup
+
+    # default link schemes
+    unless @link_schemes["asset"]
+      @link_schemes["asset"] = Lalala::Markdown::Handlers::Asset.new
+    end
+
     super(options)
   end
 
