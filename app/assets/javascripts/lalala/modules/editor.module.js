@@ -91,6 +91,8 @@ function add_image_click_handler(e) {
 
   ms = new MediaSelector();
   ms.$markitup_container = $(e.currentTarget).closest(".markItUpContainer");
+  ms.set_elements();
+  ms.save_cursor_position();
 
   overlay = Overlay.get_instance();
   overlay.append_content(ms.$el);

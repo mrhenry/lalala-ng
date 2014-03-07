@@ -20,6 +20,11 @@ function MediaSelector() {
 }
 
 
+MediaSelector.prototype.set_elements = function() {
+  this.$textarea = this.$markitup_container.find("textarea");
+};
+
+
 
 //
 //  Data & Render
@@ -190,21 +195,67 @@ MediaSelector.prototype.add_selected_to_editor_textarea = function() {
   var selected = this.selected_ids;
   var version = this.$el.find(".options .version select option:selected").val() || "original";
   var markdown = "";
-  var $textarea;
+
+  var old_textarea_text, new_textarea_text;
 
   // build markdown text
   for (var i=0, j=selected.length; i<j; ++i) {
-    markdown = markdown + "![](asset://" + selected[i] + "/" + version + ")  \n";
+    markdown = markdown + "![](asset://" + selected[i] + "/" + version + ")";
   }
 
   // add to textarea
-  // TODO: save cursor position before opening overlay,
-  //       then apply it again here
-  $textarea = this.$markitup_container.find("textarea");
-  $textarea.val($textarea.val() + markdown);
+  old_textarea_text = this.$textarea.val();
+
+  new_textarea_text =
+    old_textarea_text.substring(0, this.textarea_cursor_position) +
+    markdown +
+    old_textarea_text.substr(this.textarea_cursor_position);
+
+  this.$textarea.val(new_textarea_text);
 
   // hide overlay
   Overlay.get_instance().hide();
+};
+
+
+MediaSelector.prototype.save_cursor_position = function() {
+  var textarea, position, selection_range, text_range, text_range_duplicate;
+
+  // elements
+  textarea = this.$textarea.get(0);
+
+  // find position
+  if (textarea.selectionStart != null) {
+    position = textarea.selectionStart;
+
+  } else if (document.selection) {
+    selection_range = document.selection.createRange();
+
+    if (selection_range == null) {
+      position = false;
+
+    } else {
+      text_range = textarea.createTextRange();
+      text_range_duplicate = text_range.duplicate();
+
+      text_range.moveToBookmark(selection_range.getBookmark());
+      text_range_duplicate.setEndPoint("EndToStart", text_range);
+      position = text_range_duplicate.text.length;
+
+    }
+
+  } else {
+    position = false;
+
+  }
+
+  // if no position found
+  if (position === false || position == null) {
+    position = this.$textarea.val().length;
+  }
+
+  // set
+  this.textarea_cursor_position = position;
 };
 
 
