@@ -13,12 +13,18 @@ class Lalala::Markdown::Handlers::Asset < Lalala::Markdown::Handlers::Base
     id = id_with_version[0]
     version = id_with_version[1] || "original"
 
+    # build url
     url = "//" + File.join(
       "c." + Haraway.configuration.endpoint,
       id,
       version.to_s)
 
-    "<img src=\"#{url}\" alt=\"#{alt}\" title=\"#{title}\" />"
+    # build img element
+    helpers.image_tag(
+      url,
+      alt: alt,
+      title: title
+    )
   end
 
 end

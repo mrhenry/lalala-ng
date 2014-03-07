@@ -62,6 +62,10 @@ class Lalala::Markdown::HtmlRenderer < Redcarpet::Render::HTML
       return ""
     end
 
+    if content =~ /^\<(img|div|span|strong|em)/
+      content = helpers.raw(content)
+    end
+
     options = (@options[:link_attributes] || {}).merge(title: title)
     helpers.link_to(content, link, options)
   end
