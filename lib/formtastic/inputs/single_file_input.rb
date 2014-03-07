@@ -11,10 +11,11 @@ class Formtastic::Inputs::SingleFileInput
     accepts = defn.profile.try(:accepted_file_types)
     accepts = accepts.join(", ") if accepts
     versions = compile_versions_array(defn.profile)
+    css_class = asset ? "uploaded" : ""
 
     <<-HTML
 
-    <x-files single-file profile="#{defn.profile.name}" accept="#{accepts}" name="#{param_key}">
+    <x-files single-file profile="#{defn.profile.name}" accept="#{accepts}" name="#{param_key}" class="#{css_class}">
       <div class="association">#{ title }</div>
 
       <div class="buttons">
@@ -23,14 +24,21 @@ class Formtastic::Inputs::SingleFileInput
 
       <div class="content">
         <div class="image">#{ asset ? image_html(asset, versions) : "" }</div>
+        <div class="title">
+          <span class="name">
+            #{ asset ? asset.file_name : "" }
+          </span>
+        </div>
         <div class="status">
-          <div class="status-title"></div>
           <div class="status-bar">
             <div class="upload-bar"></div>
             <div class="process-bar"></div>
           </div>
         </div>
-        <div class="name"></div>
+        <div class="actions">
+          <a data-action="delete"></a>
+          <a data-action="meta"></a>
+        </div>
       </div>
     </x-files>
 

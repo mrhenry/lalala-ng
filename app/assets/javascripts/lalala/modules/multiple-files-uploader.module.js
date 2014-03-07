@@ -210,6 +210,9 @@ MultipleFilesUploader.prototype.file_done_handler = function(e) {
   this.$el.removeClass("processing");
   this.$el.addClass("uploaded");
 
+  // title
+  this.$el.find(".title").html(this.metadata.file_name);
+
   // attr
   var id = this.$el.find("input[name$=\"[id]\"]").val();
   if (id) this.$el.attr("data-src-original", "//c.assets.sh/" + id + "/thumb");

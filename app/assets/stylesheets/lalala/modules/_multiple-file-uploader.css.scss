@@ -45,8 +45,8 @@ x-files[multiple-files] {
     border-right: 1px solid #E2E2E2;
     float: left;
     width: 40%;
-    width: -webkit-calc(40% - 1px);
-    width: calc(40% - 1px);
+
+    @include calc(width, "40% - 1px");
 
     .name {
       padding-left: 4px;
@@ -167,7 +167,10 @@ x-files[multiple-files] {
   //  X-file -- Menu
   //
   x-file .menu {
+    bottom: 6px;
+    left: 8px;
     display: none;
+    position: absolute;
 
     a {
       background-position: center;
@@ -216,6 +219,7 @@ x-files[multiple-files] {
     > div {
       left: 0;
       top: 0;
+      width: 0;
     }
   }
 

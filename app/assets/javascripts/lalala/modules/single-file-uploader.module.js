@@ -109,6 +109,7 @@ SingleFileUploader.prototype.file_done_handler = function(e) {
 
   this.$el.removeClass("processing");
   this.$el.addClass("uploaded");
+  this.$el.find(".content > .title > .name").html(this.metadata.file_name);
 };
 
 

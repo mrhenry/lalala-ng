@@ -141,6 +141,10 @@ class Formtastic::Inputs::MultipleFilesInput
       #{ template.hidden_field_tag(param_key + "[][id]", asset.id) }
       #{ template.hidden_field_tag(param_key + "[][_destroy]", "") }
 
+      <div class="title">
+        #{ asset.file_name }
+      </div>
+
       <div class="attributes">
         #{ input.asset_attributes_form(template, param_key, asset) }
       </div>
