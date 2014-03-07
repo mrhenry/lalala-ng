@@ -265,6 +265,7 @@ MediaSelector.prototype.save_cursor_position = function() {
 //
 MediaSelector.prototype.setup_version_option = function() {
   var versions = [];
+  var excludes = [];
   var select_element;
 
   // collect all versions
@@ -273,15 +274,18 @@ MediaSelector.prototype.setup_version_option = function() {
 
     for (var k=0, l=data_piece.versions.length; k<l; ++k) {
       var version = data_piece.versions[k];
-      if (versions.indexOf(version) === -1) {
-        versions.push(version)
+      if (excludes.indexOf(version) == -1 && versions.indexOf(version) === -1) {
+        versions.push(version);
       }
     }
   }
 
+  // sort versions
+  versions = versions.sort();
+
   // make option element
   select_element = document.createElement("select");
-  select_element.innerHTML = $.map(["original"].concat(versions), function(v) {
+  select_element.innerHTML = $.map(versions, function(v) {
     return "<option value=\"" + v + "\">" + v + "</option>";
   }).join("");
 
