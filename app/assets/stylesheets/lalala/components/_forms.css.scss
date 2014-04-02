@@ -108,7 +108,7 @@ select:focus {
 // groups
 .inputs,
 .actions {
-  @extend .inner;
+  // @extend .inner;
 
   ul, ol {
     list-style: none;

@@ -31,6 +31,7 @@ module Lalala::ExtI18n::InputHelper
       ].flatten.compact
 
       locales.each do |locale|
+        next if Rails.application.config.lalala.i18n.excluded_locales.try(:include?, locale)
         I18n.locale  = locale
         @object_name = "#{_object_name}[translations_writer][#{locale}]"
 

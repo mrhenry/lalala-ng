@@ -67,7 +67,7 @@ class Lalala::Markdown::HtmlRenderer < Redcarpet::Render::HTML
     end
 
     options = (@options[:link_attributes] || {}).merge(title: title)
-    helpers.link_to(content, link, options)
+    helpers.link_to(content.html_safe, link, options)
   end
 
   def enhanced_autolink(scheme, link, link_type)

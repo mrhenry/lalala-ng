@@ -60,6 +60,11 @@
     padding-top: 0;
   }
 
+  // TODO: gray button
+  &.gray {
+    background-color: gray(200);
+  }
+
   // green button
   &.green {
     background-color: $button_green;

@@ -6,20 +6,27 @@
   @user_total     = Lalala::AdminUser::all.count
 
   # fill array
-  @values << ["pages",@page_total]
-  @values << ["posts",@post_total]
-  @values << ["files",@assets_total]
-  @values << ["user(s)",@user_total]
+  @values << ["page",@page_total, nil]
+  @values << ["post",@post_total, "/lalala/articles/new"]
+  @values << ["file",@assets_total, nil]
+  @values << ["user",@user_total, "/lalala/admin_users/new"]
 
 %>
 <div class="mod-dashboard">
 
   <div class="stats count_<%= @values.length %>">
     <ul>
-      <% @values.each do |title,val| %>
+      <% @values.each do |title,val,link| %>
       <li>
-        <p class="val"><%= val %></p>
-        <p class="title"><%= title %></p>
+        <div class="default">
+          <p class="val"><%= val %></p>
+          <p class="title"><%= title.pluralize %></p>
+        </div>
+        <% unless link.nil? %>
+        <div class="hover">
+          <a href="<%= link %>" class="button">New <%= title %></a>
+        </div>
+        <% end %>
       </li>
       <% end %>
     </ul>

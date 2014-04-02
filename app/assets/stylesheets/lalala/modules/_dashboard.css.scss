@@ -21,17 +21,49 @@
         float: left;
         margin: 0;
         padding: 20px 0;
+        position: relative;
         text-align: center;
 
-        .val {
-          font-size: 30px;
-          font-weight: bold;
-          margin: 0 0 5px 0;
+        // default shows the values
+        .default {
+
+          .val {
+            font-size: 30px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+          }
+          .title {
+            @include mono-font;
+            color: gray(200);
+          }
         }
-        .title {
-          @include mono-font;
-          color: gray(200);
+
+        // hover has the action to create a new instance
+        .hover {
+          position: absolute;
+          height: 100%;
+          top: 0;
+          left: 0;
+          width: 100%;
+
+          a.button {
+            @include transition(all 150ms);
+            @include icon('add', 'button');
+            background-position: -20px center;
+            display: block;
+            height: 100%;
+            text-indent: -9999px;
+          }
         }
+
+        &:hover {
+          .hover {
+            a {
+              background-position: 30px center;
+            }
+          }
+        }
+
       }
 
     }
@@ -51,7 +83,7 @@
     &.count_3 {
       ul {
         li {
-          width: 32.333333%;
+          width: 33%;
         }
       }
     }
@@ -65,14 +97,14 @@
     &.count_5 {
       ul {
         li {
-          width: 19.999999%;
+          width: 19.8%;
         }
       }
     }
     &.count_6 {
       ul {
         li {
-          width: 15.66666666%;
+          width: 16.5%;
         }
       }
     }
@@ -115,6 +147,15 @@ body.lalala_dashboard {
 
       .panel {
         @extend %pnl;
+
+        // overwrite default link behaviour on panel
+        a {
+          color: $blue !important;
+
+          &:hover {
+            color: $blue !important;
+          }
+        }
 
       }
 

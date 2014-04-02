@@ -251,6 +251,7 @@ private
         _locale = I18n.locale
 
         I18n.available_locales.each do |locale|
+          next if Rails.application.config.lalala.i18n.excluded_locales.try(:include?, locale)
           I18n.locale = locale
 
           translated_attrs.each do |attr|
