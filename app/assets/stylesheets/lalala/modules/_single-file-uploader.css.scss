@@ -1,0 +1,233 @@
+/*
+
+  Modules / Single file uploader
+
+*/
+
+x-files[single-file] {
+  color: #6F6F71;
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  height: 38px;
+  line-height: 38px;
+  margin: 31px 0 45px;
+  position: relative;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+
+  .buttons,
+  .content {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+
+  //
+  //  Association
+  //
+  .association {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 16px;
+    margin-left: 2px;
+    position: relative;
+    top: -1px;
+    vertical-align: middle;
+    width: 20%;
+  }
+
+
+  //
+  //  Buttons
+  //
+  .buttons {
+    border-right: 1px solid #E2E2E2;
+    bottom: 0;
+    left: 20%;
+    padding-right: 14px;
+    position: absolute;
+    text-align: right;
+    top: 0;
+
+    @media screen and (min-width: $min_width_large) {
+      // right: 511px;
+    }
+  }
+
+  .buttons .choose {
+    @include icon("folder_add");
+    background-position: left center;
+    color: #CDCDCD;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 24px;
+    padding-left: 22px;
+    padding-top: 2px;
+    white-space: nowrap;
+  }
+
+  .buttons .choose:hover {
+    color: #6F6F71;
+  }
+
+
+  //
+  //  Content
+  //
+  .content {
+    @include calc(width, "80% - 101px - 26px");
+    height: 38px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  // image
+  .image {
+    float: left;
+    height: 100%;
+    width: 58px;
+  }
+
+  .image .thumb {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+  }
+
+  .image .thumb.no-image {
+    background-color: #F3F3F3;
+    background-image: icon-url("page_white");
+    background-size: auto;
+  }
+
+  .image img,
+  .image canvas {
+    display: block;
+    height: auto;
+    opacity: 0.5;
+    width: 100%;
+
+    @include transition(
+      opacity 450ms
+    );
+  }
+
+  // title
+  .title {
+    color: #a3a3a3;
+    float: left;
+    margin: 0 19px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 120px;
+
+    .name {
+      display: none;
+    }
+  }
+
+  // status
+  .status {
+    display: none;
+    float: right;
+    height: 100%;
+    position: relative;
+
+    @include calc(width, "100% - 58px - 120px - (2 * 19px)");
+
+    .status-bar {
+      background-color: #e2e2e2;
+      height: 1px;
+      left: 0;
+      margin-top: -1px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+    }
+
+    .status-bar > div {
+      height: 1px;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 0;
+    }
+
+    .status-bar .upload-bar {
+      background-color: #FFC914;
+      box-shadow: 0 0 9px rgba(#FFC914, .75);
+      z-index: 1;
+    }
+
+    .status-bar .process-bar {
+      background-color: #36F269;
+      box-shadow: 0 0 9px rgba(#36F269, .75);
+      z-index: 2;
+    }
+  }
+
+  // actions
+  .actions {
+    border-left: 1px solid #E2E2E2;
+    display: none;
+    float: left;
+    padding-left: 19px;
+  }
+
+
+  //
+  //  Statusses
+  //
+  &.waiting .title:after {
+    content: "Waiting...";
+  }
+
+  &.uploading .title:after {
+    content: "Uploading...";
+  }
+
+  &.processing .title:after {
+    content: "Processing...";
+  }
+
+  &.waiting,
+  &.uploading,
+  &.processing { .status {
+    display: block;
+  }}
+
+  // uploaded
+  &.uploaded .image canvas,
+  &.uploaded .image img {
+    opacity: 1;
+  }
+
+  &.uploaded .title {
+    @include calc(width, "100% - 260px");
+
+    .name {
+      display: block;
+    }
+  }
+
+  // error
+  &.error {
+    .status .status-bar {
+      background-color: $red;
+    }
+
+    .status .upload-bar,
+    .status .process-bar {
+      display: none;
+    }
+  }
+
+
+}

@@ -1,10 +1,16 @@
 class Article < ActiveRecord::Base
   attr_accessible :body, :title, :category, :tag_ids
 
-  has_one_asset :image
-
   # Translations
   translates :title, :body
+
+  # Markdown
+  markdown :body
+
+  # Assets
+  has_one_asset :poster_image, "images"
+  has_many_assets :images, "images"
+  has_many_assets :downloads, "downloads"
 
   # Validations
   validates :title, presence: true

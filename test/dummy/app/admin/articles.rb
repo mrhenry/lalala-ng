@@ -1,42 +1,59 @@
 ActiveAdmin.register Article do
-
   scope :all, :default => true
   scope :catA
   scope :catB
   scope :catC
 
+  #
+  #  Form
+  #
   form do |f|
     f.inputs do
       f.input :title
       f.input :body
       f.input :tags
       f.input :category, as: :select, collection: %w(A B C)
-      f.input :image, as: :single_file
+      f.input :poster_image, as: :single_file
+
+      f.input :images, as: :multiple_files do |h|
+        h.inputs do
+          h.input :title, as: :string
+          h.input :caption, as: :text
+        end
+      end
+
+      f.input :downloads, as: :multiple_files do |h|
+        h.inputs do
+          h.input :title, as: :string
+          h.input :category, as: :select, collection: %w(X Y Z)
+          h.input :featured, as: :boolean
+        end
+      end
     end
+
     f.actions
   end
 
+
+  #
+  #  Sidebar
+  #
   sidebar "Actions", :only => [:edit] do
 
     div :class =>"lalala sidebar actions", :id => "lalala_sidebar_actions" do
-
-
-
     end
 
   end
 
-  sidebar "Information", :only => [:edit] do
 
+  sidebar "Information", :only => [:edit] do
     div :class => "lalala sidebar message", :id => "lalala_sidebar_message" do
       "This item has been updated last at <strong>Feb 14th, 2014</strong> by <a href='#link-to-hans-profile'>Hans</a>.".html_safe
     end
-
   end
 
 
   sidebar "Related tags", :only => [:show] do
-
     div :class => "lalala sidebar message", :id => "lalala_sidebar_message" do
       "This is an intro block.... It is yours. It is the best <strong>intro block</strong> in the world. Click the link for a tag detail.".html_safe
     end
@@ -63,8 +80,8 @@ ActiveAdmin.register Article do
       end
 
     end
-
   end
+
 
   sidebar "Help", :only => [:show] do
     div :class => "lalala sidebar message", :id => "lalala_sidebar_message" do
@@ -84,8 +101,8 @@ ActiveAdmin.register Article do
       end
 
     end
-
   end
+
 
   sidebar "User Information", :only => [:show] do
     div :class => "lalala sidebar person" do

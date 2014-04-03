@@ -35,8 +35,6 @@ module Lalala
 
       def setup_models
         empty_directory "app/models"
-        copy_file "models/file_asset.rb", "app/models/file_asset.rb"
-        copy_file "models/image_asset.rb", "app/models/image_asset.rb"
       end
 
       def setup_admin_users
@@ -58,12 +56,6 @@ module Lalala
       def setup_directory
         empty_directory "app/admin"
         template 'dashboard.rb', 'app/admin/dashboard.rb'
-      end
-
-      def setup_uploaders
-        empty_directory "app/uploaders"
-        copy_file "uploaders/file_uploader.rb", "app/uploaders/file_uploader.rb"
-        copy_file "uploaders/image_uploader.rb", "app/uploaders/image_uploader.rb"
       end
 
       def setup_environment_configs

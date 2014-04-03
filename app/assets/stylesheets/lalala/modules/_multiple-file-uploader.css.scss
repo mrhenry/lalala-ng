@@ -1,0 +1,293 @@
+/*
+
+  Modules / Multiple file uploader
+
+*/
+
+x-files[multiple-files] {
+  color: #6F6F71;
+  display: block;
+  font-size: 12px;
+  line-height: 18px;
+  margin-bottom: 45px;
+  margin-top: 19px;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+
+  .x-file-form {
+    display: none;
+  }
+
+  //
+  //  Header
+  //
+  header {
+    font-weight: bold;
+
+    &, .col-a, .col-b {
+      height: 38px;
+      overflow: hidden;
+    }
+
+    .col-a, .col-b {
+      line-height: 38px;
+      position: relative;
+    }
+  }
+
+  // column a - left
+  header .col-a {
+    border-right: 1px solid #E2E2E2;
+    float: left;
+    width: 40%;
+
+    @include calc(width, "40% - 1px");
+
+    .name {
+      padding-left: 4px;
+    }
+
+    .choose {
+      @include icon("folder_add");
+      background-position: left center;
+      color: #CDCDCD;
+      cursor: pointer;
+      line-height: 24px;
+      padding-left: 22px;
+      padding-top: 2px;
+      position: absolute;
+      right: 14px;
+      top: 5px;
+    }
+
+    .choose:hover {
+      color: #6F6F71;
+    }
+  }
+
+  // column b - right
+  header .col-b {
+    float: right;
+    width: 60%;
+
+    .data-inspection {
+      color: #CDCDCD;
+      padding-right: 4px;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  //
+  //  File container
+  //
+  .file-container {
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .file-container .inner-wrapper {
+    margin-bottom: -1px;
+    overflow: hidden;
+  }
+
+  //
+  //  X-file
+  //
+  x-file {
+    border: 1px solid #e2e2e2;
+    border-top: 0;
+    border-left: 0;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 110px;
+    padding: 18px 8px 62px;
+    position: relative;
+    width: 158px;
+  }
+
+  x-file.about-to-destroy {
+    background-color: rgba(red, .1);
+  }
+
+  //
+  //  X-file -- General
+  //
+  x-file .thumb {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 110px;
+    width: 100%;
+  }
+
+  x-file .thumb.no-image {
+    background-color: #F3F3F3;
+    background-image: icon-url("page_white");
+    background-size: auto;
+  }
+
+  x-file .title {
+    color: #A0A0A0;
+    font-weight: bold;
+    left: 8px;
+    line-height: 14px;
+    overflow: hidden;
+    position: absolute;
+    right: 8px;
+    text-overflow: ellipsis;
+    top: 138px;
+    white-space: nowrap;
+  }
+
+  x-file canvas,
+  x-file img {
+    display: block;
+    opacity: 0.5;
+
+    @include transition(
+      opacity 450ms
+    );
+  }
+
+  x-file .attributes,
+  x-file .meta {
+    display: none;
+  }
+
+  //
+  //  X-file -- Menu
+  //
+  x-file .menu {
+    bottom: 6px;
+    left: 8px;
+    display: none;
+    position: absolute;
+
+    a {
+      background-position: center;
+      cursor: pointer;
+      display: inline-block;
+      height: 16px;
+      margin: 9px 5px 0 0;
+      width: 16px;
+
+      -webkit-filter: grayscale(90%);
+
+      @include transition-duration(450ms);
+      @include transition-property(-webkit-filter);
+    }
+
+    a:hover,
+    a:active,
+    a:focus {
+      -webkit-filter: grayscale(0%);
+    }
+
+    [data-action="delete"] { @include icon("delete"); }
+    [data-action="meta"] { @include icon("information"); }
+    [data-action="move"] { @include icon("crosshair"); }
+  }
+
+  x-file.saved-to-db,
+  x-file.uploaded { &:hover .menu {
+    display: block;
+  }}
+
+  //
+  //  X-file -- Status bar
+  //
+  x-file .status-bar {
+    background-color: #e2e2e2;
+    bottom: 12px;
+    left: 8px;
+    right: 8px;
+
+    &, > div {
+      height: 1px;
+      position: absolute;
+    }
+
+    > div {
+      left: 0;
+      top: 0;
+      width: 0;
+    }
+  }
+
+  x-file .status-bar .upload-bar {
+    background-color: #FFC914;
+    box-shadow: 0 0 9px rgba(#FFC914, .75);
+    z-index: 1;
+  }
+
+  x-file .status-bar .process-bar {
+    background-color: #36F269;
+    box-shadow: 0 0 9px rgba(#36F269, .75);
+    z-index: 2;
+  }
+
+  //
+  //  X-file statusses
+  //
+  x-file.waiting .title:after {
+    content: "Waiting...";
+  }
+
+  x-file.uploading .title:after {
+    content: "Uploading...";
+  }
+
+  x-file.processing .title:after {
+    content: "Processing...";
+  }
+
+  x-file.uploaded canvas,
+  x-file.uploaded img {
+    opacity: 1;
+  }
+
+  x-file.uploaded .status-bar {
+    display: none;
+  }
+
+  x-file.error {
+    .status-bar {
+      background-color: $red;
+    }
+
+    .upload-bar,
+    .process-bar {
+      display: none;
+    }
+  }
+
+
+  //
+  //  FC -> Empty message
+  //
+  .is-empty {
+    color: #DEDEDE;
+    font-size: 24px;
+    font-weight: bold;
+    height: 190px;
+    line-height: 190px;
+    text-align: center;
+  }
+
+  .is-empty .message {
+    display: inline-block;
+    line-height: 26px;
+    vertical-align: middle;
+  }
+
+
+}

@@ -1,0 +1,113 @@
+.mod-media-selector {
+  background-color: white;
+  height: 100%;
+  position: relative;
+
+  //
+  //  Header
+  //
+  header {
+    border-bottom: 1px solid #e0e0e0;
+    height: 69px;
+    position: relative;
+  }
+
+  header .data-selection {
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 72px;
+    padding: 0 22px;
+  }
+
+  header .close {
+    color: black;
+    cursor: pointer;
+    font-size: 22px;
+    height: 28px;
+    line-height: 32px;
+    margin-top: -14px;
+    position: absolute;
+    right: 40px;
+    top: 50%;
+  }
+
+  //
+  //  Sidebar
+  //
+  aside {
+    border-left: 1px solid #e0e0e0;
+    bottom: 0;
+    padding: 28px;
+    position: absolute;
+    right: 0;
+    top: 70px;
+    width: 279px - 2 * 28px;
+
+    // actions
+    .actions a {
+      display: block;
+      margin-bottom: 11px;
+    }
+
+    // options
+    .options {
+      margin-top: 29px;
+    }
+
+    .options .options-title {
+      color: #aaa;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 9px;
+      text-transform: uppercase;
+    }
+
+    .options select {
+      @include box-sizing(border-box);
+      width: 100%;
+    }
+  }
+
+  //
+  //  Main
+  //
+  section {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 280px;
+    top: 70px;
+  }
+
+  .asset-container {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .asset-container .asset {
+    border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    cursor: pointer;
+    float: left;
+    padding: 14px;
+
+    &.selected {
+      background-color: rgba($button_green, .25);
+    }
+  }
+
+  .asset-container .asset .image {
+    background-color: #eee;
+    background-position: center;
+    background-size: cover;
+    height: 110px;
+    width: 158px;
+  }
+
+  .asset-container .asset.selected .image {
+    background-color: rgba($button_green, .75);
+  }
+
+
+}

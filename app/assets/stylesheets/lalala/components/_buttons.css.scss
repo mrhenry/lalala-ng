@@ -52,6 +52,14 @@
     padding-left: 29px;
   }
 
+  // large button
+  &.large {
+    height: 40px;
+    line-height: 42px;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+
   // TODO: gray button
   &.gray {
     background-color: gray(200);
@@ -135,4 +143,9 @@ a.button.destroy {
   @extend %btn;
   @extend %btn.red;
   @include icon('delete', 'button');
+}
+
+a.button.cancel {
+  @extend %btn;
+  @include icon("bullet_orange", "button");
 }

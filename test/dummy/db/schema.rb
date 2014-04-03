@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131122170308) do
+ActiveRecord::Schema.define(:version => 20140228141749) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -60,8 +60,9 @@ ActiveRecord::Schema.define(:version => 20131122170308) do
   add_index "article_translations", ["locale"], :name => "index_article_translations_on_locale"
 
   create_table "articles", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "haraway_metadata"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.string   "category"
   end
 
@@ -71,25 +72,6 @@ ActiveRecord::Schema.define(:version => 20131122170308) do
   end
 
   add_index "articles_tags", ["article_id", "tag_id"], :name => "index_articles_tags_on_article_id_and_tag_id", :unique => true
-
-  create_table "asset_translations", :force => true do |t|
-    t.string  "locale"
-    t.integer "asset_id"
-    t.string  "title"
-    t.text    "caption"
-  end
-
-  create_table "assets", :force => true do |t|
-    t.string   "asset"
-    t.string   "type"
-    t.integer  "asset_owner_id"
-    t.string   "asset_owner_type"
-    t.string   "asset_owner_section"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  add_index "assets", ["asset_owner_id", "asset_owner_type", "asset_owner_section"], :name => "asset_owner_idx"
 
   create_table "page_hierarchies", :id => false, :force => true do |t|
     t.integer "ancestor_id",   :null => false
@@ -117,8 +99,9 @@ ActiveRecord::Schema.define(:version => 20131122170308) do
     t.integer  "position"
     t.string   "type"
     t.string   "static_uuid"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.text     "haraway_metadata"
   end
 
   create_table "tag_translations", :force => true do |t|

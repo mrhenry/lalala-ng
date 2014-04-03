@@ -208,7 +208,7 @@ class Lalala::Markdown::MarkdownRenderer < Redcarpet::Render::Base
     if title.blank?
       "![#{alt_text}](#{link})"
     else
-      "![#{alt_text}](#{link} #{title})"
+      "![#{alt_text}](#{link} \"#{title}\")"
     end
   end
 
@@ -220,7 +220,7 @@ class Lalala::Markdown::MarkdownRenderer < Redcarpet::Render::Base
     if title.blank?
       "[#{content}](#{link})"
     else
-      "[#{content}](#{link} #{title})"
+      "[#{content}](#{link} \"#{title}\")"
     end
   end
 

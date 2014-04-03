@@ -1,8 +1,14 @@
-var markdown_settings;
+var Overlay = require("./overlay"),
+    MediaSelector = require("./media_selector"),
+
+    markdown_settings;
+
 
 exports.init = function(){
   $("textarea.markdown").each(setup);
 };
+
+
 
 function setup() {
   var $this    = $(this);
@@ -15,10 +21,13 @@ function setup() {
   $markitup_wrapper.find('.fullscreen').click(open_fullscreen);
   $markitup_wrapper.find('.close-fullscreen').click(close_fullscreen);
   $markitup_wrapper.find('.markdown-cheatsheet').click(toggle_cheatsheet);
+  $markitup_wrapper.find('.add-image').click(add_image_click_handler);
 }
 
+
+
 //
-// Go fullscreen
+//  Fullscreen
 //
 function open_fullscreen(event) {
   var $markitup_wrapper = $(this).closest('.markItUp');
@@ -26,16 +35,16 @@ function open_fullscreen(event) {
   $markitup_wrapper.addClass('fullscreen');
 }
 
-//
-// Close fullscreen
-//
+
 function close_fullscreen(event) {
   var $markitup_wrapper = $(this).closest('.markItUp');
   $markitup_wrapper.removeClass('fullscreen');
 }
 
+
+
 //
-// Toggle Markdown cheatsheet
+//  Cheatsheet
 //
 function toggle_cheatsheet(event) {
   var $markdown_cheatsheet = $('#markdown-cheatsheet');
@@ -55,9 +64,7 @@ function toggle_cheatsheet(event) {
   }
 }
 
-//
-// Load Markdown syntax cheatsheet
-//
+
 function load_cheatsheat(options) {
   $.get('/lalala/markdown/cheatsheet', function(data) {
     var $div = $('<div id="markdown-cheatsheet" />');
@@ -74,8 +81,28 @@ function load_cheatsheat(options) {
   });
 }
 
+
+
 //
-// Mark It Up settings
+//  Images
+//
+function add_image_click_handler(e) {
+  var ms, overlay;
+
+  ms = new MediaSelector();
+  ms.$markitup_container = $(e.currentTarget).closest(".markItUpContainer");
+  ms.set_elements();
+  ms.save_cursor_position();
+
+  overlay = Overlay.get_instance();
+  overlay.append_content(ms.$el);
+  overlay.show("media-selector");
+}
+
+
+
+//
+//  Mark It Up settings
 //
 var base_path = window.location.pathname.replace(/[\/][^\/]+$/, "");
 
@@ -93,13 +120,10 @@ markdown_settings = {
     { separator: '---' },
     { name: 'Unordered list', openWith: '- ', className: 'unordered-list', multiline: true },
     { name: 'Ordered list', openWith: '1. ', closeWith: '\n2. \n3. ', className: 'ordered-list', multiline: true },
-    /*
-| column header |\n| ------------- | ------------- |\n|               |               |
-    */
     { name: 'Add table', openWith: '| ', closeWith: ' | column header |\n| ------------- | ------------- |\n|               |               |', placeHolder: 'Column header', className: 'add-table', multiline: true },
     { separator: '---' },
     { name: 'Link', key: 'L', openWith: '[[![Link text]!]', closeWith: ']([![Url:!:http://]!])', className: 'add-link' },
-    //{ name: 'Image', openWith: '![[![Alternative text]!]]', closeWith: '([![Url:!:http://]!] "[![Image title]!]")', className: 'add-image' },
+    { name: 'Image', className: 'add-image' },
     { separator: '---' },
     { name: 'Preview', call: 'preview', className: "preview" },
     { name: 'Fullscreen', className: 'fullscreen' },

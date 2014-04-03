@@ -1,8 +1,11 @@
 ActiveAdmin.register_page "Dashboard" do
-
   menu :priority => 1, :label => proc{ I18n.t("active_admin.dashboard") }
 
+  #
+  #  Content
+  #
   content :title => proc{ I18n.t("active_admin.dashboard") } do
+
     div :class => "blank_slate_container", :id => "dashboard_default_message" do
       span :class => "blank_slate" do
         span "Howdy, partner! You’ve reached your own personal LALALA dashboard, full of stats, data and extravaganza!"
@@ -12,17 +15,13 @@ ActiveAdmin.register_page "Dashboard" do
     # Here is an example of a simple dashboard with columns and panels.
     #
     columns do
-
       column do
-
         render partial: "/admin/stats", :locals => { :matches => "test" }
-
       end
-
     end
 
-    columns do
 
+    columns do
       column :span => 2 do
         panel "Recent Posts List" do
           ul do
@@ -45,7 +44,6 @@ ActiveAdmin.register_page "Dashboard" do
           end
         end
       end
-
     end
 
 
@@ -59,7 +57,6 @@ ActiveAdmin.register_page "Dashboard" do
           end
         end
       end
-
     end
 
 

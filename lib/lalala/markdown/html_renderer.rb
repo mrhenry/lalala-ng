@@ -1,10 +1,16 @@
 class Lalala::Markdown::HtmlRenderer < Redcarpet::Render::HTML
 
-  URI_PATTERN = %r{\A(lalala|youtube|vimeo)[:][/]{2}.+\Z}
+  URI_PATTERN = %r{\A(lalala|youtube|vimeo|asset)[:][/]{2}.+\Z}
 
   def initialize(options)
     @options      = options.dup
     @link_schemes = (options[:link_schemes] || {}).dup
+
+    # default link schemes
+    unless @link_schemes["asset"]
+      @link_schemes["asset"] = Lalala::Markdown::Handlers::Asset.new
+    end
+
     super(options)
   end
 
@@ -54,6 +60,10 @@ class Lalala::Markdown::HtmlRenderer < Redcarpet::Render::HTML
 
     if link and @options[:safe_links_only] and !safe_link(link)
       return ""
+    end
+
+    if content =~ /^\<(img|div|span|strong|em)/
+      content = helpers.raw(content)
     end
 
     options = (@options[:link_attributes] || {}).merge(title: title)

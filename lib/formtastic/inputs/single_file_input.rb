@@ -3,32 +3,83 @@ class Formtastic::Inputs::SingleFileInput
 
   def to_html
     object = builder.object
-    model_instance = object.send(method)
-    model_class = object.class.reflect_on_association(method).klass
+    param_key = "#{object.class.table_name.singularize}[#{method}]"
+    title = method.to_s.titleize
+    asset = object.send(method)
 
-    html = template.raw("")
-    html << label_html
-    html << builder.fields_for(method, model_class.new) do |f|
-      f.file_field :asset, accept: model_class.extension_white_list, id: input_html_options[:id]
-    end
+    defn = object.class.haraway_assets[method.to_s]
+    accepts = defn.profile.try(:accepted_file_types)
+    accepts = accepts.join(", ") if accepts
+    versions = compile_versions_array(defn.profile)
+    css_class = asset ? "uploaded" : ""
 
-    if model_instance
-      html << template.content_tag(:div, class: "file-description") do
-        filename = model_instance.asset.file.try(:filename)
-        f_html = template.raw("")
+    <<-HTML
 
-        if model_class.to_s.include?("Image")
-          f_html << template.content_tag(:img, "", src: model_instance.asset.lalala_thumb.url)
-        end
+    <x-files single-file profile="#{defn.profile.name}" accept="#{accepts}" name="#{param_key}" class="#{css_class}">
+      <div class="association">#{ title }</div>
 
-        if filename
-          f_html << template.content_tag(:span, filename)
-        end
+      <div class="buttons">
+        <a class="choose">Browse file</a>
+      </div>
 
-        f_html
-      end
-    end
+      <div class="content">
+        <div class="image">#{ asset ? image_html(asset, versions) : "" }</div>
+        <div class="title">
+          <span class="name">
+            #{ asset ? asset.file_name : "" }
+          </span>
+        </div>
+        <div class="status">
+          <div class="status-bar">
+            <div class="upload-bar"></div>
+            <div class="process-bar"></div>
+          </div>
+        </div>
+        <div class="actions">
+          <a data-action="delete"></a>
+          <a data-action="meta"></a>
+        </div>
+      </div>
+    </x-files>
 
-    input_wrapping { html }
+    HTML
   end
+
+
+  def compile_versions_array(profile)
+    if profile
+      versions = profile.versions.keys.map do |key|
+        version = profile.versions[key.to_s]
+
+        OpenStruct.new(
+          name: version.name,
+          params: version.steps.first.try(:[], "params")
+        )
+      end.compact
+
+    else
+      versions = []
+
+    end
+
+    # return
+    versions
+  end
+
+
+  def image_html(asset, versions)
+    if versions.select { |v| v.name == "thumb" }.length >= 1
+      asset_url_thumb = asset.url(:thumb)
+    end
+
+    if asset_url_thumb
+      html = "<div class=\"thumb\" style=\"background-image: " +
+                   "url(#{ asset_url_thumb });\"></div>"
+    else
+      html = "<div class=\"thumb no-image\"></div>"
+    end
+
+    html
+  end
+
 end

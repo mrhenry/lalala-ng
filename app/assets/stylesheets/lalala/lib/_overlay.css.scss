@@ -1,0 +1,66 @@
+.mod-overlay-background,
+.mod-overlay {
+  bottom: 0;
+  display: none;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+
+/*
+
+  Background
+
+*/
+.mod-overlay-background {
+  @include single-transition(background-color, 750ms);
+  background-color: rgba($yellow, 0);
+  z-index: 1000;
+
+  &.visible {
+    background-color: rgba($yellow, 0.9);
+  }
+}
+
+
+/*
+
+  Content
+
+*/
+.mod-overlay {
+  @include single-transition(opacity, 750ms);
+  opacity: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  z-index: 1010;
+
+  -webkit-overflow-scrolling: touch;
+
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.mod-overlay .overlay-outer-wrapper {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+.mod-overlay .overlay-inner-wrapper {
+  display: table-cell;
+  height: 100%;
+  padding: 60px;
+  vertical-align: middle;
+}
+
+.mod-overlay .overlay-header {
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1020;
+}

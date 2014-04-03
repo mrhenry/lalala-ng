@@ -114,18 +114,12 @@ module Lalala
     ActiveRecord::Base.send(
       :include, Lalala::ExtActiveRecord::I18nTranslationsWriter)
 
-    ActiveRecord::Base.send(
-      :include, Lalala::ExtActiveRecord::Assets)
-
   end
 
   ActiveSupport.on_load :action_controller do
 
     ActionDispatch::Routing::Mapper.send(
       :include, Lalala::Pages::RouteMapper)
-
-    ActionDispatch::Request.send(
-      :include, Lalala::ExtActionDispatch::MultiFileUpload)
 
     ActionDispatch::Request.send(
       :include, Lalala::ExtActionDispatch::PageName)

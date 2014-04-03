@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  #
+  #  Active Admin & Devise
+  #
   if (ActiveAdmin rescue nil)
     ActiveAdmin.routes(self)
     if (AdminUser rescue nil)
@@ -7,8 +10,16 @@ Rails.application.routes.draw do
     end
   end
 
-  get  '/lalala/markdown/cheatsheet', to: 'lalala/markdown#cheatsheet'
 
+  #
+  #  Other
+  #
+  get '/lalala/markdown/cheatsheet', to: 'lalala/markdown#cheatsheet'
+
+
+  #
+  #  Errors
+  #
   if (ErrorsController rescue nil)
     match '/404', to: 'errors#not_found'
     match '/422', to: 'errors#unprocessable_entity'
