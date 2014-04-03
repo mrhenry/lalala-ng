@@ -37,7 +37,7 @@ MultipleFilesUploader.prototype.make_xfile_template = function() {
       $content = $(template.content.children);
       $wrapper.append($content);
     } else {
-      $content = $template.remove().unwrap();
+      $content = $.trim($template.html());
       $wrapper.append($content);
     }
 

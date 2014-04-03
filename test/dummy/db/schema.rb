@@ -73,25 +73,6 @@ ActiveRecord::Schema.define(:version => 20140228141749) do
 
   add_index "articles_tags", ["article_id", "tag_id"], :name => "index_articles_tags_on_article_id_and_tag_id", :unique => true
 
-  create_table "asset_translations", :force => true do |t|
-    t.string  "locale"
-    t.integer "asset_id"
-    t.string  "title"
-    t.text    "caption"
-  end
-
-  create_table "assets", :force => true do |t|
-    t.string   "asset"
-    t.string   "type"
-    t.integer  "asset_owner_id"
-    t.string   "asset_owner_type"
-    t.string   "asset_owner_section"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  add_index "assets", ["asset_owner_id", "asset_owner_type", "asset_owner_section"], :name => "asset_owner_idx"
-
   create_table "page_hierarchies", :id => false, :force => true do |t|
     t.integer "ancestor_id",   :null => false
     t.integer "descendant_id", :null => false

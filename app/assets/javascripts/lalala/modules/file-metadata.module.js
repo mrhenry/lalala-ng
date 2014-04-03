@@ -131,7 +131,7 @@ FileMetadata.prototype.get_form_template = function() {
   if (x.content) {
     $(wrapper).append( $(x.content.children).clone() );
   } else {
-    $(wrapper).append( $x.clone().unwrap() );
+    $(wrapper).append( $x.clone().html() );
   }
 
   return wrapper.innerHTML;
@@ -181,7 +181,7 @@ FileMetadata.prototype.copy_attributes_to_xfile = function() {
     new_attributes_container.className = "attributes";
     new_attributes_container.innerHTML = this.get_form_template();
 
-    this.$xfile.find("[name$=\"id]\"]").after(new_attributes_container);
+    this.$xfile.prepend(new_attributes_container);
     $xattr = $(new_attributes_container);
 
     this.fileuploader.remove_hidden_fields_from_checkboxes($xattr);

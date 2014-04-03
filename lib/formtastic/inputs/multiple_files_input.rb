@@ -137,16 +137,17 @@ class Formtastic::Inputs::MultipleFilesInput
     <x-file class="uploaded saved-to-db" data-src-original="#{ asset_url_original }">
       #{ thumb_html }
 
+      <div class="attributes">
+        #{ input.asset_attributes_form(template, param_key, asset) }
+      </div>
+
       #{ Formtastic::Inputs::MultipleFilesInput.menu_html }
+      #{ template.hidden_field_tag(param_key + "[][file_name]", asset.file_name) }
       #{ template.hidden_field_tag(param_key + "[][id]", asset.id) }
       #{ template.hidden_field_tag(param_key + "[][_destroy]", "") }
 
       <div class="title">
         #{ asset.file_name }
-      </div>
-
-      <div class="attributes">
-        #{ input.asset_attributes_form(template, param_key, asset) }
       </div>
 
       <div class="meta">
