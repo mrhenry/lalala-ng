@@ -71,51 +71,58 @@ CPT.prototype.addTriggers = function() {
 CPT.prototype.initStates = function() {
   var _this = this;
 
+  // Close all
+  this.$tree_parents.each(function() {
+    var $tree_parent = $(this),
+        $target      = $tree_parent.data('collapsible_target'),
+        $trigger     = $tree_parent.find('.collapse');
+
+    _this.update($target, $trigger, 'close', false);
+  });
+
+  // Open saved states
   $.each(this.states, function(idx, value) {
     var $tree_parent = $('#' + value),
         $target      = $tree_parent.data('collapsible_target'),
         $trigger     = $tree_parent.find('.collapse');
 
-    _this.close($target, $trigger);
+    _this.update($target, $trigger, 'open', false);
   });
 };
 
 
 /**
- * Close target
+ * Update target state
  *
- * @param  {jQuery object} $target  The element to be closed
- * @param  {jQuery object} $trigger The trigger element
+ * @param  {jQuery object} $target    The element to be closed
+ * @param  {jQuery object} $trigger   The trigger element
+ * @param  {Boolean}       save_state Default TRUE
  */
-CPT.prototype.close = function($target, $trigger) {
+CPT.prototype.update = function($target, $trigger, state, save_state) {
   if ( !$target ) {
-    console.warn('Can not find tree target');
+    console.warn('Collapsible tree: Can not find tree target');
     return;
   }
 
-  $target.hide();
-  $trigger.addClass('closed');
+  save_state = (typeof save_state == 'undefined') ? true : save_state;
 
-  this.saveState();
-};
+  if ( state == 'close' ) {
+    $target.hide();
+    $trigger.addClass('closed');
 
+  } else if ( state == 'open') {
+    $target.show();
+    $trigger.removeClass('closed');
 
-/**
- * Open target
- *
- * @param  {jQuery object} $target  The element to be closed
- * @param  {jQuery object} $trigger The trigger element
- */
-CPT.prototype.open = function($target, $trigger) {
-  if ( !$target ) {
-    console.warn('Can not find tree target');
+  } else {
+    console.warn('Collapsible tree: Unknown state');
     return;
+
   }
 
-  $target.show();
-  $trigger.removeClass('closed');
-
-  this.saveState();
+  if ( save_state ) {
+    this.saveState();
+  }
 };
 
 
@@ -129,10 +136,10 @@ CPT.prototype.toggleState = function(event) {
       $target  = $trigger.data('tree_parent').data('collapsible_target');
 
   if ( $target.is(':visible') ) {
-    this.close($target, $trigger);
+    this.update($target, $trigger, 'close');
 
   } else {
-    this.open($target, $trigger);
+    this.update($target, $trigger, 'open');
 
   }
 
@@ -151,7 +158,7 @@ CPT.prototype.saveState = function() {
     var $tree_parent = $(this),
         $trigger     = $tree_parent.find('.collapse');
 
-    if ( $trigger.hasClass('closed') ) {
+    if ( !$trigger.hasClass('closed') ) {
       new_states.push($tree_parent.attr('id'));
     }
 
