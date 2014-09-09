@@ -9,6 +9,7 @@ class Lalala::Markdown
   module Handlers
     require 'lalala/markdown/handlers/base'
     require 'lalala/markdown/handlers/asset'
+    require 'lalala/markdown/handlers/vimeo'
     require 'lalala/markdown/handlers/youtube'
   end
 
