@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+ * Append or prepend placeholders to certain inputs
+ */
+
 exports.init = function () {
   $('.js-prepend-placeholder[placeholder], .js-append-placeholder[placeholder]').each(function () {
     var $this = $(this);
@@ -7,6 +11,13 @@ exports.init = function () {
   });
 }
 
+/**
+ * Replace an <input> element with an appended/prepended placeholder
+ * @param  {jQuery}          $input
+ * @param  {string}          placeholder
+ * @param  {optional} {bool} reverse - false: prepend, true: append (default false)
+ * @return {jQuery}          The new input group
+ */
 function replace_input_with_group ($input, placeholder, reverse) {
     var placeholder  = placeholder || '',
         reverse      = (typeof reverse === 'undefined') ? false : reverse,
@@ -20,4 +31,6 @@ function replace_input_with_group ($input, placeholder, reverse) {
           .appendTo($input_group);
     $input.replaceWith($input_group);
     $clone.css(!!reverse ? 'padding-right' : 'padding-left', (parseInt($clone.css('padding-right'), 10) + parseInt($prepend.outerWidth(), 10)) + 'px');
+
+    return $input_group;
 }
