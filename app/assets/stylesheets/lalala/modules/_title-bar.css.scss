@@ -92,3 +92,20 @@
   }
 
 }
+
+
+//
+// Hide new button from header on edit views
+//
+.active_admin.edit {
+
+  #title_bar {
+
+    #titlebar_right {
+
+      .action_item a[href$=new] {
+        display: none;
+      }
+    }
+  }
+}
