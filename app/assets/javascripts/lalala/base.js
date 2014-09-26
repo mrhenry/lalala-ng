@@ -13,7 +13,7 @@ $(function() {
   var modules = [
     "calendar", "editor", "locale_chooser",
     "sorted_pages_tree", "login", "dashboard",
-    "collapsible_pages_tree"
+    "collapsible_pages_tree", "input_group"
   ];
 
   for (var i=0, j=initializers.length; i<j; ++i) {

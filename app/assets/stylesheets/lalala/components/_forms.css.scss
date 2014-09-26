@@ -260,3 +260,37 @@ select:focus {
 .chosen-container {
   margin-top: 4px;
 }
+
+.input-group {
+  display: inline-block;
+  position: relative;
+  width: 80%;
+
+  input {
+    width: 100%;
+  }
+
+  .input-prepend,
+  .input-append {
+    background-color: rgb(220, 220, 220);
+    color: rgb(110, 110, 110);
+    bottom: 0;
+    line-height: 2.875;
+    padding: 0 15px;
+    position: absolute;
+    text-shadow: 0 1px 0 rgb(240, 240, 240);
+    top: 0;
+  }
+
+  .input-prepend {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    left: 0;
+  }
+
+  .input-append {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    right: 0;
+  }
+}
