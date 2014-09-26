@@ -79,6 +79,10 @@ module Lalala
         copy_file 'application_mailer.html.erb', 'app/views/layouts/application_mailer.html.erb'
       end
 
+      def copy_default_layout
+        copy_file 'application.html.erb', 'app/views/layouts/application.html.erb'
+      end
+
       def create_assets
         generate "lalala:assets"
       end
