@@ -13,6 +13,8 @@ ActiveAdmin.register Article do
       f.input :body
       f.input :tags
       f.input :category, as: :select, collection: %w(A B C)
+	  f.input :url, input_html: { placeholder: 'http://', class: 'js-prepend-placeholder' }
+      f.input :price, input_html: { placeholder: '€', class: 'js-append-placeholder' }
       f.input :poster_image, as: :single_file
 
       f.input :images, as: :multiple_files do |h|

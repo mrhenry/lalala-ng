@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140228141749) do
+ActiveRecord::Schema.define(:version => 20140926152646) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(:version => 20140228141749) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.string   "category"
+    t.string   "url"
+    t.string   "price"
   end
 
   create_table "articles_tags", :id => false, :force => true do |t|
@@ -88,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20140228141749) do
     t.string  "title"
     t.string  "path_component"
     t.text    "body"
+    t.boolean "activated"
   end
 
   add_index "page_translations", ["locale"], :name => "index_page_translations_on_locale"
