@@ -60,10 +60,10 @@ ActiveRecord::Schema.define(:version => 20140926152646) do
   add_index "article_translations", ["locale"], :name => "index_article_translations_on_locale"
 
   create_table "articles", :force => true do |t|
-    t.text     "haraway_metadata"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.string   "category"
+    t.text     "haraway_metadata"
     t.string   "url"
     t.string   "price"
   end
@@ -74,6 +74,25 @@ ActiveRecord::Schema.define(:version => 20140926152646) do
   end
 
   add_index "articles_tags", ["article_id", "tag_id"], :name => "index_articles_tags_on_article_id_and_tag_id", :unique => true
+
+  create_table "asset_translations", :force => true do |t|
+    t.string  "locale"
+    t.integer "asset_id"
+    t.string  "title"
+    t.text    "caption"
+  end
+
+  create_table "assets", :force => true do |t|
+    t.string   "asset"
+    t.string   "type"
+    t.integer  "asset_owner_id"
+    t.string   "asset_owner_type"
+    t.string   "asset_owner_section"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "assets", ["asset_owner_id", "asset_owner_type", "asset_owner_section"], :name => "asset_owner_idx"
 
   create_table "page_hierarchies", :id => false, :force => true do |t|
     t.integer "ancestor_id",   :null => false
@@ -90,7 +109,6 @@ ActiveRecord::Schema.define(:version => 20140926152646) do
     t.string  "title"
     t.string  "path_component"
     t.text    "body"
-    t.boolean "activated"
   end
 
   add_index "page_translations", ["locale"], :name => "index_page_translations_on_locale"
