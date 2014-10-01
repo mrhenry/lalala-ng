@@ -4,7 +4,17 @@ if defined?(ActiveAdmin) and defined?(ApplicationPage)
 
     config.filters  = false
     config.paginate = false
+
+    # Remove action buttons in topbar
     config.clear_action_items!
+
+    # Edit button in topbar only on show
+    action_item :only => [:show] do
+      if controller.action_methods.include?('edit')
+        link_to(I18n.t('active_admin.edit_model', :model => active_admin_config.resource_name), edit_resource_path)
+      end
+    end
+
 
     #
     # Index
