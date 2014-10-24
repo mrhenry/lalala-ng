@@ -4,9 +4,6 @@ class Article < ActiveRecord::Base
   # Translations
   translates :title, :body
 
-  # Markdown
-  markdown :body
-
   # Assets
   has_one_asset :poster_image, "images"
   has_many_assets :images, "images"

@@ -1,14 +1,19 @@
 var Overlay = require("./overlay");
 
 
-function MediaSelector() {
+function MediaSelector($markitup_container) {
+  this.$markitup_container = $markitup_container;
   this.$el = $('<div class="mod-media-selector" />');
+  this.set_elements();
 
   // settings
   this.settings = {
     selected_class: "selected",
-    selected_data: "SELF"
+    selected_data: "SELF",
+    editor: {}
   };
+
+  this.gather_editor_settings();
 
   // data
   this.selected_ids = [];
@@ -17,11 +22,31 @@ function MediaSelector() {
   // exec
   this.collect_data_and_render();
   this.bind_events();
+  this.save_cursor_position();
 }
 
 
 MediaSelector.prototype.set_elements = function() {
   this.$textarea = this.$markitup_container.find("textarea");
+};
+
+
+MediaSelector.prototype.gather_editor_settings = function() {
+  var attr = this.$textarea.get(0).attributes;
+  attr = Array.prototype.slice.call(attr, 0);
+
+  for (var i=0, j=attr.length; i<j; ++i) {
+    var name = attr[i].name;
+    var value = attr[i].value;
+
+    if (name.match(/^editor\-/)) {
+      name = name.replace(/^editor\-/, "").replace(/\-/g, "_");
+      value = (value && value.toString().length > 0 ? value : true);
+      value = (value === "1" ? true : (value === "0" ? false : value));
+
+      this.settings.editor[name] = value;
+    }
+  }
 };
 
 
@@ -47,7 +72,9 @@ MediaSelector.prototype.collect_data_and_render = function() {
   this.render(data);
 
   // versions
-  this.setup_version_option();
+  if (!this.settings.editor.disable_versions_option) {
+    this.setup_version_option();
+  }
 };
 
 
@@ -193,14 +220,16 @@ MediaSelector.prototype.unselect_asset = function($asset) {
 
 MediaSelector.prototype.add_selected_to_editor_textarea = function() {
   var selected = this.selected_ids;
-  var version = this.$el.find(".options .version select option:selected").val() || "original";
+  var version = this.$el.find(".options .version select option:selected").val();
   var markdown = "";
 
   var old_textarea_text, new_textarea_text;
 
   // build markdown text
   for (var i=0, j=selected.length; i<j; ++i) {
-    markdown = markdown + "![](asset://" + selected[i] + "/" + version + ")";
+    markdown = markdown + "![](asset://" + selected[i];
+    if (version) markdown = markdown + "/" + version;
+    markdown = markdown + ")";
   }
 
   // add to textarea

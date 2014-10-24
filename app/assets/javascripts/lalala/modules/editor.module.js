@@ -89,10 +89,9 @@ function load_cheatsheat(options) {
 function add_image_click_handler(e) {
   var ms, overlay;
 
-  ms = new MediaSelector();
-  ms.$markitup_container = $(e.currentTarget).closest(".markItUpContainer");
-  ms.set_elements();
-  ms.save_cursor_position();
+  ms = new MediaSelector(
+    $(e.currentTarget).closest(".markItUpContainer")
+  );
 
   overlay = Overlay.get_instance();
   overlay.append_content(ms.$el);
