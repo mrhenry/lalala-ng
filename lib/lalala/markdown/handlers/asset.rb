@@ -11,13 +11,14 @@ class Lalala::Markdown::Handlers::Asset < Lalala::Markdown::Handlers::Base
 
     id_with_version = $1.split("/")
     id = id_with_version[0]
-    version = id_with_version[1] || "original"
+    version = id_with_version[1]
 
     # build url
-    url = "//" + File.join(
+    url = "//" + [
       "c." + Haraway.configuration.endpoint,
       id,
-      version.to_s)
+      version
+    ].compact.join("/")
 
     # build img element
     helpers.image_tag(
