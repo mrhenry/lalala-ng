@@ -45,7 +45,7 @@ class Lalala::Markdown
     @parser_options = options.slice(*PARSER_OPTIONS)
     @parser_options = {
       no_intra_emphasis: true,
-      tables: false,
+      tables: true,
       fenced_code_blocks: true,
       autolink: true,
       strikethrough: true,
