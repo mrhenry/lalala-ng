@@ -10,6 +10,7 @@ function MediaSelector($markitup_container) {
   this.settings = {
     selected_class: "selected",
     selected_data: "SELF",
+    disable_commit: false,
     editor: {}
   };
 
@@ -32,21 +33,19 @@ MediaSelector.prototype.set_elements = function() {
 
 
 MediaSelector.prototype.gather_editor_settings = function() {
-  var attr = this.$textarea.get(0).attributes;
-  attr = Array.prototype.slice.call(attr, 0);
+  var settings_attr = this.$textarea.attr("editor-settings");
+  var settings;
 
-  for (var i=0, j=attr.length; i<j; ++i) {
-    var name = attr[i].name;
-    var value = attr[i].value;
-
-    if (name.match(/^editor\-/)) {
-      name = name.replace(/^editor\-/, "").replace(/\-/g, "_");
-      value = (value && value.toString().length > 0 ? value : true);
-      value = (value === "1" ? true : (value === "0" ? false : value));
-
-      this.settings.editor[name] = value;
-    }
+  if (!settings_attr) {
+    settings = {};
+  } else {
+    settings = $.parseJSON(settings_attr);
   }
+
+  this.settings.editor = settings;
+  this.settings.editor.media_selector = (
+    this.settings.editor.media_selector || {}
+  );
 };
 
 
@@ -72,7 +71,7 @@ MediaSelector.prototype.collect_data_and_render = function() {
   this.render(data);
 
   // versions
-  if (!this.settings.editor.disable_versions_option) {
+  if (!this.settings.editor.media_selector.disable_versions_option) {
     this.setup_version_option();
   }
 };
@@ -185,7 +184,16 @@ MediaSelector.prototype.asset_click_handler = function(e) {
 
 
 MediaSelector.prototype.commit_click_handler = function(e) {
+  if (this.settings.disable_commit) return;
+
+  // add
   this.add_selected_to_editor_textarea();
+
+  // disable
+  this.settings.disable_commit = true;
+
+  // hide overlay
+  Overlay.get_instance().hide();
 };
 
 
@@ -220,7 +228,7 @@ MediaSelector.prototype.unselect_asset = function($asset) {
 
 MediaSelector.prototype.add_selected_to_editor_textarea = function() {
   var selected = this.selected_ids;
-  var version = this.$el.find(".options .version select option:selected").val();
+  var version = this.$el.find(".options .version select option:selected").val() || "original";
   var markdown = "";
 
   var old_textarea_text, new_textarea_text;
@@ -241,9 +249,6 @@ MediaSelector.prototype.add_selected_to_editor_textarea = function() {
     old_textarea_text.substr(this.textarea_cursor_position);
 
   this.$textarea.val(new_textarea_text);
-
-  // hide overlay
-  Overlay.get_instance().hide();
 };
 
 
