@@ -22,6 +22,7 @@ function setup() {
   $markitup_wrapper.find('.close-fullscreen').click(close_fullscreen);
   $markitup_wrapper.find('.markdown-cheatsheet').click(toggle_cheatsheet);
   $markitup_wrapper.find('.add-image').click(add_image_click_handler);
+  $('body').on('click', '.markdown-cheatsheet-close', toggle_cheatsheet);
 }
 
 
@@ -33,18 +34,25 @@ function open_fullscreen(event) {
   var $markitup_wrapper = $(this).closest('.markItUp');
   $markitup_wrapper.find('.markItUpHeader .preview').trigger('mouseup');
   $markitup_wrapper.addClass('fullscreen');
+
+  $('body').on('keyup.MARKDOWN_FULLSCREEN', function (event) {
+    if (event.which === 27) {
+      close_fullscreen(event);
+    }
+  });
 }
-
-
-function close_fullscreen(event) {
-  var $markitup_wrapper = $(this).closest('.markItUp');
-  $markitup_wrapper.removeClass('fullscreen');
-}
-
-
 
 //
-//  Cheatsheet
+// Close fullscreen
+//
+function close_fullscreen(event) {
+  var $markitup_wrapper = $('.close-fullscreen').closest('.markItUp');
+  $markitup_wrapper.removeClass('fullscreen');
+  $('body').off('keyup.MARKDOWN_FULLSCREEN');
+}
+
+//
+// Toggle Markdown cheatsheet
 //
 function toggle_cheatsheet(event) {
   var $markdown_cheatsheet = $('#markdown-cheatsheet');
@@ -64,7 +72,9 @@ function toggle_cheatsheet(event) {
   }
 }
 
-
+//
+// Load Markdown syntax cheatsheet
+//
 function load_cheatsheat(options) {
   $.get('/lalala/markdown/cheatsheet', function(data) {
     var $div = $('<div id="markdown-cheatsheet" />');
@@ -80,8 +90,6 @@ function load_cheatsheat(options) {
     }
   });
 }
-
-
 
 //
 //  Images
