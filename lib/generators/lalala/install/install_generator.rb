@@ -63,6 +63,19 @@ module Lalala
         gsub_file "config/environments/production.rb", "  # config.assets.precompile += %w( search.js )", "  config.assets.precompile += %w( modernizr.js )"
       end
 
+      def setup_helpers
+        empty_directory "app/helpers"
+        copy_file "helpers/application_helper.rb", "app/helpers/application_helper.rb"
+        template "helpers/open_graph_helper.rb.erb", "app/helpers/open_graph_helper.rb"
+        copy_file "helpers/html_helper.rb", "app/helpers/html_helper.rb"
+        copy_file "helpers/pages_helper.rb", "app/helpers/pages_helper.rb"
+      end
+
+      def setup_locales
+        empty_directory 'config/locales'
+        copy_file 'locales/en.yml', 'config/locales/en.yml'
+      end
+
       def setup_forklift
         empty_directory ".forklift"
       end

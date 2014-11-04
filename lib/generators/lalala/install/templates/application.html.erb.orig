@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title><%= og_title %></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui" />
+
+  <meta name="description" content="<%= og_description %>" />
+  <meta name="distribution" content="global" />
+  <%= meta_name_robots %>
+  <meta name="revisit-after" content="31 days" />
+  <meta name="author" content="" />
+  <meta name="publisher" content="Mr. Henry" />
+  <meta name="copyright" content="" />
+
+  <link rel="shortcut icon" href="/assets/favicon.ico"/>
+  <link rel="canonical" href="<%= canonical_url(request.original_fullpath) %>" />
+
+  <meta property="og:url" content="<%= canonical_url(request.original_fullpath) %>" />
+  <meta property="og:title" content="<%= og_title %>" />
+  <meta property="og:site_name" content="<%= site_name %>">
+  <meta property="og:description" content="<%= og_description %>" />
+  <%= meta_property_og_image %>
+  <meta property="og:image" content="<%= og_image_default_url %>" />
+
+  <%= javascript_include_tag "modernizr" %>
+  <%= stylesheet_link_tag "application", media: "all" %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= body_class %>">
+
+  <!--[if lt IE 9]>
+    <p class="chromeframe" style="background-color: rgb(255,65,45); color: white; font-size: 12px; margin: 0; padding: 7px; text-align: center;">
+    You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" style="color: black;">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true" style="color: black;">activate Google Chrome Frame</a> to improve your experience.</p>
+  <![endif]-->
+
+  <%= yield %>
+
+  <script type="text/javascript">
+    // Bridge between I18n YAML & JS
+    window.translations = { };
+  </script>
+
+  <%= javascript_include_tag "application" %>
+
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXX-XX', 'auto');
+    ga('require', 'displayfeatures');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
