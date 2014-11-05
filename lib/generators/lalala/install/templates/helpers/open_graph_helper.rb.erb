@@ -1,0 +1,92 @@
+module OpenGraphHelper
+
+  # Returns site name
+  #
+  # @return {String}
+  def site_name
+    "<%= Rails.application.class.name.split("::").first.titlecase.gsub("Client ", "") %>"
+  end
+
+
+  # Returns canonical url and following path for the given key in CANONICAL_URLS hash
+  #
+  # @params {String} path
+  #
+  # @return {String}
+  def canonical_url(path = '/', protocol = nil)
+    protocol ||= request.protocol
+
+    begin
+      "#{protocol}#{ENV["CANONICAL_DOMAIN"]}#{path}"
+
+    rescue
+      Rails.logger.error("canonical_url failed with following argument: #{path}")
+      "#{protocol}#{request.domain}#{path}"
+
+    end
+  end
+
+
+  # Returns meta description.
+  # Default lives in locale file. Add @og_description in your controller
+  # to override default.
+  #
+  # @return {String}
+  def og_description
+    @og_description.strip_tags rescue t("meta.description")
+  end
+
+
+  # Returns default OG image url based on current app name
+  #
+  # @return {String}
+  def og_image_default_url
+    "#{request.protocol}#{request.host_with_port}#{image_path("og-image.png")}"
+  end
+
+
+  # Returns meta og:image tags when @og_image(s) is given
+  #
+  # @return {String}
+  def meta_property_og_image
+    if @og_image
+      tag("meta", property: "og:image", content: "http:#{@og_image.url(:medium)}")
+    end
+
+    if @og_images
+      @og_images.each do |og_image|
+        tag("meta", property: "og:image", content: "http:#{og_image.url(:medium)}")
+      end
+    end
+  end
+
+
+  # Returns the page title, build upon the current page chain, separated by |
+  # To prefix, use @og_title in your controller.
+  #
+  # @param {Integer} offset How many page chain levels you want to skip
+  #
+  # @return {String}
+  def og_title(offset = 0)
+    page_title = []
+
+    if @og_title
+      if offset > 0
+        offset -= 1
+      else
+        page_title << @og_title
+      end
+    end
+
+    current_page_chain.reverse.each_with_index do |page, idx|
+      next if idx < offset
+
+      page_title << page.title unless page.type == "HomePage"
+    end
+
+    page_title << site_name
+
+    page_title.join(' | ')
+  end
+
+end

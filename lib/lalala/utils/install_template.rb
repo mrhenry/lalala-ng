@@ -5,6 +5,12 @@ class AppBuilder < Rails::AppBuilder
   RUBY_VERSION   = "2.0.0"
   LALALA_VERSION = "4.0.0.dev"
 
+  # You can test the generator locally by pointing to your local gems:
+  #
+  # gem 'lalala',             path: "~/Github/mrhenry/lalala-ng"
+  # gem 'lalala-development', path: "~/Github/mrhenry/lalala-ng", groups: [:development]
+  # gem 'lalala-assets',      path: "~/Github/mrhenry/lalala-ng", groups: [:development, :assets]
+  # gem 'lalala-test',        path: "~/Github/mrhenry/lalala-ng", groups: [:test]
   def gemfile
     create_file 'Gemfile', <<-DOC
 
