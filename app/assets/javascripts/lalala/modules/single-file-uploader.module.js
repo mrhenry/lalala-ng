@@ -99,6 +99,9 @@ SingleFileUploader.prototype.file_done_handler = function(e) {
   var name = this.$el.closest("x-files").attr("name");
   var pairs = format_asset_metadata(this.metadata, name);
 
+  // remove any old inputs
+  this.$el.find('input').remove();
+
   for (var i in pairs) {
     var input = document.createElement("input");
     input.type = "hidden";
@@ -110,6 +113,7 @@ SingleFileUploader.prototype.file_done_handler = function(e) {
   this.$el.removeClass("processing");
   this.$el.addClass("uploaded");
   this.$el.find(".content > .title > .name").html(this.metadata.file_name);
+  this.$el.find(".actions").show();
 };
 
 
@@ -118,9 +122,16 @@ SingleFileUploader.prototype.file_done_handler = function(e) {
 //  Events - General
 //
 SingleFileUploader.prototype.bind_events = function() {
+  // show the actions if there is file
+  if (this.$el.find('.content > .title > .name').text().trim().length > 0) {
+    this.$el.find(".actions").show();
+  }
+
   var choose_handler = $.proxy(this.choose_click_handler, this);
+  var delete_handler = $.proxy(this.delete_click_handler, this);
 
   this.$el.on("click", ".choose", choose_handler);
+  this.$el.on("click", "[data-action]", delete_handler);
 
   // when processing/uploading files -> disable form
   Haraway.on("busy", $.proxy(function() {
@@ -144,6 +155,21 @@ SingleFileUploader.prototype.choose_click_handler = function(e) {
   // show choose dialog
   Haraway.choose(accept, false, profile, $.proxy(this.handle_file, this));
 };
+
+SingleFileUploader.prototype.delete_click_handler = function(e) {
+  e.preventDefault();
+
+  this.$el.find(".actions").hide();
+
+  this.$el.find('input').remove();
+
+  var name = this.$el.closest("x-files").attr("name");
+  var input = document.createElement("input");
+  input.type = "hidden";
+  input.name = name+"[_destroy]";
+  input.value = "1";
+  this.$el.append(input);
+}
 
 
 SingleFileUploader.prototype.defer_submit = function(e) {

@@ -176,9 +176,33 @@ x-files[single-file] {
   // actions
   .actions {
     border-left: 1px solid #E2E2E2;
+    float: right;
     display: none;
-    float: left;
     padding-left: 19px;
+
+    a {
+      background-position: center;
+      cursor: pointer;
+      display: inline-block;
+      height: 16px;
+      line-height: 24px;
+      margin: 12px 5px 0 0;
+      width: 16px;
+
+      -webkit-filter: grayscale(90%);
+
+      @include transition-duration(450ms);
+      @include transition-property(-webkit-filter);
+    }
+
+    a:hover,
+    a:active,
+    a:focus {
+      -webkit-filter: grayscale(0%);
+    }
+
+    [data-action="delete"] { @include icon("delete"); }
+    [data-action="meta"] { @include icon("information"); display: none; }
   }
 
 
