@@ -46,6 +46,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'redcarpet',                 '= 2.3.0'
   gem.add_runtime_dependency 'stringex',                  '= 1.5.1'
   gem.add_runtime_dependency 'sentry-raven',              '= 0.9.4'
+  gem.add_runtime_dependency 'rails_12factor',            '= 0.0.3'
   gem.add_runtime_dependency 'haraway',                   '~> 0.1.0.dev'
 
 end
