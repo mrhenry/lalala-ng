@@ -1,7 +1,7 @@
 module Lalala
 
-  unless RUBY_VERSION == "2.0.0"
-    raise "Lalala is only compatible with one version of ruby at a time (current: Ruby 2.0.0)"
+  unless RUBY_VERSION == "2.1.2"
+    raise "Lalala is only compatible with one version of ruby at a time (current: Ruby 2.1.2)"
   end
 
   require 'lalala/version'
