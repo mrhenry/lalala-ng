@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140926152646) do
+ActiveRecord::Schema.define(:version => 20150113110505) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20140926152646) do
     t.string   "category"
     t.string   "url"
     t.string   "price"
+    t.datetime "published_at"
   end
 
   create_table "articles_tags", :id => false, :force => true do |t|

@@ -1,5 +1,5 @@
 class Article < ActiveRecord::Base
-  attr_accessible :body, :title, :category, :tag_ids, :url, :price
+  attr_accessible :body, :title, :category, :tag_ids, :url, :price, :published_at
 
   # Translations
   translates :title, :body
