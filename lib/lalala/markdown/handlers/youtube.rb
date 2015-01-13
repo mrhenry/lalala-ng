@@ -18,15 +18,19 @@ class Lalala::Markdown::Handlers::YouTube < Lalala::Markdown::Handlers::Base
 
     id = $1
 
-    helpers.content_tag(
-      :iframe,
-      "",
-      width:           @options[:width],
-      height:          @options[:height],
-      src:             "http://www.youtube.com/embed/#{id}?rel=0",
-      frameborder:     0,
-      allowfullscreen: true
-    )
+    helpers.content_tag :span, class: "embed-container" do
+      helpers.content_tag(
+        :iframe,
+        "",
+        width:           @options[:width],
+        height:          @options[:height],
+        src:             "http://www.youtube.com/embed/#{id}?rel=0",
+        frameborder:     0,
+        allowfullscreen: true
+      )
+    end
+
+
   end
 
 end

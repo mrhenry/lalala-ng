@@ -23,16 +23,18 @@ class Lalala::Markdown::Handlers::Vimeo < Lalala::Markdown::Handlers::Base
 
     id = $1
 
-    helpers.content_tag(
-      :iframe,
-      "",
-      width:           @options[:width],
-      height:          @options[:height],
-      src:             "//player.vimeo.com/video/#{id}?portrait=#{@options[:show_portrait]}&title=#{@options[:show_title]}&badge=#{@options[:show_badge]}&byline=#{@options[:show_byline]}&color=#{@options[:color]}&wmode=transparent",
+    helpers.content_tag :span, class: "embed-container" do
+      helpers.content_tag(
+        :iframe,
+        "",
+        width:           @options[:width],
+        height:          @options[:height],
+        src:             "//player.vimeo.com/video/#{id}?portrait=#{@options[:show_portrait]}&title=#{@options[:show_title]}&badge=#{@options[:show_badge]}&byline=#{@options[:show_byline]}&color=#{@options[:color]}&wmode=transparent",
 
-      frameborder:     0,
-      allowfullscreen: true
-    )
+        frameborder:     0,
+        allowfullscreen: true
+      )
+    end
   end
 
 end

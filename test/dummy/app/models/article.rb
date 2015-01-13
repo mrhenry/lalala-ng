@@ -15,7 +15,8 @@ class Article < ActiveRecord::Base
   # Markdown columns
   markdown :body, tables: true, link_schemes: {
     "youtube" => Lalala::Markdown::Handlers::YouTube.new(width: 520, height: 292),
-    "asset" => Lalala::Markdown::Handlers::LazyAsset.new
+    "asset" => Lalala::Markdown::Handlers::LazyAsset.new,
+    "vimeo"   => Lalala::Markdown::Handlers::Vimeo.new(color: "5c2d91", show_title: 1)
   }
 
   # Scopes
