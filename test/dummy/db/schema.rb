@@ -60,9 +60,10 @@ ActiveRecord::Schema.define(:version => 20140926152646) do
   add_index "article_translations", ["locale"], :name => "index_article_translations_on_locale"
 
   create_table "articles", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.string   "category"
+    t.text     "haraway_metadata"
     t.string   "url"
     t.string   "price"
   end
@@ -108,7 +109,6 @@ ActiveRecord::Schema.define(:version => 20140926152646) do
     t.string  "title"
     t.string  "path_component"
     t.text    "body"
-    t.boolean "activated"
   end
 
   add_index "page_translations", ["locale"], :name => "index_page_translations_on_locale"
@@ -120,8 +120,9 @@ ActiveRecord::Schema.define(:version => 20140926152646) do
     t.integer  "position"
     t.string   "type"
     t.string   "static_uuid"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.text     "haraway_metadata"
   end
 
   create_table "tag_translations", :force => true do |t|
