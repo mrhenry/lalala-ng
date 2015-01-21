@@ -12,7 +12,6 @@ module Lalala
 
   groups = Rails.groups(:assets => %w(development test)).map(&:to_sym)
 
-  require 'sentry-raven'
   require 'rails-i18n'
   require 'i18n-country-translations'
   require 'carrierwave'
