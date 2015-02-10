@@ -63,13 +63,15 @@ private
       return action(true)
     end
 
-    Rails.logger.debug "[I18n]: try Accept-Language..."
-    if m = accept_language_is_available?
-      @env['rack.locale']           = m[0]
-      @env['SCRIPT_NAME']           = m[1]
-      @env['lalala.cannonical_url'] = m[2]
-      @env['lalala.locale.source']  = 'header'
-      return action(false)
+    if @adapter.allow_accept_language
+      Rails.logger.debug "[I18n]: try Accept-Language..."
+      if m = accept_language_is_available?
+        @env['rack.locale']           = m[0]
+        @env['SCRIPT_NAME']           = m[1]
+        @env['lalala.cannonical_url'] = m[2]
+        @env['lalala.locale.source']  = 'header'
+        return action(false)
+      end
     end
 
     @env['rack.locale'] = default_locale_for_hostname.to_sym

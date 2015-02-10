@@ -12,6 +12,7 @@ module Lalala
     config.lalala = ActiveSupport::OrderedOptions.new
     config.lalala.i18n = ActiveSupport::OrderedOptions.new
     config.lalala.i18n.adapter = nil
+    config.lalala.i18n.allow_accept_language = true
 
     initializer "lalala.migrations" do |app|
       app.class.configure do
