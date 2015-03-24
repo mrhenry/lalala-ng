@@ -18,4 +18,8 @@ class Lalala::ExtI18n::TestNegotiationAdapter < Lalala::ExtI18n::NegotiationAdap
     @domain_locales[hostname]
   end
 
+  def allow_accept_language
+    true
+  end
+
 end

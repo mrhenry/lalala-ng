@@ -28,4 +28,8 @@ class Lalala::ExtI18n::NegotiationAdapter
     %r{^/(lalala|assets)(/|$)} === env['PATH_INFO']
   end
 
+  def allow_accept_language
+    !!Rails.configuration.lalala.i18n.allow_accept_language
+  end
+
 end
