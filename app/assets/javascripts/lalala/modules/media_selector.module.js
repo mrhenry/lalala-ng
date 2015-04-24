@@ -93,6 +93,7 @@ MediaSelector.prototype.collect_data_from_self = function() {
       var $xfile = $(this);
 
       data.push({
+        file_name: $xfile.find("[name$=\"[file_name]\"]").attr("value"),
         id: $xfile.find("[name$=\"[id]\"]").attr("value"),
         thumb_url: $xfile.attr("data-src-original").replace(/original$/, "thumb"),
         versions: versions
@@ -227,7 +228,18 @@ MediaSelector.prototype.add_selected_to_editor_textarea = function() {
 
   // build markdown text
   for (var i=0, j=selected.length; i<j; ++i) {
-    markdown = markdown + "![](asset://" + selected[i];
+    var file_name = null;
+
+    $.each(this.last_rendered_data, function(idx, value){
+      if ( value.id == selected[i]) {
+        file_name = value.file_name;
+      }
+    });
+
+    file_name;
+
+    markdown = markdown + "![" + file_name + "](asset://" + selected[i];
+
     if (version) markdown = markdown + "/" + version;
     markdown = markdown + ")";
   }
