@@ -10,6 +10,7 @@ class Lalala::Markdown
     require 'lalala/markdown/handlers/base'
     require 'lalala/markdown/handlers/youtube'
     require 'lalala/markdown/handlers/vimeo'
+    require 'lalala/markdown/handlers/soundcloud'
   end
 
   PARSER_OPTIONS = [

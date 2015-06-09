@@ -1,6 +1,6 @@
 class Lalala::Markdown::HtmlRenderer < Redcarpet::Render::HTML
 
-  URI_PATTERN = %r{\A(lalala|youtube|vimeo)[:][/]{2}.+\Z}
+  URI_PATTERN = %r{\A(lalala|youtube|vimeo|soundcloud)[:][/]{2}.+\Z}
 
   def initialize(options)
     @options      = options.dup
