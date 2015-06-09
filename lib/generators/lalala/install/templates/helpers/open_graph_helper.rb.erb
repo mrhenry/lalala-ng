@@ -8,6 +8,14 @@ module OpenGraphHelper
   end
 
 
+  # Returns site twitter handle
+  #
+  # @return {String}
+  def twitter_handle
+    "@m_hka"
+  end
+
+
   # Returns canonical url and following path for the given key in CANONICAL_URLS hash
   #
   # @params {String} path
@@ -45,17 +53,29 @@ module OpenGraphHelper
   end
 
 
-  # Returns meta og:image tags when @og_image(s) is given
+  # Returns meta og:image & twitter:image tags
+  #
+  # Use @image or @images in your controller to append
   #
   # @return {String}
   def meta_property_og_image
+    unless @og_image and @og_images
+      concat tag("meta", property: "og:image", content: og_image_default_url)
+      concat tag("meta", property: "twitter:image", content: og_image_default_url)
+    end
+
     if @og_image
-      tag("meta", property: "og:image", content: "http:#{@og_image.url(:medium)}")
+      concat tag("meta", property: "og:image", content: "http:#{@og_image}")
+      concat tag("meta", property: "twitter:image", content: "http:#{@og_image}")
     end
 
     if @og_images
-      @og_images.each do |og_image|
-        tag("meta", property: "og:image", content: "http:#{og_image.url(:medium)}")
+      @og_images.each_with_index do |og_image, idx|
+        if idx == 0
+          concat tag("meta", property: "twitter:image", content: "http:#{og_image}")
+        end
+
+        concat tag("meta", property: "og:image", content: "http:#{og_image}")
       end
     end
   end
