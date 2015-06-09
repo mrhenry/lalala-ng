@@ -23,7 +23,7 @@ class Lalala::Markdown::Handlers::Vimeo < Lalala::Markdown::Handlers::Base
 
     id = $1
 
-    helpers.content_tag :span, class: "embed-container" do
+    helpers.content_tag :span, class: "embed-container is-vimeo" do
       helpers.content_tag(
         :iframe,
         "",

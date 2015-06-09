@@ -18,7 +18,7 @@ class Lalala::Markdown::Handlers::YouTube < Lalala::Markdown::Handlers::Base
 
     id = $1
 
-    helpers.content_tag :span, class: "embed-container" do
+    helpers.content_tag :span, class: "embed-container is-youtube" do
       helpers.content_tag(
         :iframe,
         "",
