@@ -42,7 +42,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'meta_search',               '= 1.1.3'
   gem.add_runtime_dependency 'mini_magick',               '= 3.6.0'
   gem.add_runtime_dependency 'pg',                        '= 0.17.1'
-  gem.add_runtime_dependency 'puma',                      '= 2.0.14'
+  gem.add_runtime_dependency 'puma',                      '= 2.14.0'
   gem.add_runtime_dependency 'rails',                     '= 3.2.16'
   gem.add_runtime_dependency 'rails-i18n',                '= 0.7.3'
   gem.add_runtime_dependency 'redcarpet',                 '= 2.3.0'
