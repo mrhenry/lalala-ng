@@ -2,7 +2,7 @@ class AppBuilder < Rails::AppBuilder
   include Thor::Actions
   include Thor::Shell
 
-  RUBY_VERSION   = "2.1.7"
+  RUBY_VERSION   = "2.1.8"
   LALALA_VERSION = "4.1.0.dev"
 
   # You can test the generator locally by pointing to your local gems:

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.1.7"
+ruby "2.1.8"
 
 gemspec name: 'lalala'
 gemspec name: 'lalala-development', groups: [:development]
