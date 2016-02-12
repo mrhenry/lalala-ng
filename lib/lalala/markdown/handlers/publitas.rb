@@ -14,13 +14,13 @@ class Lalala::Markdown::Handlers::Publitas < Lalala::Markdown::Handlers::Base
     random = "publitas-embed-#{rand(1..9999999)}"
 
     helpers.content_tag :div, class: "embed-container" do
-      helpers.content_tag(
+      content = helpers.content_tag(
         :div,
         "",
         id: random
       )
 
-      helpers.content_tag(
+      content << helpers.content_tag(
         :script,
         "",
         {
@@ -34,6 +34,8 @@ class Lalala::Markdown::Handlers::Publitas < Lalala::Markdown::Handlers::Base
           src: "https://view.publitas.com/embed.js"
         }
       )
+
+      content
     end
   end
 
