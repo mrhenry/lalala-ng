@@ -25,7 +25,7 @@ class Lalala::Markdown::Handlers::Publitas < Lalala::Markdown::Handlers::Base
         "",
         {
           :"publitas-embed" => "publitas-embed",
-          wrapperId: random,
+          :"wrapperId" => random,
           :"data-cfasync" => false,
           :"data-menu" => false,
           :"data-publication" => "https://view.publitas.com/#{id}",
