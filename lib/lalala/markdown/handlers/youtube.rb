@@ -24,7 +24,7 @@ class Lalala::Markdown::Handlers::YouTube < Lalala::Markdown::Handlers::Base
         "",
         width:           @options[:width],
         height:          @options[:height],
-        src:             "http://www.youtube.com/embed/#{id}?rel=0",
+        src:             "//www.youtube.com/embed/#{id}?rel=0",
         frameborder:     0,
         allowfullscreen: true
       )
