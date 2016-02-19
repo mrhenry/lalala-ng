@@ -29,8 +29,7 @@ FileMetadata.prototype.render = function() {
   sidebar_tmpl = this.sidebar_template;
 
   if (this.$xfile.hasClass("saved-to-db")) {
-    img_tmpl = '<div class="image cover" style="background-image: url(' +
-               this.$xfile.attr("data-src-original").replace("original", "thumb") + ');"></div>';
+    img_tmpl = '<a href="' + this.$xfile.attr("data-src-original").replace("original", "thumb") + '" class="image cover" style="display: block; background-image: url(' + this.$xfile.attr("data-src-original").replace("original", "thumb") + ');"></a>';
 
     meta_tmpl = this.$xfile.find(".meta").html();
 
