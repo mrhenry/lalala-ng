@@ -14,6 +14,7 @@ class Lalala::Markdown
     require 'lalala/markdown/handlers/youtube'
     require 'lalala/markdown/handlers/soundcloud'
     require 'lalala/markdown/handlers/publitas'
+    require 'lalala/markdown/handlers/mixcloud'
   end
 
   PARSER_OPTIONS = [
