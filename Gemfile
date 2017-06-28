@@ -8,3 +8,4 @@ gemspec name: 'lalala-assets',      groups: [:development, :assets]
 gemspec name: 'lalala-test',        groups: [:test]
 
 gem "active_admin-sortable_tree"
+gem "jquery-ui-rails"
