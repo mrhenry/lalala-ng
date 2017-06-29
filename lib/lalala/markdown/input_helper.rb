@@ -8,10 +8,10 @@ module Lalala::Markdown::InputHelper
       input_html = options[:input_html] || {}
       input_html[:class] = [input_html[:class], 'markdown'].flatten.compact.join(" ")
 
-      editor_options = options[:editor_options] || {}
-      editor_options.each do |k, v|
-        v = if v === true then "1" elsif v === false then "0" end
-        input_html["editor-#{k.to_s.gsub("_", "-")}"] = v
+      if defined?(Lalala::Markdown::Editor) &&
+         defined?(Lalala::Markdown::Editor::SETTINGS)
+        hash = Lalala::Markdown::Editor::SETTINGS
+        input_html["editor-settings"] = hash.to_json
       end
 
       options[:input_html] = input_html
@@ -19,4 +19,5 @@ module Lalala::Markdown::InputHelper
 
     super(method, options)
   end
+
 end
